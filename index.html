@@ -1,0 +1,1817 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b2414">
+  <meta name="description" content="打开电视，进入爱奇艺的好戏现场；探索剧集、电影、综艺、动漫与纪录片。">
+  <title>爱奇艺｜打开好戏，进入此刻</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23050706'/%3E%3Crect x='12' y='16' width='40' height='32' rx='7' fill='none' stroke='%2300BE06' stroke-width='5'/%3E%3Cpath d='M27 25l14 7-14 7z' fill='%2300BE06'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --brand: #00BE06;
+      --brand-bright: #2bf136;
+      --brand-soft: #8bff91;
+      --ink: #f8fff9;
+      --muted: #b6c8ba;
+      --canvas: #0b2414;
+      --panel: #163621;
+      --panel-soft: #102a19;
+      --line: rgba(210, 255, 218, .16);
+      --radius-lg: 34px;
+      --radius-md: 22px;
+      --ease: cubic-bezier(.16, 1, .3, 1);
+      --display-face: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+      --ui-face: "DIN Alternate", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      margin: 0;
+      min-width: 1180px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 83% 4%, rgba(42, 246, 98, .32), transparent 34rem),
+        radial-gradient(circle at 9% 26%, rgba(65, 205, 133, .19), transparent 31rem),
+        linear-gradient(150deg, #12351e 0%, #0b2113 42%, #11301c 100%),
+        var(--canvas);
+      font-family: var(--ui-face);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      opacity: .09;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+    }
+
+    #particleCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: .66;
+      mix-blend-mode: screen;
+    }
+
+    main, footer { position: relative; z-index: 1; transition: opacity .78s var(--ease); }
+    .topbar,.scroll-rail { transition: opacity .78s var(--ease); }
+    body.experience-entering main,body.experience-entering footer,body.experience-entering .topbar,body.experience-entering .scroll-rail,
+    body.experience-returning main,body.experience-returning footer,body.experience-returning .topbar,body.experience-returning .scroll-rail { opacity:0; }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 2px solid var(--brand-bright); outline-offset: 4px; }
+
+    .focus-group > .focus-item {
+      position: relative;
+      transition: opacity .4s var(--ease), filter .4s var(--ease);
+    }
+    .focus-group:has(> .focus-item:hover) > .focus-item:not(:hover),
+    .focus-group:has(> .focus-item:focus-visible) > .focus-item:not(:focus-visible) {
+      opacity: .62;
+      filter: saturate(.78) brightness(.84);
+    }
+    .focus-group > .focus-item:hover,
+    .focus-group > .focus-item:focus-visible {
+      z-index: 5;
+      opacity: 1;
+      filter: saturate(1.12) brightness(1.07);
+    }
+    main.focus-group:has(> .focus-item:hover) > .focus-item:not(:hover),
+    main.focus-group:has(> .focus-item:focus-visible) > .focus-item:not(:focus-visible) {
+      opacity: .86;
+      filter: saturate(.9) brightness(.93);
+    }
+
+    body.intro-active { overflow: hidden; }
+    body.intro-active .hero h1 .word,body.intro-active .hero-lede,body.intro-active .hero-actions,body.intro-active .phone-stage { animation-play-state:paused; }
+    .tv-gate {
+      position: fixed; inset: 0; z-index: 120; display: grid; place-items: center; overflow: hidden;
+      padding: 54px 5vw 40px; color: #f2f6e8; touch-action:none;
+      background: radial-gradient(ellipse at 50% 47%, rgba(36,125,62,.38), transparent 39rem), radial-gradient(circle at 50% 104%, rgba(24,192,71,.15), transparent 32rem), linear-gradient(145deg,#07130c,#0b2112 52%,#07120b);
+      transition: opacity .72s var(--ease), visibility .72s;
+    }
+    .tv-gate::before,.tv-gate::after { content:""; position:absolute; pointer-events:none; }
+    .tv-gate::before { inset:0; opacity:.42; background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(191,255,196,.035) 4px); mix-blend-mode:screen; }
+    .tv-gate::after { left:50%; top:0; width:min(86vw,1120px); height:1px; transform:translateX(-50%); background:linear-gradient(90deg,transparent,rgba(111,255,142,.42),transparent); box-shadow:0 0 45px 2px rgba(43,241,54,.24); }
+    .tv-gate.is-leaving { opacity:0; visibility:hidden; pointer-events:none; }
+    .tv-gate.is-returning { opacity:0; visibility:visible; }
+    .gate-content { position:relative; z-index:1; width:min(1120px,100%); display:grid; justify-items:center; text-align:center; }
+    .gate-heading { margin:0 0 24px; }
+    .gate-kicker { display:block; margin-bottom:13px; color:#83d492; font-size:.68rem; font-weight:800; letter-spacing:.32em; }
+    .gate-heading h1 { margin:0; font-family:var(--display-face); font-size:clamp(2.2rem,4.3vw,4.3rem); line-height:1; letter-spacing:-.07em; font-weight:600; }
+    .gate-heading h1 em { color:#a8efad; font-weight:500; }
+    .tv-cabinet { position:relative; width:min(980px,calc(100vw - 120px)); display:grid; grid-template-columns:minmax(0,1fr) 130px; align-items:center; gap:24px; padding:28px; border:1px solid rgba(228,245,218,.28); border-radius:38px; background:linear-gradient(145deg,#26372a,#18251b 48%,#101912); box-shadow:0 48px 130px rgba(0,0,0,.56),0 0 0 8px rgba(211,235,198,.025),inset 0 2px rgba(255,255,255,.16),inset 0 -12px 35px rgba(0,0,0,.35); transform:perspective(1500px) rotateX(1.5deg); transition:transform .8s var(--ease),box-shadow .8s var(--ease); }
+    .tv-cabinet::before,.tv-cabinet::after { content:""; position:absolute; z-index:-1; bottom:-30px; width:24px; height:40px; border-radius:0 0 8px 8px; background:linear-gradient(90deg,#101711,#374536 48%,#131b14); box-shadow:0 10px 14px rgba(0,0,0,.25); }
+    .tv-cabinet::before { left:11%; transform:rotate(8deg); }
+    .tv-cabinet::after { right:11%; transform:rotate(-8deg); }
+    .tv-aerial { position:absolute; top:-36px; left:49%; width:210px; height:50px; transform:translateX(-50%); pointer-events:none; }
+    .tv-aerial::before,.tv-aerial::after { content:""; position:absolute; bottom:2px; left:50%; width:1px; height:55px; transform-origin:bottom; background:linear-gradient(#c2d6be,#6d806b); box-shadow:0 0 8px rgba(255,255,255,.12); }
+    .tv-aerial::before { transform:rotate(-35deg); }
+    .tv-aerial::after { transform:rotate(35deg); }
+    .tv-screen-frame { position:relative; padding:13px; border-radius:28px; background:linear-gradient(145deg,#080d09,#1a241c); box-shadow:inset 0 2px 10px rgba(0,0,0,.9),0 1px rgba(255,255,255,.1); }
+    .tv-screen { position:relative; display:block; width:100%; aspect-ratio:16/9; overflow:hidden; padding:0; border:1px solid rgba(164,255,175,.34); border-radius:19px; color:#fff; background:#06110a; cursor:pointer; text-align:left; box-shadow:inset 0 0 45px rgba(0,0,0,.76),0 0 28px rgba(33,220,70,.14); isolation:isolate; }
+    .tv-screen::before { content:""; position:absolute; inset:0; z-index:2; pointer-events:none; background:linear-gradient(0deg,rgba(0,10,3,.7),transparent 65%),repeating-linear-gradient(0deg,transparent 0 4px,rgba(3,12,5,.12) 5px); }
+    .tv-screen-image { position:absolute; inset:-4%; width:108%; height:108%; object-fit:cover; opacity:.74; filter:saturate(.82) brightness(.7); transform:scale(1.035); transition:transform 1.4s var(--ease),opacity .7s,filter .7s; }
+    .tv-light-cone { position:absolute; z-index:1; left:-3%; top:10%; width:90%; height:80%; pointer-events:none; background:linear-gradient(90deg,rgba(207,255,218,.02),rgba(224,255,229,.13) 58%,rgba(240,255,240,.3)); clip-path:polygon(100% 43%,0 0,0 100%,100% 57%); transform-origin:100% 50%; mix-blend-mode:screen; filter:blur(12px); opacity:.76; animation:tdl-sweep 6.4s ease-in-out infinite alternate; }
+    .tv-light-cone::before,.tv-light-cone::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(222,255,229,.22),rgba(241,255,239,.05)); clip-path:polygon(100% 46%,0 12%,0 18%,100% 48%); filter:blur(5px); }
+    .tv-light-cone::after { opacity:.6; clip-path:polygon(100% 53%,0 83%,0 90%,100% 55%); }
+    .beam-particles { position:absolute; z-index:2; inset:0; overflow:hidden; pointer-events:none; }
+    .beam-particles i { position:absolute; left:var(--x); top:var(--y); width:var(--size); height:var(--size); border-radius:50%; background:rgba(235,255,226,.9); box-shadow:0 0 8px 2px rgba(192,255,199,.52); opacity:0; animation:beam-dust var(--duration) var(--delay) ease-in-out infinite; }
+    .tv-screen.is-tuning .tv-screen-image { opacity:.18; filter:blur(2px) saturate(.7) brightness(.55); transform:scale(1.09); }
+    .tv-screen-copy { position:absolute; z-index:3; left:8%; bottom:10%; display:grid; gap:8px; text-shadow:0 4px 20px rgba(0,0,0,.72); }
+    .tv-screen-copy small { color:#baf7c4; font-size:.64rem; font-weight:800; letter-spacing:.28em; }
+    .tv-screen-copy strong { font-family:var(--display-face); font-size:clamp(2.1rem,4vw,4.6rem); line-height:.98; letter-spacing:-.06em; font-weight:550; }
+    .tv-screen-copy strong em { color:#bdffc3; font-style:normal; }
+    .tv-screen-corner { position:absolute; z-index:3; right:5%; top:7%; display:flex; align-items:center; gap:8px; color:#e9f5e7; font-size:.58rem; letter-spacing:.17em; }
+    .tv-screen-corner i { width:6px; height:6px; border-radius:50%; background:#39ff59; box-shadow:0 0 13px #39ff59; animation:on-air 1.6s ease-in-out infinite; }
+    .tv-controls { min-height:285px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; }
+    .tv-brand { color:rgba(225,240,219,.63); font-size:.62rem; font-weight:800; letter-spacing:.23em; }
+    .tv-channel-readout { display:flex; align-items:center; gap:7px; color:rgba(225,240,219,.67); font-size:.58rem; letter-spacing:.11em; }
+    .tv-channel-readout b { color:#bbf8c1; font-variant-numeric:tabular-nums; }
+    .tv-auto-line { width:70px; height:2px; margin-top:-9px; overflow:hidden; border-radius:4px; background:rgba(188,247,194,.18); }
+    .tv-auto-line i { display:block; width:100%; height:100%; background:#b7f9bf; box-shadow:0 0 8px rgba(139,255,145,.65); transform:scaleX(0); transform-origin:left; }
+    .tv-auto-line.is-running i { animation:channel-countdown 5.8s linear both; }
+    @keyframes channel-countdown { to { transform:scaleX(1); } }
+    .tv-dial { position:relative; width:67px; height:67px; padding:0; border:5px solid #0b110c; border-radius:50%; appearance:none; background:radial-gradient(circle,#7c8a79 0 20%,#252e25 23% 62%,#111812 66%); box-shadow:0 0 0 1px rgba(235,248,227,.24),inset 0 2px 4px rgba(255,255,255,.18),0 9px 15px rgba(0,0,0,.35); transform:rotate(var(--dial-angle,0deg)); transition:transform .44s var(--ease),box-shadow .3s; cursor:grab; touch-action:none; user-select:none; }
+    .tv-dial:hover { box-shadow:0 0 0 1px rgba(235,248,227,.4),0 0 27px rgba(43,241,54,.24),inset 0 2px 4px rgba(255,255,255,.2); }
+    .tv-dial:active { cursor:grabbing; }
+    .tv-dial::before { content:""; position:absolute; top:2px; left:50%; width:3px; height:11px; border-radius:4px; background:#d7e5d2; box-shadow:0 0 7px rgba(220,255,222,.45); transform:translateX(-50%); }
+    .tv-dial::after { content:""; position:absolute; left:50%; top:50%; width:15px; height:15px; border-radius:50%; background:#91a18d; box-shadow:inset 0 2px 4px rgba(255,255,255,.18),0 2px 5px rgba(0,0,0,.5); transform:translate(-50%,-50%); }
+    .tv-speaker { width:62px; height:47px; opacity:.56; background:radial-gradient(circle,#080d09 1.35px,transparent 1.9px) 0 0/8px 8px; }
+    .tv-sound-toggle { display:inline-flex; align-items:center; justify-content:center; gap:6px; min-width:86px; padding:7px 9px; border:1px solid rgba(166,239,178,.28); border-radius:999px; color:#bbedc2; background:rgba(30,96,43,.22); font-size:.53rem; letter-spacing:.1em; cursor:pointer; transition:background .3s,border-color .3s,color .3s,transform .3s var(--ease); }
+    .tv-sound-toggle:hover { transform:translateY(-2px); border-color:rgba(166,239,178,.6); background:rgba(30,126,52,.36); }
+    .tv-sound-toggle[aria-pressed="false"] { color:#9cab9d; border-color:rgba(171,186,171,.18); background:rgba(39,49,39,.22); }
+    .tv-sound-toggle .sound-icon { font-size:.8rem; line-height:1; }
+    .power-button { display:grid; justify-items:center; gap:9px; padding:0; border:0; color:#b9c8b7; background:transparent; cursor:pointer; }
+    .power-button-mark { width:54px; height:54px; display:grid; place-items:center; border:1px solid rgba(174,255,186,.55); border-radius:50%; color:#c1ffca; background:radial-gradient(circle,rgba(57,255,89,.2),rgba(21,70,31,.4)); box-shadow:0 0 28px rgba(43,241,54,.2),inset 0 0 15px rgba(43,241,54,.1); transition:transform .3s var(--ease),box-shadow .3s,background .3s; }
+    .power-button-mark svg { width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; }
+    .power-button:hover .power-button-mark,.power-button:focus-visible .power-button-mark { transform:scale(1.08); background:radial-gradient(circle,rgba(57,255,89,.38),rgba(21,70,31,.56)); box-shadow:0 0 42px rgba(43,241,54,.42),inset 0 0 18px rgba(43,241,54,.18); }
+    .power-button-label { font-size:.61rem; letter-spacing:.13em; }
+    .gate-instruction { display:flex; align-items:center; gap:13px; margin:27px 0 0; color:rgba(218,234,214,.7); font-size:.75rem; letter-spacing:.14em; }
+    .gate-instruction span { display:inline-flex; align-items:center; gap:7px; }
+    .gate-instruction b { color:#b9f4c0; font-size:.9rem; font-weight:500; }
+    .gate-instruction i { width:3px; height:3px; border-radius:50%; background:rgba(210,244,213,.42); }
+    .tv-gate.is-powering .tv-cabinet { transform:perspective(1500px) rotateX(0) scale(1.018); box-shadow:0 52px 150px rgba(0,0,0,.48),0 0 0 8px rgba(211,235,198,.025),0 0 115px rgba(38,246,69,.34),inset 0 2px rgba(255,255,255,.16); }
+    .tv-gate.is-powering .tv-screen-image { animation:crt-wake .75s steps(1,end) both; }
+    .tv-gate.is-powering .tv-screen { animation:screen-flash .75s ease both; }
+    .tv-gate.is-powering .tv-screen-copy { animation:image-reveal .7s .25s both; }
+    @keyframes on-air { 50% { opacity:.25; } }
+    @keyframes tdl-sweep { from { transform:rotate(-1.5deg) scaleX(.97); opacity:.52; } to { transform:rotate(2deg) scaleX(1.035); opacity:.88; } }
+    @keyframes beam-dust { 0%,100% { opacity:0; transform:translate3d(0,10px,0) scale(.45); } 28% { opacity:.75; } 58% { opacity:.5; transform:translate3d(-20px,-11px,0) scale(1.1); } 78% { opacity:.12; transform:translate3d(-37px,-18px,0) scale(.7); } }
+    @keyframes crt-wake { 0% { opacity:0; transform:scaleY(.008); } 12% { opacity:.85; transform:scaleY(.015); } 21% { opacity:.2; transform:scaleY(1); } 34% { opacity:1; } 43% { opacity:.45; } 56%,100% { opacity:.82; transform:scale(1.08); } }
+    @keyframes screen-flash { 0%,17% { box-shadow:inset 0 0 90px #d9ffe0,0 0 0 2px #e9fff0; } 40% { box-shadow:inset 0 0 25px rgba(217,255,224,.75),0 0 38px 8px rgba(43,241,54,.5); } 100% { box-shadow:inset 0 0 45px rgba(0,0,0,.76),0 0 55px rgba(33,220,70,.36); } }
+    @keyframes image-reveal { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+    @media (prefers-reduced-motion: reduce) { .tv-screen-corner i,.tv-light-cone,.beam-particles i,.tv-auto-line i { animation:none; } .tv-gate.is-powering .tv-screen-image,.tv-gate.is-powering .tv-screen,.tv-gate.is-powering .tv-screen-copy { animation:none; } }
+
+    .shell { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--brand-bright);
+      font-size: .77rem;
+      font-weight: 800;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 22px; height: 2px; background: currentColor; }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      padding: 18px 0;
+      transition: background .35s, border-color .35s, padding .35s;
+    }
+    .topbar.scrolled {
+      padding: 11px 0;
+      background: rgba(7, 22, 13, .78);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 12px 40px rgba(0, 24, 8, .2);
+      backdrop-filter: blur(20px) saturate(1.35);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 900;
+      font-size: 1.2rem;
+      letter-spacing: -.04em;
+    }
+    .logo-mark {
+      display: grid;
+      place-items: center;
+      width: 39px;
+      height: 31px;
+      color: #021503;
+      background: var(--brand);
+      border-radius: 8px;
+      box-shadow: 0 0 30px rgba(0, 190, 6, .2);
+      font-size: .92rem;
+      letter-spacing: -.08em;
+    }
+    .nav-links { display: flex; align-items: center; gap: 30px; color: #bdc2be; font-size: .88rem; }
+    .nav-links a { display: inline-flex; align-items: center; padding: 8px 4px; transition: color .25s, transform .3s var(--ease); }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover { transform: translateY(-2px); }
+    .nav-cta {
+      padding: 10px 16px;
+      color: #031103 !important;
+      background: var(--brand);
+      border-radius: 999px;
+      font-weight: 800;
+    }
+
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 75% 48%, rgba(42, 244, 91, .25), transparent 34%),
+        radial-gradient(ellipse at 24% 38%, rgba(45, 203, 92, .16), transparent 38%),
+        linear-gradient(130deg, rgba(15, 51, 28, .62), rgba(6, 25, 14, .36));
+      padding: 116px 0 60px;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 52vw;
+      height: 52vw;
+      max-width: 720px;
+      max-height: 720px;
+      min-width: 430px;
+      min-height: 430px;
+      right: -8%;
+      top: 6%;
+      z-index: -2;
+      background: radial-gradient(circle, rgba(65, 255, 94, .32), rgba(0, 190, 6, .1) 38%, transparent 70%);
+      filter: blur(7px);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 72vw;
+      height: 160px;
+      right: -18vw;
+      top: 35%;
+      background: linear-gradient(90deg, transparent, rgba(119,255,147,.12), transparent);
+      filter: blur(28px);
+      transform: rotate(-18deg);
+      animation: beam-drift 9s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes beam-drift { to { transform: translateY(80px) rotate(-13deg); opacity: .55; } }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      align-items: center;
+      gap: 40px;
+    }
+    .hero-copy { position: relative; z-index: 3; }
+    .hero h1 {
+      margin: 22px 0 24px;
+      max-width: 730px;
+      font-size: clamp(3.8rem, 6.4vw, 6.6rem);
+      line-height: .84;
+      letter-spacing: -.085em;
+      font-weight: 900;
+      text-wrap: balance;
+    }
+    .hero h1 .line { display: block; overflow: hidden; padding-right: .08em; }
+    .hero h1 .word { display: inline-block; transform: translateY(115%); animation: title-in 1.05s var(--ease) forwards; }
+    .hero h1 .line:nth-child(2) .word { color: var(--brand-bright); animation-delay: .11s; }
+    .hero h1 .hook-line { display: flex; align-items: baseline; gap: .12em; overflow: visible; }
+    .hook-window {
+      display: inline-block;
+      height: .9em;
+      min-width: 2.08em;
+      overflow: hidden;
+      color: var(--brand-bright);
+      font-family: var(--display-face);
+      font-style: italic;
+      font-weight: 600;
+      vertical-align: bottom;
+      filter: drop-shadow(0 0 28px rgba(34, 239, 69, .2));
+    }
+    .hook-track {
+      display: flex;
+      flex-direction: column;
+      line-height: .9;
+      animation: hook-roll 10s var(--ease) infinite;
+    }
+    .hook-track > span { height: .9em; flex: 0 0 .9em; }
+    @keyframes hook-roll {
+      0%, 14% { transform: translateY(0); }
+      20%, 34% { transform: translateY(-.9em); }
+      40%, 54% { transform: translateY(-1.8em); }
+      60%, 74% { transform: translateY(-2.7em); }
+      80%, 100% { transform: translateY(-3.6em); }
+    }
+    @keyframes title-in { to { transform: translateY(0); } }
+    .hero-lede {
+      max-width: 430px;
+      margin: 0 0 34px;
+      color: #c8d7cb;
+      font-size: clamp(.94rem, 1.15vw, 1.05rem);
+      line-height: 1.75;
+      opacity: 0;
+      animation: fade-up .8s .35s var(--ease) forwards;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 14px; opacity: 0; animation: fade-up .8s .48s var(--ease) forwards; }
+    @keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+    .btn {
+      border: 0;
+      min-height: 52px;
+      padding: 0 23px;
+      border-radius: 999px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 11px;
+      cursor: pointer;
+      font-weight: 850;
+      transition: transform .25s var(--ease), background .25s, color .25s, box-shadow .25s;
+    }
+    .btn:active { transform: scale(.96); }
+    .btn-primary { color: #001b02; background: linear-gradient(120deg, var(--brand-bright), #83ff7c); box-shadow: 0 15px 44px rgba(0, 218, 17, .28), inset 0 1px rgba(255,255,255,.55); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 20px 58px rgba(0, 230, 28, .4), inset 0 1px rgba(255,255,255,.6); }
+    .btn-ghost { color: #f1fff3; background: rgba(161,255,178,.085); border: 1px solid rgba(208,255,217,.22); backdrop-filter: blur(12px); }
+    .btn-ghost:hover { background: rgba(169,255,183,.15); }
+    .play-icon { width: 19px; height: 19px; fill: currentColor; }
+
+    .phone-stage {
+      position: relative;
+      height: min(680px, 75vh);
+      min-height: 560px;
+      display: grid;
+      place-items: center;
+      perspective: 1300px;
+      opacity: 0;
+      animation: phone-in 1.25s .16s var(--ease) forwards;
+    }
+    .phone-rig {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform .22s cubic-bezier(.2,.8,.2,1);
+    }
+    .magnetic-glow {
+      position: absolute;
+      z-index: -1;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(83,255,116,.25), rgba(0,190,6,.07) 45%, transparent 72%);
+      filter: blur(12px);
+      transform: translate(-50%, -50%);
+      opacity: .75;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+    .signal-ring {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      border: 1px dashed rgba(143,255,163,.17);
+      animation: ring-spin 18s linear infinite;
+    }
+    .signal-ring::before, .signal-ring::after {
+      content: "";
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--brand-soft);
+      box-shadow: 0 0 20px var(--brand-bright);
+    }
+    .signal-ring::before { left: 18%; top: 7%; }
+    .signal-ring::after { right: 8%; bottom: 22%; }
+    .signal-ring.secondary { width: 505px; height: 505px; border-style: solid; border-color: rgba(206,255,215,.08); animation-duration: 27s; animation-direction: reverse; }
+    @keyframes ring-spin { to { transform: rotate(360deg); } }
+    @keyframes phone-in { from { opacity: 0; transform: translate3d(70px, 40px, 0) scale(.9); } to { opacity: 1; transform: none; } }
+    .orbit {
+      position: absolute;
+      width: 540px;
+      height: 540px;
+      border: 1px solid rgba(162,255,177,.18);
+      box-shadow: 0 0 90px rgba(20, 216, 61, .09), inset 0 0 70px rgba(80,255,113,.035);
+      border-radius: 50%;
+      transform: rotateX(66deg) rotateZ(-16deg);
+    }
+    .orbit::after {
+      content: "";
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      left: 20%;
+      top: 3%;
+      border-radius: 50%;
+      background: var(--brand-bright);
+      box-shadow: 0 0 20px var(--brand-bright);
+    }
+    .phone {
+      --rx: -7deg;
+      --ry: -10deg;
+      width: 292px;
+      height: 602px;
+      position: relative;
+      border: 8px solid #405349;
+      border-radius: 48px;
+      background: #080b09;
+      box-shadow: -32px 42px 82px rgba(0,14,5,.55), 30px 10px 80px rgba(0,236,34,.2), inset 0 0 0 1px rgba(255,255,255,.28);
+      transform-style: preserve-3d;
+      transform: rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(3deg);
+      transition: transform .12s ease-out, filter .35s;
+      will-change: transform;
+    }
+    .phone-stage:hover .phone { filter: saturate(1.15) brightness(1.06); }
+    .phone-stage:hover .magnetic-glow { opacity: 1; }
+    .phone::before {
+      content: "";
+      position: absolute;
+      z-index: 9;
+      width: 90px;
+      height: 23px;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #080a09;
+      border-radius: 999px;
+    }
+    .phone::after {
+      content: "";
+      position: absolute;
+      right: -12px;
+      top: 136px;
+      width: 4px;
+      height: 90px;
+      border-radius: 0 4px 4px 0;
+      background: #3b413d;
+    }
+    .screen { position: absolute; inset: 4px; overflow: hidden; border-radius: 36px; background: #090c0a; }
+    .phone-art {
+      height: 57%;
+      position: relative;
+      background:
+        linear-gradient(to top, #090c0a 2%, transparent 54%),
+        radial-gradient(circle at 52% 38%, rgba(205,255,216,.9) 0 2%, transparent 3%),
+        radial-gradient(ellipse at 49% 38%, rgba(20,160,73,.3) 0 16%, transparent 17%),
+        linear-gradient(145deg, transparent 0 47%, rgba(41,245,78,.68) 48% 50%, transparent 51%),
+        radial-gradient(ellipse at 74% 22%, #567160 0 13%, transparent 14%),
+        radial-gradient(ellipse at 37% 48%, #1d6635 0 16%, transparent 17%),
+        linear-gradient(152deg, #345640, #0a2112 43%, #327044 44%, #0b2113 76%);
+    }
+    .phone-brand { position: absolute; left: 18px; top: 45px; font-size: .73rem; font-weight: 900; color: var(--brand-bright); }
+    .phone-badge { position: absolute; right: 16px; top: 47px; padding: 5px 8px; border-radius: 8px; background: rgba(0,0,0,.35); font-size: .56rem; color: #dfe7e1; backdrop-filter: blur(8px); }
+    .show-meta { position: absolute; left: 19px; right: 19px; bottom: 9px; }
+    .show-kicker { color: var(--brand-bright); font-size: .55rem; font-weight: 850; letter-spacing: .16em; }
+    .show-title { margin: 5px 0 8px; font-family: "STSong", "Songti SC", serif; font-size: 2.15rem; letter-spacing: .14em; line-height: 1; }
+    .show-sub { color: #b3b9b4; font-size: .6rem; }
+    .show-meta.switching { animation: screen-switch .52s var(--ease); }
+    @keyframes screen-switch {
+      0% { opacity: 1; transform: translateY(0); filter: blur(0); }
+      45% { opacity: 0; transform: translateY(-11px); filter: blur(5px); }
+      55% { opacity: 0; transform: translateY(11px); filter: blur(5px); }
+      100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+    .screen-body { padding: 13px 17px; }
+    .screen-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 11px; }
+    .screen-row strong { font-size: .75rem; }
+    .screen-row span { color: var(--brand-bright); font-size: .52rem; }
+    .mini-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+    .mini-card { height: 95px; border-radius: 9px; background: linear-gradient(155deg, var(--c1), var(--c2)); position: relative; overflow: hidden; }
+    .mini-card::after { content: ""; position: absolute; inset: auto 0 0; height: 55%; background: linear-gradient(transparent, rgba(0,0,0,.75)); }
+    .mini-card:nth-child(1) { --c1: #504a30; --c2: #0f1d12; }
+    .mini-card:nth-child(2) { --c1: #51333a; --c2: #101925; }
+    .mini-card:nth-child(3) { --c1: #2e5161; --c2: #18201b; }
+    .phone-nav { position: absolute; bottom: 0; left: 0; right: 0; height: 55px; display: flex; align-items: center; justify-content: space-around; border-top: 1px solid rgba(255,255,255,.08); background: rgba(8,10,9,.95); }
+    .phone-nav i { width: 15px; height: 15px; border: 1.5px solid #697069; border-radius: 4px; }
+    .phone-nav i:first-child { background: var(--brand); border-color: var(--brand); box-shadow: 0 0 13px rgba(0,190,6,.55); }
+
+    .float-chip {
+      position: absolute;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 15px;
+      background: rgba(17, 44, 27, .78);
+      border: 1px solid rgba(176,255,190,.2);
+      border-radius: 14px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 16px 35px rgba(0,18,7,.28), 0 0 26px rgba(0,190,6,.09);
+      color: #d8e8db;
+      font-size: .72rem;
+      animation: float 4.2s ease-in-out infinite;
+    }
+    .float-chip b { color: #fff; display: block; font-size: .83rem; }
+    .float-chip .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 12px var(--brand); }
+    .float-chip.one { top: 24%; left: 2%; }
+    .float-chip.two { right: -5%; bottom: 21%; animation-delay: -1.7s; }
+    @keyframes float { 50% { transform: translateY(-11px); } }
+
+    .scroll-hint {
+      position: absolute;
+      left: 50%;
+      bottom: 27px;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: #747b76;
+      font-size: .58rem;
+      letter-spacing: .18em;
+    }
+    .scroll-hint::after { content: ""; width: 1px; height: 35px; background: linear-gradient(var(--brand), transparent); animation: pulse-line 1.7s infinite; }
+    @keyframes pulse-line { 0%,100% { transform: scaleY(.45); transform-origin: top; } 50% { transform: scaleY(1); } }
+
+    .marquee {
+      position: relative;
+      z-index: 6;
+      overflow: hidden;
+      border-block: 1px solid rgba(192,255,203,.18);
+      background: rgba(8, 29, 15, .82);
+      backdrop-filter: blur(18px);
+      transform: rotate(-1.15deg) scale(1.02);
+      box-shadow: 0 22px 55px rgba(0, 25, 8, .22);
+    }
+    .marquee.secondary { transform: rotate(1.15deg) scale(1.02); background: rgba(21, 64, 33, .72); }
+    .marquee-track {
+      width: max-content;
+      display: flex;
+      align-items: center;
+      animation: marquee-left 27s linear infinite;
+    }
+    .marquee.secondary .marquee-track { animation-name: marquee-right; animation-duration: 31s; }
+    .marquee-group { display: flex; align-items: center; }
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px 28px;
+      color: #effff1;
+      font-size: clamp(1.45rem, 2.4vw, 2.7rem);
+      font-weight: 880;
+      letter-spacing: -.045em;
+      white-space: nowrap;
+    }
+    .marquee-item::before { content: "✦"; color: #efcb8a; font-family: var(--display-face); font-size: .7em; font-weight: 500; text-shadow: 0 0 18px rgba(239,203,138,.42); }
+    .marquee-group > .marquee-item:nth-child(3n + 2)::before { content: "✧"; }
+    .marquee-group > .marquee-item:nth-child(3n)::before { content: "◈"; font-size: .54em; }
+    .marquee-item::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border: 1px solid rgba(239,203,138,.82);
+      transform: rotate(45deg);
+      box-shadow: 0 0 16px rgba(239,203,138,.34);
+    }
+    .marquee-item em { color: #f1d39b; font-family: var(--display-face); font-style: italic; font-weight: 650; text-shadow: 0 0 18px rgba(241,211,155,.23); }
+    @keyframes marquee-left { to { transform: translateX(-50%); } }
+    @keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+    .scroll-rail {
+      position: fixed;
+      z-index: 45;
+      right: 24px;
+      top: 50%;
+      width: 36px;
+      height: 235px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      transform: translateY(-50%);
+      color: rgba(224,255,230,.62);
+      pointer-events: none;
+    }
+    .scroll-rail-label {
+      position: absolute;
+      top: -70px;
+      right: -5px;
+      width: 120px;
+      transform: rotate(90deg);
+      transform-origin: right center;
+      font-size: .61rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      white-space: nowrap;
+      text-align: right;
+    }
+    .scroll-track {
+      position: relative;
+      width: 2px;
+      height: 170px;
+      margin-top: 28px;
+      overflow: hidden;
+      background: rgba(255,255,255,.14);
+      border-radius: 99px;
+    }
+    .scroll-progress {
+      position: absolute;
+      inset: 0 0 auto;
+      height: 0;
+      background: linear-gradient(var(--brand-soft), var(--brand));
+      box-shadow: 0 0 16px var(--brand);
+      border-radius: inherit;
+    }
+    .scroll-percent { font-size: .66rem; font-variant-numeric: tabular-nums; }
+
+    .hero-hook {
+      position: absolute;
+      left: 53%;
+      bottom: 13%;
+      z-index: 7;
+      width: 122px;
+      height: 122px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(202,255,211,.2);
+      border-radius: 50%;
+      background: rgba(8,34,17,.5);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 0 45px rgba(0,190,6,.1);
+    }
+    .hero-hook svg { position: absolute; inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px); animation: ring-spin 16s linear infinite; }
+    .hero-hook text { fill: #c9ffcf; font-size: 8px; letter-spacing: 2.7px; }
+    .hero-hook-core { width: 43px; height: 43px; display: grid; place-items: center; border-radius: 50%; color: #032507; background: var(--brand-bright); font-size: 1.1rem; box-shadow: 0 0 28px rgba(43,241,54,.38); }
+
+    section { position: relative; padding: 92px 0; }
+    #content,#catalog,#ai,#vip { scroll-margin-top: 94px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 44px; }
+    .section-head h2 { margin: 13px 0 0; max-width: 720px; font-family: var(--display-face); font-size: clamp(2.25rem, 4.15vw, 3.8rem); line-height: 1.04; font-weight: 650; letter-spacing: -.055em; text-wrap: balance; }
+    .headline-accent { color: #c8f9cd; font-weight: 500; font-style: italic; letter-spacing: -.065em; }
+    .section-caption { display: block; margin-top: 13px; color: rgba(201,255,207,.62); font-size: .62rem; font-weight: 750; letter-spacing: .22em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+    .section-note { max-width: 280px; color: var(--muted); line-height: 1.8; font-size: .84rem; }
+
+    .reveal { opacity: 0; transform: translateY(38px); transition: opacity .85s var(--ease), transform .85s var(--ease); }
+    .reveal.is-visible { opacity: 1; transform: none; }
+
+    .content-section {
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 14% 42%, rgba(76, 226, 126, .2), transparent 27rem),
+        linear-gradient(180deg, rgba(31, 83, 47, .42), rgba(12, 38, 21, .23));
+      border-block: 1px solid rgba(183,255,197,.06);
+    }
+    .content-section::before { content: "NOW SHOWING"; position: absolute; top: 40px; right: -8px; color: rgba(203,255,213,.045); font-size: 11vw; font-weight: 950; letter-spacing: -.07em; white-space: nowrap; pointer-events: none; }
+    .content-section::after {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      right: -190px;
+      bottom: -130px;
+      border-radius: 50%;
+      background: rgba(74, 220, 126, .13);
+      filter: blur(85px);
+      pointer-events: none;
+    }
+    .poster-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .poster {
+      --tilt: 0deg;
+      position: relative;
+      height: 382px;
+      border: 0;
+      padding: 0;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      color: #fff;
+      text-align: left;
+      cursor: pointer;
+      background: #193023;
+      border: 1px solid rgba(221,255,226,.12);
+      isolation: isolate;
+      box-shadow: 0 18px 42px rgba(0, 20, 7, .2), inset 0 1px rgba(255,255,255,.1);
+      transition: transform .55s var(--ease), box-shadow .5s var(--ease), border-color .5s;
+      will-change: transform;
+    }
+    .poster.reveal.is-visible { transform: perspective(1050px) rotateX(var(--pointer-rx, 0deg)) rotateY(var(--pointer-ry, 0deg)) translateY(var(--scroll-lift, 0)); }
+    .poster:nth-child(even) { margin-top: 38px; }
+    .poster::before { content: ""; position: absolute; inset: -22px 0; z-index: -3; background: var(--art); transform: translateY(var(--art-shift, 0)) scale(1.06); transition: transform .7s var(--ease), filter .7s; will-change: transform; }
+    .poster-image { position:absolute; inset:-22px 0; z-index:-2; width:100%; height:calc(100% + 44px); object-fit:cover; opacity:.8; filter:saturate(.9) brightness(.72); transform:translateY(var(--art-shift, 0)) scale(1.06); transition:transform .7s var(--ease),filter .7s,opacity .7s; will-change:transform; }
+    .poster::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(circle at var(--spot-x, 50%) var(--spot-y, 40%), rgba(213,255,219,.24), transparent 32%), linear-gradient(to top, rgba(4,18,9,.92), transparent 63%), linear-gradient(115deg, rgba(255,255,255,.2), transparent 28%); opacity: .94; transition: opacity .35s; }
+    .poster.reveal.is-visible:hover, .poster.reveal.is-visible:focus-visible { transform: perspective(1050px) rotateX(var(--pointer-rx, 0deg)) rotateY(var(--pointer-ry, 0deg)) translateY(-10px) scale(1.025) rotate(var(--tilt)); border-color: rgba(189,255,200,.35); box-shadow: 0 30px 75px rgba(0,18,6,.45), 0 0 45px rgba(0,190,6,.2); }
+    .poster:hover::before, .poster:focus-visible::before { transform: translateY(var(--art-shift, 0)) scale(1.13); filter: saturate(1.3) brightness(1.08); }
+    .poster:hover .poster-image,.poster:focus-visible .poster-image { transform:translateY(var(--art-shift, 0)) scale(1.13); filter:saturate(1.24) brightness(.96); opacity:.98; }
+    .poster:nth-child(1) { --tilt: -1.1deg; --art: radial-gradient(circle at 67% 24%, #ffe3b3 0 5%, transparent 5.5%), radial-gradient(ellipse at 65% 42%, #9a7056 0 18%, transparent 19%), linear-gradient(148deg, #d6532d 0 22%, #2c5135 48%, #102318 80%); }
+    .poster:nth-child(2) { --tilt: .8deg; --art: radial-gradient(circle at 38% 32%, #ffe6bc 0 4%, transparent 4.5%), radial-gradient(ellipse at 40% 49%, #d53972 0 19%, transparent 20%), linear-gradient(35deg, #2a1d3b, #845cbd 52%, #253343); }
+    .poster:nth-child(3) { --tilt: -.8deg; --art: linear-gradient(24deg, transparent 46%, rgba(205,244,244,.7) 47% 49%, transparent 50%), radial-gradient(circle at 70% 26%, #bde8ec 0 8%, transparent 8.5%), linear-gradient(150deg, #17657a, #25473e 57%, #a28d59); }
+    .poster:nth-child(4) { --tilt: 1deg; --art: radial-gradient(circle at 54% 28%, #e3ffe6 0 4%, transparent 4.5%), radial-gradient(circle at 53% 39%, #25a553 0 17%, transparent 18%), linear-gradient(145deg, #286c43, #11291b 52%, #54a975); }
+    .poster-index { position: absolute; top: 17px; right: 18px; color: rgba(255,255,255,.42); font-size: .66rem; letter-spacing: .17em; }
+    .poster-copy { position: absolute; left: 20px; right: 20px; bottom: 22px; }
+    .poster-kind { color: var(--brand-bright); font-size: .65rem; font-weight: 850; letter-spacing: .18em; }
+    .poster h3 { margin: 8px 0 7px; font-family: var(--display-face); font-size: 1.55rem; letter-spacing: .055em; }
+    .poster p { max-width: 240px; margin: 0; color: #d2ddd4; font-size: .7rem; line-height: 1.55; }
+    .poster-arrow { position: absolute; right: 19px; bottom: 22px; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; background: var(--brand); color: #051006; opacity: 0; transform: translateX(-10px); transition: .35s var(--ease); }
+    .poster:hover .poster-arrow, .poster:focus-visible .poster-arrow { opacity: 1; transform: none; }
+
+    .catalog-section { overflow:hidden; background:radial-gradient(ellipse at 76% 38%,rgba(32,209,84,.13),transparent 33rem),linear-gradient(180deg,rgba(10,34,18,.45),rgba(17,55,30,.5)); border-block:1px solid rgba(183,255,197,.07); }
+    .catalog-section::before { content:"THE COLLECTION"; position:absolute; top:34px; right:20px; color:rgba(203,255,213,.045); font-size:8vw; font-weight:950; letter-spacing:-.075em; pointer-events:none; }
+    .catalog-toolbar { display:flex; align-items:center; justify-content:space-between; gap:28px; margin:-12px 0 28px; }
+    .catalog-filters { display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+    .catalog-filter { position:relative; padding:10px 16px; border:1px solid rgba(207,245,211,.14); border-radius:999px; color:#c4d4c7; background:rgba(255,255,255,.025); font-size:.76rem; cursor:pointer; transition:color .3s,background .3s,border-color .3s,transform .3s var(--ease); }
+    .catalog-filter:hover,.catalog-filter[aria-pressed="true"] { color:#f5fff4; border-color:rgba(73,255,100,.48); background:rgba(0,190,6,.15); transform:translateY(-2px); }
+    .catalog-count { flex:0 0 auto; color:rgba(207,233,208,.52); font-size:.62rem; font-weight:750; letter-spacing:.18em; text-transform:uppercase; }
+    .catalog-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:15px; }
+    .catalog-grid.is-filtered { width:min(100%,calc(2 * 283px + 15px)); grid-template-columns:repeat(2,minmax(0,1fr)); margin-inline:auto; }
+    .catalog-grid.is-single { width:min(100%,283px); grid-template-columns:1fr; }
+    .catalog-card { position:relative; display:block; min-width:0; height:330px; overflow:hidden; padding:0; border:1px solid rgba(219,255,226,.13); border-radius:21px; color:#fff; background:#15251a; text-align:left; cursor:pointer; isolation:isolate; box-shadow:0 18px 40px rgba(0,20,7,.2),inset 0 1px rgba(255,255,255,.1); transition:transform .5s var(--ease),border-color .4s,box-shadow .4s; }
+    .catalog-card[hidden] { display:none!important; }
+    .catalog-card img { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; opacity:.77; filter:saturate(.86) brightness(.78); transform:scale(1.015); transition:transform .8s var(--ease),filter .55s,opacity .55s; }
+    .catalog-card::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(4,13,7,.04) 15%,rgba(4,13,7,.16) 43%,rgba(3,13,6,.92) 100%),linear-gradient(125deg,rgba(255,255,255,.17),transparent 31%); }
+    .catalog-card::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:0; background:radial-gradient(circle at var(--spot-x,50%) var(--spot-y,35%),rgba(191,255,197,.23),transparent 42%); transition:opacity .35s; }
+    .catalog-card:hover,.catalog-card:focus-visible,.catalog-card.is-selected { transform:translateY(-8px) scale(1.018); border-color:rgba(178,255,189,.5); box-shadow:0 30px 64px rgba(0,16,5,.42),0 0 32px rgba(0,190,6,.15); }
+    .catalog-card:hover img,.catalog-card:focus-visible img,.catalog-card.is-selected img { transform:scale(1.09); filter:saturate(1.14) brightness(.95); opacity:.92; }
+    .catalog-card:hover::after,.catalog-card:focus-visible::after,.catalog-card.is-selected::after { opacity:1; }
+    .catalog-card-index { position:absolute; top:16px; left:17px; display:flex; align-items:center; gap:8px; color:rgba(255,255,255,.76); font-size:.58rem; font-weight:800; letter-spacing:.2em; text-shadow:0 2px 12px rgba(0,0,0,.5); }
+    .catalog-card-index::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--brand-bright); box-shadow:0 0 12px rgba(43,241,54,.8); }
+    .catalog-card-copy { position:absolute; left:19px; right:19px; bottom:18px; display:grid; gap:7px; }
+    .catalog-card-type { color:#b7f7be; font-size:.59rem; font-weight:800; letter-spacing:.2em; text-transform:uppercase; }
+    .catalog-card h3 { margin:0; font-family:var(--display-face); font-size:1.45rem; font-weight:600; letter-spacing:.015em; }
+    .catalog-card p { margin:0; color:rgba(237,245,237,.74); font-size:.7rem; line-height:1.5; }
+    .catalog-card-arrow { position:absolute; top:14px; right:15px; width:32px; height:32px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.3); border-radius:50%; color:#fff; background:rgba(8,20,10,.2); backdrop-filter:blur(8px); opacity:0; transform:translate(-5px,5px); transition:opacity .3s,transform .3s var(--ease); }
+    .catalog-card:hover .catalog-card-arrow,.catalog-card:focus-visible .catalog-card-arrow,.catalog-card.is-selected .catalog-card-arrow { opacity:1; transform:none; }
+    .catalog-selection { display:flex; align-items:center; justify-content:space-between; gap:28px; min-height:82px; margin-top:21px; padding:18px 22px; border:1px solid rgba(197,255,207,.12); border-radius:17px; background:linear-gradient(100deg,rgba(29,72,40,.52),rgba(10,31,17,.44)); }
+    .catalog-selection-label { display:block; margin-bottom:5px; color:rgba(204,245,210,.56); font-size:.58rem; font-weight:800; letter-spacing:.2em; }
+    .catalog-selection-title { display:block; font-family:var(--display-face); font-size:1.05rem; }
+    .catalog-selection-copy { margin:0; color:var(--muted); font-size:.76rem; line-height:1.6; }
+    .catalog-selection-mark { flex:0 0 auto; color:var(--brand-bright); font-size:1.2rem; }
+
+    .ai-section {
+      padding-block: 112px;
+      background: radial-gradient(ellipse at 78% 45%, rgba(29, 207, 91, .1), transparent 36%);
+    }
+    .ai-frame { position: relative; padding: 58px; overflow: hidden; border: 1px solid rgba(197,255,207,.2); border-radius: var(--radius-lg); background: linear-gradient(135deg, rgba(35, 88, 52, .54), rgba(12, 35, 20, .78)); box-shadow: 0 30px 90px rgba(0, 28, 10, .25), inset 0 1px rgba(255,255,255,.11); }
+    .ai-frame::before { content: ""; position: absolute; width: 450px; height: 450px; right: -170px; top: -180px; border-radius: 50%; background: rgba(45,242,100,.25); filter: blur(70px); }
+    .ai-layout { display: grid; grid-template-columns: .78fr 1.22fr; gap: 60px; align-items: start; }
+    .ai-title h2 { margin: 14px 0 0; font-family: var(--display-face); font-size: clamp(2.65rem, 4.3vw, 4.1rem); line-height: .98; font-weight: 650; letter-spacing: -.065em; text-wrap: balance; }
+    .ai-title p { color: var(--muted); line-height: 1.8; max-width: 340px; font-size: .88rem; }
+    .ai-visual { position:relative; height:184px; margin-top:25px; overflow:hidden; border:1px solid rgba(199,255,209,.2); border-radius:19px; background:#13291b; box-shadow:0 18px 45px rgba(0,15,5,.32),inset 0 1px rgba(255,255,255,.16); isolation:isolate; }
+    .ai-visual img { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; opacity:.68; filter:saturate(.88) brightness(.76); transform:scale(1.02); transition:transform .8s var(--ease),filter .6s,opacity .6s; }
+    .ai-visual::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(3,14,7,.04),rgba(3,14,7,.84)),linear-gradient(100deg,rgba(17,203,65,.2),transparent 62%); }
+    .ai-visual:hover img { transform:scale(1.09); filter:saturate(1.08) brightness(.92); opacity:.88; }
+    .ai-visual-tag { position:absolute; top:14px; left:15px; padding:6px 9px; border:1px solid rgba(218,255,222,.27); border-radius:999px; color:#dfffe2; background:rgba(5,21,10,.44); backdrop-filter:blur(10px); font-size:.52rem; font-weight:800; letter-spacing:.16em; }
+    .ai-visual-copy { position:absolute; left:16px; right:16px; bottom:13px; display:flex; align-items:end; justify-content:space-between; gap:10px; }
+    .ai-visual-copy strong { font-family:var(--display-face); font-size:1.14rem; letter-spacing:.02em; text-shadow:0 2px 12px rgba(0,0,0,.6); }
+    .ai-visual-copy span { color:#f0d59b; font-size:.57rem; font-weight:800; letter-spacing:.15em; }
+    .ai-timeline { position:absolute; left:16px; right:16px; bottom:50px; height:2px; background:rgba(240,255,239,.3); }
+    .ai-timeline::before { content:""; position:absolute; inset:0 35% 0 0; background:#e6c47e; box-shadow:0 0 10px rgba(230,196,126,.55); }
+    .ai-timeline::after { content:""; position:absolute; left:65%; top:50%; width:7px; height:7px; border-radius:50%; background:#f4d89a; box-shadow:0 0 12px rgba(244,216,154,.75); transform:translate(-50%,-50%); }
+    .ai-list { border-top: 1px solid var(--line); }
+    .ai-item { position: relative; display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: 18px; padding: 22px 4px; border-bottom: 1px solid var(--line); transition: padding .35s var(--ease), background .35s, transform .4s var(--ease), border-color .4s; }
+    .ai-item::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 100%; height: 1px; transform: scaleX(0); transform-origin: left; background: var(--brand-bright); box-shadow: 0 0 14px rgba(43,241,54,.48); transition: transform .5s var(--ease); }
+    .ai-item:hover, .ai-item:focus-visible { padding-inline: 14px; background: rgba(194,255,204,.065); border-color: rgba(43,241,54,.22); }
+    .ai-item:hover::after, .ai-item:focus-visible::after { transform: scaleX(1); }
+    .ai-icon { width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid rgba(102,255,127,.4); border-radius: 14px; color: var(--brand-soft); background: rgba(0,190,6,.13); box-shadow: inset 0 1px rgba(255,255,255,.09); }
+    .ai-icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; }
+    .ai-item h3 { margin: 0 0 3px; font-family: var(--display-face); font-size: 1.13rem; letter-spacing: .015em; }
+    .ai-english { display: block; margin-bottom: 8px; color: rgba(201,255,207,.58); font-size: .52rem; font-weight: 750; letter-spacing: .16em; }
+    .ai-item p { margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.65; }
+    .ai-number { color: #7fa288; font-size: .67rem; letter-spacing: .15em; }
+
+    .membership {
+      padding-top: 110px;
+      background: linear-gradient(180deg, transparent, rgba(24, 67, 38, .22) 45%, transparent);
+    }
+    .plans { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; align-items:center; transition:grid-template-columns .58s var(--ease); }
+    .plans:has(> .plan:nth-child(1).is-selected) { grid-template-columns:1.12fr .94fr .94fr; }
+    .plans:has(> .plan:nth-child(2).is-selected) { grid-template-columns:.94fr 1.12fr .94fr; }
+    .plans:has(> .plan:nth-child(3).is-selected) { grid-template-columns:.94fr .94fr 1.12fr; }
+    .plan {
+      --plan-rx: 0deg;
+      --plan-ry: 0deg;
+      --tier-accent: #e9c982;
+      --tier-edge: rgba(233,201,130,.78);
+      --tier-glow: rgba(233,201,130,.18);
+      position: relative;
+      min-height: 376px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: 27px;
+      background: linear-gradient(155deg, rgba(61, 120, 77, .32), rgba(14, 42, 23, .7));
+      overflow: hidden;
+      cursor:pointer;
+      box-shadow: 0 22px 58px rgba(0, 25, 8, .18), inset 0 1px rgba(255,255,255,.08);
+      transform: perspective(1100px) rotateX(var(--plan-rx)) rotateY(var(--plan-ry));
+      transition: opacity .6s var(--ease),min-height .58s var(--ease),padding .58s var(--ease),transform .5s var(--ease),border-color .4s,background .4s,box-shadow .4s;
+      will-change: transform;
+    }
+    .plans.focus-group > .plan.focus-item { transition:opacity .6s var(--ease),filter .4s var(--ease),min-height .58s var(--ease),padding .58s var(--ease),transform .5s var(--ease),border-color .4s,background .4s,box-shadow .4s; }
+    .plan.reveal.is-visible { transform: perspective(1100px) rotateX(var(--plan-rx)) rotateY(var(--plan-ry)); }
+    .plan::after { content: ""; position: absolute; z-index:1; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(220,255,222,.17), transparent 48%); transition: opacity .35s; }
+    .plan-art { position:absolute; z-index:0; inset:0 0 auto; height:190px; overflow:hidden; pointer-events:none; }
+    .plan-art img { width:100%; height:100%; object-fit:cover; opacity:.36; filter:saturate(.82) brightness(.66); mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.75) 55%,transparent 100%); transition:opacity .5s var(--ease); }
+    .plan-art::after { content:""; position:absolute; inset:0; background:linear-gradient(110deg,rgba(4,17,8,.3),rgba(4,18,8,.22)),linear-gradient(0deg,rgba(12,46,22,.74),transparent 90%); }
+    .plan > :not(.plan-art) { position:relative; z-index:2; }
+    .plan:nth-child(3) { --tier-accent:#a9dbe8; --tier-edge:rgba(169,219,232,.76); --tier-glow:rgba(117,208,224,.19); background:linear-gradient(155deg,rgba(47,93,106,.32),rgba(13,37,34,.79)); }
+    .plan:nth-child(1) { background:linear-gradient(155deg,rgba(102,82,38,.3),rgba(34,37,22,.76)); }
+    .plan:hover::after { opacity: 1; }
+    .plan.reveal.is-visible:hover { transform:perspective(1100px) rotateX(var(--plan-rx)) rotateY(var(--plan-ry)) translateY(-8px); border-color:var(--tier-edge); box-shadow:0 30px 68px rgba(0,24,8,.36),0 0 32px var(--tier-glow); }
+    .plan.featured { --tier-accent:#70ff80; --tier-edge:rgba(95,255,115,.78); --tier-glow:rgba(0,190,6,.2); background:linear-gradient(155deg,rgba(8,127,39,.31),rgba(13,50,26,.77) 63%); }
+    .plan.is-selected { min-height:428px; padding:35px 32px; z-index:3; border-color:var(--tier-edge); box-shadow:0 35px 85px var(--tier-glow),0 0 0 1px var(--tier-glow),inset 0 1px rgba(255,255,255,.16); }
+    .plan:nth-child(1).is-selected { background:linear-gradient(155deg,rgba(116,91,40,.52),rgba(38,40,22,.88)); }
+    .plan.featured.is-selected { background:linear-gradient(155deg,rgba(8,127,39,.48),rgba(13,50,26,.91) 63%); }
+    .plan:nth-child(3).is-selected { background:linear-gradient(155deg,rgba(46,106,120,.52),rgba(13,42,42,.9)); }
+    .plan.is-selected .plan-art img { opacity:.43; }
+    .plan.is-selected.reveal.is-visible { transform:perspective(1100px) rotateX(var(--plan-rx)) rotateY(var(--plan-ry)) translateY(-10px) scale(1.025); }
+    .plan.is-selected.reveal.is-visible:hover { transform:perspective(1100px) rotateX(var(--plan-rx)) rotateY(var(--plan-ry)) translateY(-18px) scale(1.04); box-shadow:0 43px 94px var(--tier-glow),0 0 0 1px var(--tier-glow); }
+    .plan.is-selected::before { content:"当前选择"; position:absolute; z-index:3; right:20px; top:20px; padding:6px 10px; border-radius:999px; color:#071709; background:var(--tier-accent); font-size:.62rem; font-weight:900; }
+    .plan.featured.is-selected::before { content:"人气之选"; }
+    .plans.focus-group > .plan.is-selected { opacity:1!important; filter:none!important; }
+    .plan-tier { color: var(--tier-accent); font-size: .68rem; font-weight: 850; letter-spacing: .2em; }
+    .plan h3 { margin: 13px 0 10px; font-family: var(--display-face); font-size: 1.75rem; font-weight: 650; letter-spacing: -.035em; transition:font-size .5s var(--ease); }
+    .plan.is-selected h3 { font-size:2rem; }
+    .plan-sub { margin: 0 0 23px; color: var(--muted); font-size: .8rem; }
+    .plan ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    .plan li { display: flex; align-items: center; gap: 10px; color: #d1d6d2; font-size: .87rem; }
+    .plan li::before { content: "✓"; width: 20px; height: 20px; display: grid; place-items: center; color: var(--tier-accent); background: rgba(0,190,6,.09); border-radius: 50%; font-size: .68rem; font-weight: 900; }
+    .plan .btn { margin-top: auto; width: 100%; min-height: 47px; }
+    .plan.is-selected .btn { color:#071709; border-color:transparent; background:var(--tier-accent); box-shadow:0 15px 38px var(--tier-glow),inset 0 1px rgba(255,255,255,.35); }
+    .plan.is-selected .btn:hover { transform:translateY(-3px); box-shadow:0 19px 48px var(--tier-glow),inset 0 1px rgba(255,255,255,.48); }
+
+    .final-cta { padding: 122px 0 64px; text-align: center; overflow: hidden; background: radial-gradient(ellipse at 50% 100%, rgba(30, 239, 70, .2), transparent 52%); }
+    .final-cta::before { content: ""; position: absolute; width: 650px; height: 360px; left: 50%; bottom: -190px; transform: translateX(-50%); border-radius: 50%; background: rgba(32,244,72,.34); filter: blur(75px); }
+    .final-cta h2 { margin: 15px auto 23px; max-width: 760px; font-family: var(--display-face); font-size: clamp(2.8rem, 5.4vw, 5.4rem); font-weight: 650; line-height: .98; letter-spacing: -.06em; }
+    .final-cta h2 span { color: var(--brand-bright); font-weight: 500; font-style: italic; }
+    .final-cta p { margin: 0 auto 34px; color: var(--muted); line-height: 1.7; }
+    .final-cta .btn { position: relative; min-width: 170px; }
+
+    footer { position: relative; z-index: 2; padding: 25px 0 32px; border-top: 1px solid var(--line); background: rgba(5, 24, 11, .4); }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: #91a897; font-size: .72rem; }
+    .footer-row .logo { color: #c8ceca; font-size: .9rem; }
+    .footer-row .logo-mark { width: 30px; height: 24px; border-radius: 6px; font-size: .68rem; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      z-index: 80;
+      min-width: min(390px, calc(100% - 32px));
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: #e9edea;
+      background: rgba(19,24,20,.93);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+      backdrop-filter: blur(18px);
+      transform: translate(-50%, 140%);
+      opacity: 0;
+      transition: .45s var(--ease);
+      pointer-events: none;
+      font-size: .87rem;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .toast-dot { width: 9px; height: 9px; flex: 0 0 auto; border-radius: 50%; background: var(--brand-bright); box-shadow: 0 0 16px var(--brand); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+      #particleCanvas { opacity: .28; }
+      .hero h1 .word, .hero-lede, .hero-actions, .phone-stage, .reveal { opacity: 1; transform: none; }
+      .phone { transform: rotateX(-5deg) rotateY(-8deg) rotateZ(2deg); }
+    }
+  </style>
+</head>
+<body class="intro-active">
+  <section class="tv-gate" id="tvGate" aria-label="开机页" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+    <div class="gate-content">
+      <div class="gate-heading">
+        <span class="gate-kicker">IQIYI · ON AIR</span>
+        <h1 id="gateTitle">把好戏，<em>调到眼前。</em></h1>
+      </div>
+      <div class="tv-cabinet" id="tvCabinet">
+        <div class="tv-aerial" aria-hidden="true"></div>
+        <div class="tv-screen-frame">
+          <button class="tv-screen" id="tvScreen" type="button" aria-label="点亮电视，进入爱奇艺">
+            <img class="tv-screen-image" src="https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=1600&q=88" alt="" fetchpriority="high">
+            <span class="tv-light-cone" aria-hidden="true"></span>
+            <span class="beam-particles" id="beamParticles" aria-hidden="true"></span>
+            <span class="tv-screen-corner"><i></i> <span id="tvSignalName">LIVE SIGNAL · IQIYI</span></span>
+            <span class="tv-screen-copy"><small id="tvScreenKicker">THE NEXT STORY IS CALLING</small><strong><span id="tvTitleLead">好戏，</span><em id="tvTitleAccent">马上开场。</em></strong></span>
+          </button>
+        </div>
+        <div class="tv-controls">
+          <span class="tv-brand">爱奇艺 · CHANNEL SELECTOR</span>
+          <span class="tv-channel-readout" aria-live="polite"><b id="tvChannelNumber">01</b><span id="tvChannelName">精选</span></span>
+          <span class="tv-auto-line" id="tvAutoLine" aria-hidden="true"><i></i></span>
+          <button class="tv-dial" id="tvDial" type="button" aria-label="旋转频道旋钮，当前频道 01 精选" title="点击、滚动或拖动旋钮切换频道"></button>
+          <span class="tv-speaker" aria-hidden="true"></span>
+          <button class="power-button" id="powerButton" type="button" aria-label="打开电视并进入首页">
+            <span class="power-button-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v10M6.1 5.9a8 8 0 1 0 11.8 0"/></svg></span>
+            <span class="power-button-label">按下电源</span>
+          </button>
+          <button class="tv-sound-toggle" id="soundToggle" type="button" aria-label="音效" aria-pressed="true"><span class="sound-icon" aria-hidden="true">♫</span><span id="soundLabel">音效开启</span></button>
+        </div>
+      </div>
+      <p class="gate-instruction"><span><b>↵</b> 点击电视开机</span><i></i><span><b>↑</b> 向上滑动进入</span></p>
+    </div>
+  </section>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <aside class="scroll-rail" aria-hidden="true">
+    <span class="scroll-rail-label" id="scrollLabel">00 · ON AIR</span>
+    <span class="scroll-track"><span class="scroll-progress" id="scrollProgress"></span></span>
+    <span class="scroll-percent" id="scrollPercent">00%</span>
+  </aside>
+  <header class="topbar" id="topbar">
+    <nav class="nav shell focus-group" aria-label="主导航">
+      <a class="logo focus-item" href="#top" aria-label="爱奇艺首页">
+        <span class="logo-mark">iQIYI</span><span>爱奇艺</span>
+      </a>
+      <div class="nav-links focus-group focus-item">
+        <a class="focus-item" href="#content">正在热播</a>
+        <a class="focus-item" href="#catalog">影视分类</a>
+        <a class="focus-item" href="#ai">AI 体验</a>
+        <a class="focus-item" href="#vip">会员权益</a>
+        <a class="nav-cta action focus-item" href="#vip" data-message="已为你定位到会员方案">开通会员</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top" class="focus-group" tabindex="-1">
+    <section class="hero focus-item">
+      <div class="hero-grid shell focus-group">
+        <div class="hero-copy focus-item">
+          <span class="eyebrow">iQIYI · ENTER THE STORY</span>
+          <h1>
+            <span class="line"><span class="word">下一秒</span></span>
+            <span class="line hook-line"><span class="hook-window"><span class="hook-track"><span>悬念</span><span>心动</span><span>欢笑</span><span>热爱</span><span>悬念</span></span></span><span class="word">就来了</span></span>
+          </h1>
+          <p class="hero-lede">别花时间找下一部。爱奇艺让值得追的内容，主动来到你面前。</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary action" type="button" data-message="入场通道已开启，下一场好戏马上开始">
+              立即入戏
+              <svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <a class="btn btn-ghost" href="#content">看看有什么 <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+
+        <div class="phone-stage focus-item" id="phoneStage" aria-label="爱奇艺 App 界面展示">
+          <div class="magnetic-glow" id="magneticGlow" aria-hidden="true"></div>
+          <div class="phone-rig" id="phoneRig">
+            <div class="signal-ring" aria-hidden="true"></div>
+            <div class="signal-ring secondary" aria-hidden="true"></div>
+            <div class="orbit" aria-hidden="true"></div>
+            <div class="float-chip one" aria-hidden="true"><span class="dot"></span><span><b>智能续播</b>刚刚好，接着看</span></div>
+            <div class="float-chip two" aria-hidden="true"><span class="dot"></span><span><b>AI 跳看</b>直达高能时刻</span></div>
+            <div class="phone" id="phone">
+              <div class="screen">
+                <div class="phone-art">
+                  <span class="phone-brand">iQIYI 爱奇艺</span>
+                  <span class="phone-badge" id="phoneBadge">独播剧场</span>
+                  <div class="show-meta" id="showMeta">
+                    <span class="show-kicker" id="showKicker">迷雾剧场 · 正在热播</span>
+                    <div class="show-title" id="showTitle">边界回声</div>
+                    <div class="show-sub" id="showSub">迷雾之中，每个人都有两张面孔</div>
+                  </div>
+                </div>
+                <div class="screen-body">
+                  <div class="screen-row"><strong>为你精选</strong><span>换一换</span></div>
+                  <div class="mini-cards"><i class="mini-card"></i><i class="mini-card"></i><i class="mini-card"></i></div>
+                </div>
+                <div class="phone-nav" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-hook" aria-hidden="true">
+        <svg viewBox="0 0 100 100"><defs><path id="hookPath" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"/></defs><text><textPath href="#hookPath">MOVE CURSOR · FEEL THE STORY · </textPath></text></svg>
+        <span class="hero-hook-core">↗</span>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">向下探索</div>
+    </section>
+
+    <div class="marquee focus-item" aria-label="爱奇艺功能亮点">
+      <div class="marquee-track">
+        <div class="marquee-group focus-group"><span class="marquee-item focus-item"><em>正在热播</em> 好戏不断</span><span class="marquee-item focus-item">AI 跳看 高能直达</span><span class="marquee-item focus-item"><em>智能续播</em> 无缝接上</span><span class="marquee-item focus-item">帧绮映画 沉浸视听</span><span class="marquee-item focus-item"><em>多端共享</em> 随时入戏</span></div>
+        <div class="marquee-group focus-group" aria-hidden="true"><span class="marquee-item focus-item"><em>正在热播</em> 好戏不断</span><span class="marquee-item focus-item">AI 跳看 高能直达</span><span class="marquee-item focus-item"><em>智能续播</em> 无缝接上</span><span class="marquee-item focus-item">帧绮映画 沉浸视听</span><span class="marquee-item focus-item"><em>多端共享</em> 随时入戏</span></div>
+      </div>
+    </div>
+
+    <section class="content-section focus-item" id="content">
+      <div class="shell">
+        <div class="section-head reveal focus-group">
+          <div class="focus-item"><span class="eyebrow">CONTENT UNIVERSE</span><h2>每一次点开，<br><span class="headline-accent">都有新的世界。</span></h2><span class="section-caption">A NEW WORLD IN EVERY PLAY</span></div>
+          <p class="section-note focus-item">四种观看情绪，一处自在切换。选择你此刻想进入的故事。</p>
+        </div>
+        <div class="poster-grid focus-group">
+          <button class="poster reveal action focus-item" type="button" data-message="已进入剧集频道｜好故事，慢慢追">
+            <img class="poster-image" src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=85" alt="夜空下的城市剪影" loading="lazy" decoding="async">
+            <span class="poster-index">01 / 04</span>
+            <div class="poster-copy"><span class="poster-kind">剧集 SERIES</span><h3>好故事，慢慢追</h3><p>迷雾剧场、恋恋剧场与年度大剧，陪你追到下一集。</p></div>
+            <span class="poster-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button class="poster reveal action focus-item" type="button" data-message="已进入综艺频道｜把快乐拉满">
+            <img class="poster-image" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=900&q=85" alt="舞台灯光与现场演出" loading="lazy" decoding="async">
+            <span class="poster-index">02 / 04</span>
+            <div class="poster-copy"><span class="poster-kind">综艺 SHOW</span><h3>把快乐拉满</h3><p>热梗、新声与现场感，随时加入这一场快乐。</p></div>
+            <span class="poster-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button class="poster reveal action focus-item" type="button" data-message="已进入电影频道｜一部就入戏">
+            <img class="poster-image" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=85" alt="电影放映机与银幕" loading="lazy" decoding="async">
+            <span class="poster-index">03 / 04</span>
+            <div class="poster-copy"><span class="poster-kind">电影 FILM</span><h3>一部就入戏</h3><p>从院线新作到经典佳片，留一段完整时间给电影。</p></div>
+            <span class="poster-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button class="poster reveal action focus-item" type="button" data-message="已进入动漫频道｜热爱不设限">
+            <img class="poster-image" src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=900&q=85" alt="星空与绚丽色彩" loading="lazy" decoding="async">
+            <span class="poster-index">04 / 04</span>
+            <div class="poster-copy"><span class="poster-kind">动漫 ANIME</span><h3>热爱不设限</h3><p>国创、日漫与少儿内容，让想象力继续生长。</p></div>
+            <span class="poster-arrow" aria-hidden="true">↗</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="catalog-section focus-item" id="catalog">
+      <div class="shell">
+        <div class="section-head reveal focus-group">
+          <div class="focus-item"><span class="eyebrow">THE IQIYI COLLECTION</span><h2>挑一种心情，<br><span class="headline-accent">进入一类故事。</span></h2><span class="section-caption">PICK A GENRE · FIND YOUR NEXT STORY</span></div>
+          <p class="section-note focus-item">从悬疑剧到自然纪录片。选一个频道，好戏就从这里开始。</p>
+        </div>
+        <div class="catalog-toolbar focus-group">
+          <div class="catalog-filters focus-group focus-item" role="group" aria-label="筛选影视分类">
+            <button class="catalog-filter focus-item" type="button" data-filter="all" aria-pressed="true">全部频道</button>
+            <button class="catalog-filter focus-item" type="button" data-filter="series" aria-pressed="false">剧集</button>
+            <button class="catalog-filter focus-item" type="button" data-filter="film" aria-pressed="false">电影</button>
+            <button class="catalog-filter focus-item" type="button" data-filter="variety" aria-pressed="false">综艺</button>
+            <button class="catalog-filter focus-item" type="button" data-filter="anime" aria-pressed="false">动漫</button>
+            <button class="catalog-filter focus-item" type="button" data-filter="documentary" aria-pressed="false">纪录片</button>
+            <button class="catalog-filter focus-item" type="button" data-filter="kids" aria-pressed="false">少儿</button>
+          </div>
+          <span class="catalog-count focus-item" id="catalogCount">08 CHANNELS · ALL STORIES</span>
+        </div>
+        <div class="catalog-grid focus-group" id="catalogGrid">
+          <button class="catalog-card focus-item is-selected" type="button" data-type="series" data-title="迷雾剧场" data-copy="悬念、反转与层层递进的真相。今晚，跟着线索走进下一集。" aria-pressed="true">
+            <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
+            <span class="catalog-card-index">01 / SERIES</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
+            <span class="catalog-card-copy"><span class="catalog-card-type">悬疑 · 高能 · 独播</span><h3>迷雾剧场</h3><p>每个答案，都藏着新的问题。</p></span>
+          </button>
+          <button class="catalog-card focus-item" type="button" data-type="series" data-title="都市热剧" data-copy="从心动相遇到人生转场，把熟悉的日常看出新的滋味。" aria-pressed="false">
+            <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
+            <span class="catalog-card-index">02 / SERIES</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
+            <span class="catalog-card-copy"><span class="catalog-card-type">都市 · 情感 · 连载</span><h3>都市热剧</h3><p>生活有回声，故事正发生。</p></span>
+          </button>
+          <button class="catalog-card focus-item" type="button" data-type="film" data-title="影院新片" data-copy="大银幕新作与口碑佳片，给自己留一段完整的观影时间。" aria-pressed="false">
+            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
+            <span class="catalog-card-index">03 / FILM</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
+            <span class="catalog-card-copy"><span class="catalog-card-type">院线 · 佳片 · 片单</span><h3>影院新片</h3><p>把世界放大，把此刻留给电影。</p></span>
+          </button>
+          <button class="catalog-card focus-item" type="button" data-type="film" data-title="科幻奇遇" data-copy="穿过星河、时间与想象边界。下一站，交给好奇心决定。" aria-pressed="false">
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
+            <span class="catalog-card-index">04 / FILM</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
+            <span class="catalog-card-copy"><span class="catalog-card-type">科幻 · 冒险 · 奇想</span><h3>科幻奇遇</h3><p>想象力，永远比宇宙更远。</p></span>
+          </button>
+          <button class="catalog-card focus-item" type="button" data-type="variety" data-title="综艺现场" data-copy="音乐、热梗与真实反应。打开这一场，快乐不用预热。" aria-pressed="false">
+            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
+            <span class="catalog-card-index">05 / SHOW</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
+            <span class="catalog-card-copy"><span class="catalog-card-type">音乐 · 喜剧 · 热梗</span><h3>综艺现场</h3><p>现场感拉满，快乐刚刚好。</p></span>
+          </button>
+          <button class="catalog-card focus-item" type="button" data-type="anime" data-title="动漫宇宙" data-copy="国创新作与人气番剧。每次出发，都有新的世界观。" aria-pressed="false">
+            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
+            <span class="catalog-card-index">06 / ANIME</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
+            <span class="catalog-card-copy"><span class="catalog-card-type">国创 · 番剧 · 新番</span><h3>动漫宇宙</h3><p>想象没有边界，热爱自有方向。</p></span>
+          </button>
+          <button class="catalog-card focus-item" type="button" data-type="documentary" data-title="自然纪录" data-copy="去山海之间，看见真实世界的辽阔与细节。" aria-pressed="false">
+            <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
+            <span class="catalog-card-index">07 / DOC</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
+            <span class="catalog-card-copy"><span class="catalog-card-type">自然 · 人文 · 真实</span><h3>自然纪录</h3><p>世界很大，值得慢慢看见。</p></span>
+          </button>
+          <button class="catalog-card focus-item" type="button" data-type="kids" data-title="少儿天地" data-copy="动画、启蒙与亲子时光。让好奇心从一个故事开始。" aria-pressed="false">
+            <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
+            <span class="catalog-card-index">08 / KIDS</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
+            <span class="catalog-card-copy"><span class="catalog-card-type">动画 · 启蒙 · 亲子</span><h3>少儿天地</h3><p>陪伴每一份小小的好奇。</p></span>
+          </button>
+        </div>
+        <div class="catalog-selection" aria-live="polite">
+          <div><span class="catalog-selection-label">NOW BROWSING</span><strong class="catalog-selection-title" id="catalogSelectionTitle">迷雾剧场</strong><p class="catalog-selection-copy" id="catalogSelectionCopy">悬念、反转与层层递进的真相。今晚，跟着线索走进下一集。</p></div>
+          <span class="catalog-selection-mark" aria-hidden="true">↗</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-section focus-item" id="ai">
+      <div class="shell">
+        <div class="ai-frame reveal">
+          <div class="ai-layout focus-group">
+            <div class="ai-title focus-item">
+              <span class="eyebrow">AI VIEWING</span>
+              <h2>让好内容，<br><span class="headline-accent">更懂你。</span></h2>
+              <span class="section-caption">SMARTER WATCHING, LESS SEARCHING</span>
+              <p>技术退到幕后，把选择变简单，把观看变顺畅。你只管享受故事。</p>
+              <div class="ai-visual focus-item" aria-label="AI 跳看影片时间轴示意">
+                <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=900&q=85" alt="影院银幕正播放电影画面" loading="lazy" decoding="async">
+                <span class="ai-visual-tag">AI · SCENE MAP 00:42</span>
+                <span class="ai-timeline" aria-hidden="true"></span>
+                <span class="ai-visual-copy"><strong>高能时刻，直达现场</strong><span>01:24 / 42:18</span></span>
+              </div>
+            </div>
+            <div class="ai-list focus-group focus-item">
+              <article class="ai-item focus-item">
+                <span class="ai-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4v16M9 7l8 5-8 5z"/></svg></span>
+                <div><h3>AI 跳看</h3><span class="ai-english">SKIP TO THE MOMENT</span><p>快速理解剧情脉络，一键直达关键情节与高能片段。</p></div><span class="ai-number">01</span>
+              </article>
+              <article class="ai-item focus-item">
+                <span class="ai-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7M4 4v5h5"/></svg></span>
+                <div><h3>智能续播</h3><span class="ai-english">PICK UP WHERE YOU LEFT</span><p>自动记住进度与观看习惯，换个设备也能无缝接上。</p></div><span class="ai-number">02</span>
+              </article>
+              <article class="ai-item focus-item">
+                <span class="ai-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.3-7-10a4 4 0 0 1 7-2.7A4 4 0 0 1 19 10c0 5.7-7 10-7 10z"/></svg></span>
+                <div><h3>个性荐片</h3><span class="ai-english">MADE AROUND YOUR TASTE</span><p>从你的真实兴趣出发，减少翻找，把下一部好片放到眼前。</p></div><span class="ai-number">03</span>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="membership focus-item" id="vip">
+      <div class="shell">
+        <div class="section-head reveal focus-group">
+          <div class="focus-item"><span class="eyebrow">VIP PRIVILEGES</span><h2>选对你的<br><span class="headline-accent">观影方式。</span></h2><span class="section-caption">MORE WAYS TO WATCH</span></div>
+          <p class="section-note focus-item">从个人观看，到跨屏共享体验。三档权益，按你的生活场景选择。</p>
+        </div>
+        <div class="plans focus-group" role="group" aria-label="选择 VIP 方案">
+          <article class="plan reveal focus-item" data-tier="黄金">
+            <div class="plan-art" aria-hidden="true"><img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=84" alt="" loading="lazy" decoding="async"></div>
+            <span class="plan-tier">GOLD</span><h3>黄金 VIP</h3><p class="plan-sub">个人标准会员</p>
+            <ul><li>手机 / 平板 / 电脑可用</li><li>会员内容免费看</li><li>热播内容抢先看</li><li>沉浸观影特权</li></ul>
+            <button class="btn btn-ghost" type="button" data-message="已选择黄金 VIP｜适合个人多端观看" aria-pressed="false">选择黄金</button>
+          </article>
+          <article class="plan featured is-selected reveal focus-item" data-tier="白金">
+            <div class="plan-art" aria-hidden="true"><img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1000&q=86" alt="" loading="lazy" decoding="async"></div>
+            <span class="plan-tier">PLATINUM</span><h3>白金 VIP</h3><p class="plan-sub">大屏也能看</p>
+            <ul><li>电视 / 手机 / 电脑 / 平板</li><li>黄金 VIP 全部权益</li><li>大屏观影体验</li><li>更多设备同时播放</li></ul>
+            <button class="btn btn-ghost" type="button" data-message="已选择白金 VIP｜大屏观影更自在" aria-pressed="true">已选白金</button>
+          </article>
+          <article class="plan reveal focus-item" data-tier="星钻">
+            <div class="plan-art" aria-hidden="true"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=84" alt="" loading="lazy" decoding="async"></div>
+            <span class="plan-tier">DIAMOND</span><h3>星钻 VIP</h3><p class="plan-sub">全场景旗舰会员</p>
+            <ul><li>覆盖电视 / XR 等多端</li><li>白金 VIP 全部权益</li><li>加更礼内容免费看</li><li>多会员权益组合</li></ul>
+            <button class="btn btn-ghost" type="button" data-message="已选择星钻 VIP｜解锁旗舰会员体验" aria-pressed="false">选择星钻</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee secondary focus-item" aria-label="爱奇艺观影体验">
+      <div class="marquee-track">
+        <div class="marquee-group focus-group"><span class="marquee-item focus-item"><em>影院质感</em> 帧帧入戏</span><span class="marquee-item focus-item">独播剧场 抢先追更</span><span class="marquee-item focus-item"><em>兴趣推荐</em> 越看越懂</span><span class="marquee-item focus-item">大屏沉浸 声画俱佳</span><span class="marquee-item focus-item"><em>会员专享</em> 好戏先看</span></div>
+        <div class="marquee-group focus-group" aria-hidden="true"><span class="marquee-item focus-item"><em>影院质感</em> 帧帧入戏</span><span class="marquee-item focus-item">独播剧场 抢先追更</span><span class="marquee-item focus-item"><em>兴趣推荐</em> 越看越懂</span><span class="marquee-item focus-item">大屏沉浸 声画俱佳</span><span class="marquee-item focus-item"><em>会员专享</em> 好戏先看</span></div>
+      </div>
+    </div>
+
+    <section class="final-cta focus-item">
+      <div class="shell reveal">
+        <span class="eyebrow">YOUR STORY STARTS HERE</span>
+        <h2>下一场好戏，<br><span>现在开场。</span></h2>
+        <p>打开爱奇艺，把喜欢的内容留在身边。</p>
+        <button class="btn btn-primary action" type="button" data-message="会员开通页已准备好，欢迎入场">开通会员 <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-row shell focus-group">
+      <div class="logo focus-item"><span class="logo-mark">iQIYI</span><span>爱奇艺</span></div>
+      <span class="focus-item">个人概念演示 · 非爱奇艺官方项目 · 图片来自 Unsplash · 不提供真实充值</span>
+      <span class="focus-item">© 2026 FHX</span>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"><span class="toast-dot"></span><span id="toastText">已完成</span></div>
+
+  <script>
+    (() => {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const topbar = document.getElementById('topbar');
+      const hero = document.querySelector('.hero');
+      const phoneStage = document.getElementById('phoneStage');
+      const phoneRig = document.getElementById('phoneRig');
+      const phone = document.getElementById('phone');
+      const magneticGlow = document.getElementById('magneticGlow');
+      const phoneBadge = document.getElementById('phoneBadge');
+      const showMeta = document.getElementById('showMeta');
+      const showKicker = document.getElementById('showKicker');
+      const showTitle = document.getElementById('showTitle');
+      const showSub = document.getElementById('showSub');
+      const scrollProgress = document.getElementById('scrollProgress');
+      const scrollPercent = document.getElementById('scrollPercent');
+      const scrollLabel = document.getElementById('scrollLabel');
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toastText');
+      const tvGate = document.getElementById('tvGate');
+      const tvScreen = document.getElementById('tvScreen');
+      const tvScreenImage = document.querySelector('.tv-screen-image');
+      const tvScreenKicker = document.getElementById('tvScreenKicker');
+      const tvTitleLead = document.getElementById('tvTitleLead');
+      const tvTitleAccent = document.getElementById('tvTitleAccent');
+      const tvSignalName = document.getElementById('tvSignalName');
+      const tvChannelNumber = document.getElementById('tvChannelNumber');
+      const tvChannelName = document.getElementById('tvChannelName');
+      const tvAutoLine = document.getElementById('tvAutoLine');
+      const tvDial = document.getElementById('tvDial');
+      const beamParticles = document.getElementById('beamParticles');
+      const powerButton = document.getElementById('powerButton');
+      const soundToggle = document.getElementById('soundToggle');
+      const soundLabel = document.getElementById('soundLabel');
+      const experienceRegions = [topbar, document.querySelector('main'), document.querySelector('footer')];
+      experienceRegions.forEach((region) => { region.inert = true; });
+      const catalogGrid = document.getElementById('catalogGrid');
+      const catalogCards = [...document.querySelectorAll('.catalog-card')];
+      const catalogFilters = [...document.querySelectorAll('.catalog-filter')];
+      const catalogCount = document.getElementById('catalogCount');
+      const catalogSelectionTitle = document.getElementById('catalogSelectionTitle');
+      const catalogSelectionCopy = document.getElementById('catalogSelectionCopy');
+      const particleCanvas = document.getElementById('particleCanvas');
+      const particleContext = particleCanvas.getContext('2d');
+      let toastTimer;
+      let particleFrame;
+      let particles = [];
+      let pointerX = 0;
+      let pointerY = 0;
+      let phoneScrollOffset = 0;
+      let ticking = false;
+
+      const scrollSections = [
+        { element: hero, label: '01 · OPENING' },
+        { element: document.getElementById('content'), label: '02 · CONTENT' },
+        { element: document.getElementById('catalog'), label: '03 · COLLECTION' },
+        { element: document.getElementById('ai'), label: '04 · AI VIEWING' },
+        { element: document.getElementById('vip'), label: '05 · VIP' },
+        { element: document.querySelector('.final-cta'), label: '06 · FINALE' }
+      ];
+
+      const makeParticles = () => {
+        const count = 42;
+        particles = Array.from({ length: count }, (_, index) => ({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          vx: (Math.random() - .5) * .16,
+          vy: (Math.random() - .5) * .13 - .035,
+          radius: Math.random() * 1.5 + .55,
+          alpha: Math.random() * .36 + .16,
+          color: index % 5 === 0 ? '224,255,230' : '64,255,103'
+        }));
+      };
+
+      const sizeParticleCanvas = () => {
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        particleCanvas.width = Math.round(window.innerWidth * ratio);
+        particleCanvas.height = Math.round(window.innerHeight * ratio);
+        particleContext.setTransform(ratio, 0, 0, ratio, 0, 0);
+        makeParticles();
+      };
+
+      const drawParticles = (move = true) => {
+        particleContext.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        particleContext.globalCompositeOperation = 'lighter';
+
+        particles.forEach((particle, index) => {
+          if (move) {
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            if (particle.x < -12) particle.x = window.innerWidth + 12;
+            if (particle.x > window.innerWidth + 12) particle.x = -12;
+            if (particle.y < -12) particle.y = window.innerHeight + 12;
+            if (particle.y > window.innerHeight + 12) particle.y = -12;
+          }
+
+          const glow = particleContext.createRadialGradient(
+            particle.x, particle.y, 0,
+            particle.x, particle.y, particle.radius * 5
+          );
+          glow.addColorStop(0, `rgba(${particle.color},${particle.alpha})`);
+          glow.addColorStop(1, `rgba(${particle.color},0)`);
+          particleContext.fillStyle = glow;
+          particleContext.beginPath();
+          particleContext.arc(particle.x, particle.y, particle.radius * 5, 0, Math.PI * 2);
+          particleContext.fill();
+
+          for (let nextIndex = index + 1; nextIndex < particles.length; nextIndex += 1) {
+            const next = particles[nextIndex];
+            const distance = Math.hypot(particle.x - next.x, particle.y - next.y);
+            if (distance < 112) {
+              particleContext.strokeStyle = `rgba(77,255,111,${(1 - distance / 112) * .075})`;
+              particleContext.lineWidth = .55;
+              particleContext.beginPath();
+              particleContext.moveTo(particle.x, particle.y);
+              particleContext.lineTo(next.x, next.y);
+              particleContext.stroke();
+            }
+          }
+        });
+
+        if (move) particleFrame = requestAnimationFrame(() => drawParticles(true));
+      };
+
+      sizeParticleCanvas();
+      drawParticles(!reduceMotion);
+      window.addEventListener('resize', () => {
+        cancelAnimationFrame(particleFrame);
+        sizeParticleCanvas();
+        drawParticles(!reduceMotion);
+      }, { passive: true });
+
+      for (let index = 0; index < 34; index += 1) {
+        const mote = document.createElement('i');
+        mote.style.setProperty('--x', `${8 + Math.random() * 86}%`);
+        mote.style.setProperty('--y', `${18 + Math.random() * 64}%`);
+        mote.style.setProperty('--size', `${1 + Math.random() * 2.2}px`);
+        mote.style.setProperty('--duration', `${3.8 + Math.random() * 5.8}s`);
+        mote.style.setProperty('--delay', `${-Math.random() * 8}s`);
+        beamParticles.append(mote);
+      }
+
+      const updatePhoneRig = () => {
+        if (reduceMotion) return;
+        phoneRig.style.transform = `translate3d(${pointerX * 34}px, ${pointerY * 24 + phoneScrollOffset}px, 0) rotateZ(${pointerX * 2.2}deg)`;
+      };
+
+      const onScroll = () => {
+        ticking = false;
+        if (document.body.classList.contains('intro-active')) {
+          scrollProgress.style.height = '0%';
+          scrollPercent.textContent = '00%';
+          scrollLabel.textContent = '00 · ON AIR';
+          return;
+        }
+        const scrollTop = window.scrollY;
+        const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+        const progress = Math.min(scrollTop / maxScroll, 1);
+        const focusLine = scrollTop + window.innerHeight * .46;
+        let activeSection = scrollSections[0];
+
+        scrollSections.forEach((section) => {
+          if (focusLine >= section.element.offsetTop) activeSection = section;
+        });
+
+        topbar.classList.toggle('scrolled', scrollTop > 18);
+        scrollProgress.style.height = `${progress * 100}%`;
+        scrollPercent.textContent = `${String(Math.round(progress * 100)).padStart(2, '0')}%`;
+        scrollLabel.textContent = activeSection.label;
+        phoneScrollOffset = Math.min(scrollTop, window.innerHeight) * .105;
+        updatePhoneRig();
+
+        if (!reduceMotion) {
+          document.querySelectorAll('.poster').forEach((card, index) => {
+            const rect = card.getBoundingClientRect();
+            const distance = (rect.top + rect.height / 2 - window.innerHeight / 2) / window.innerHeight;
+            if (Math.abs(distance) < 1.2) {
+              card.style.setProperty('--art-shift', `${distance * (index % 2 ? 15 : -15)}px`);
+            }
+          });
+
+        }
+      };
+
+      const requestScrollUpdate = () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(onScroll);
+        }
+      };
+
+      let experienceEntering = false;
+      let gatePointerStart = null;
+      const AudioContextType = window.AudioContext || window.webkitAudioContext;
+      let audioContext = null;
+      let soundEnabled = true;
+      let lastDialSoundAt = 0;
+      const emitTone = (context, startFrequency, endFrequency, duration, volume, delay = 0, type = 'sine') => {
+        const start = context.currentTime + delay;
+        const oscillator = context.createOscillator();
+        const envelope = context.createGain();
+        oscillator.type = type;
+        oscillator.frequency.setValueAtTime(startFrequency, start);
+        oscillator.frequency.exponentialRampToValueAtTime(endFrequency, start + duration);
+        envelope.gain.setValueAtTime(.0001, start);
+        envelope.gain.exponentialRampToValueAtTime(volume, start + Math.min(.012, duration / 3));
+        envelope.gain.exponentialRampToValueAtTime(.0001, start + duration);
+        oscillator.connect(envelope);
+        envelope.connect(context.destination);
+        oscillator.start(start);
+        oscillator.stop(start + duration + .02);
+        oscillator.onended = () => { oscillator.disconnect(); envelope.disconnect(); };
+      };
+      const playEffect = (effect) => {
+        if (!soundEnabled || !AudioContextType || document.hidden || navigator.userActivation?.hasBeenActive === false) return;
+        if (effect === 'dial') {
+          if (performance.now() - lastDialSoundAt < 105) return;
+          lastDialSoundAt = performance.now();
+        }
+        try {
+          if (!audioContext) audioContext = new AudioContextType();
+          const render = () => {
+            if (!soundEnabled || document.hidden || audioContext.state !== 'running') return;
+            if (effect === 'dial') {
+              emitTone(audioContext, 490, 210, .075, .033, 0, 'triangle');
+              emitTone(audioContext, 1120, 650, .038, .012);
+            } else if (effect === 'power') {
+              emitTone(audioContext, 120, 460, .28, .046, 0, 'triangle');
+              emitTone(audioContext, 420, 780, .24, .027, .08);
+            } else if (effect === 'return') {
+              emitTone(audioContext, 690, 250, .22, .024, 0, 'triangle');
+            } else {
+              emitTone(audioContext, 540, 660, .16, .029);
+              emitTone(audioContext, 760, 890, .19, .022, .07);
+            }
+          };
+          if (audioContext.state === 'suspended') audioContext.resume().then(render).catch(() => {});
+          else render();
+        } catch (_) { /* Audio is optional when a browser blocks it. */ }
+      };
+      soundToggle.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        soundToggle.setAttribute('aria-pressed', String(soundEnabled));
+        soundLabel.textContent = soundEnabled ? '音效开启' : '音效关闭';
+        if (soundEnabled) playEffect('select');
+      });
+      const channels = [
+        { name: '精选', label: 'ON AIR · FEATURED', kicker: 'THE NEXT STORY IS CALLING', lead: '好戏，', accent: '马上开场。', image: 'https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=1600&q=88' },
+        { name: '剧集', label: 'SERIES · NEW EPISODE', kicker: 'SERIES · NEXT EPISODE', lead: '故事，', accent: '正在热播。', image: 'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1600&q=88' },
+        { name: '电影', label: 'CINEMA · FEATURED FILM', kicker: 'CINEMA · A MOMENT TO STAY', lead: '此刻，', accent: '留给电影。', image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1600&q=88' },
+        { name: '综艺', label: 'SHOW · LIVE MOMENT', kicker: 'SHOW · GOOD TIMES LIVE', lead: '快乐，', accent: '正在发生。', image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1600&q=88' },
+        { name: '纪录', label: 'DOC · WIDE OPEN WORLD', kicker: 'DOCUMENTARY · OPEN YOUR WORLD', lead: '世界，', accent: '值得看见。', image: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1600&q=88' },
+        { name: '动漫', label: 'ANIME · ANIMATION', kicker: 'ANIMATION · IMAGINATION IN MOTION', lead: '想象，', accent: '自由生长。', image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1600&q=88' }
+      ];
+      let activeChannel = 0;
+      let channelRevision = 0;
+      let dialDrag = null;
+      let suppressDialClick = false;
+      let lastDialWheelAt = 0;
+      const tuneChannel = (direction, source = 'manual') => {
+        activeChannel = (activeChannel + direction + channels.length) % channels.length;
+        const channel = channels[activeChannel];
+        const revision = ++channelRevision;
+        tvChannelNumber.textContent = String(activeChannel + 1).padStart(2, '0');
+        tvChannelName.textContent = channel.name;
+        tvDial.setAttribute('aria-label', `旋转频道旋钮，当前频道 ${String(activeChannel + 1).padStart(2, '0')} ${channel.name}`);
+        tvScreenKicker.textContent = channel.kicker;
+        tvTitleLead.textContent = channel.lead;
+        tvTitleAccent.textContent = channel.accent;
+        tvSignalName.textContent = channel.label;
+        tvScreen.classList.add('is-tuning');
+        window.setTimeout(() => {
+          if (revision !== channelRevision) return;
+          tvScreenImage.onload = () => {
+            if (revision === channelRevision) tvScreen.classList.remove('is-tuning');
+          };
+          tvScreenImage.src = channel.image;
+          window.setTimeout(() => {
+            if (revision === channelRevision) tvScreen.classList.remove('is-tuning');
+          }, 1100);
+        }, 130);
+        tvDial.style.setProperty('--dial-angle', `${activeChannel * 60}deg`);
+        if (source === 'manual') {
+          playEffect('dial');
+          scheduleChannelAuto();
+        }
+      };
+
+      const autoChannelDelay = 5800;
+      let channelAutoTimer = null;
+      const stopChannelAuto = () => {
+        window.clearTimeout(channelAutoTimer);
+        channelAutoTimer = null;
+        tvAutoLine.classList.remove('is-running');
+      };
+      const scheduleChannelAuto = () => {
+        stopChannelAuto();
+        if (reduceMotion || document.hidden || tvGate.hidden || experienceEntering) return;
+        void tvAutoLine.offsetWidth;
+        tvAutoLine.classList.add('is-running');
+        channelAutoTimer = window.setTimeout(() => {
+          if (document.hidden || tvGate.hidden || experienceEntering) return;
+          tuneChannel(1, 'auto');
+          scheduleChannelAuto();
+        }, autoChannelDelay);
+      };
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stopChannelAuto();
+        else scheduleChannelAuto();
+      });
+      scheduleChannelAuto();
+
+      tvDial.addEventListener('click', () => {
+        if (suppressDialClick) {
+          suppressDialClick = false;
+          return;
+        }
+        tuneChannel(1);
+      });
+      tvDial.addEventListener('wheel', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (Math.abs(event.deltaY) > 1 && performance.now() - lastDialWheelAt > 180) {
+          lastDialWheelAt = performance.now();
+          tuneChannel(event.deltaY > 0 ? 1 : -1);
+        }
+      }, { passive: false });
+      tvDial.addEventListener('pointerdown', (event) => {
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+        dialDrag = { y: event.clientY, accumulated: 0, moved: false };
+        tvDial.setPointerCapture(event.pointerId);
+      });
+      tvDial.addEventListener('pointermove', (event) => {
+        if (!dialDrag) return;
+        dialDrag.accumulated += event.clientY - dialDrag.y;
+        dialDrag.y = event.clientY;
+        while (Math.abs(dialDrag.accumulated) >= 28) {
+          const direction = dialDrag.accumulated > 0 ? 1 : -1;
+          dialDrag.accumulated -= direction * 28;
+          dialDrag.moved = true;
+          tuneChannel(direction);
+        }
+      });
+      const finishDialDrag = () => {
+        if (dialDrag?.moved) {
+          suppressDialClick = true;
+          window.setTimeout(() => { suppressDialClick = false; }, 80);
+        }
+        dialDrag = null;
+      };
+      tvDial.addEventListener('pointerup', finishDialDrag);
+      tvDial.addEventListener('pointercancel', finishDialDrag);
+      tvDial.addEventListener('keydown', (event) => {
+        if (['ArrowUp', 'ArrowRight', 'ArrowDown', 'ArrowLeft'].includes(event.key)) {
+          event.preventDefault();
+          event.stopPropagation();
+          tuneChannel(event.key === 'ArrowDown' || event.key === 'ArrowRight' ? 1 : -1);
+        }
+      });
+      const enterExperience = () => {
+        if (experienceEntering || tvGate.hidden) return;
+        experienceEntering = true;
+        stopChannelAuto();
+        playEffect('power');
+        document.body.classList.add('experience-entering');
+        tvGate.classList.add('is-powering');
+        tvGate.inert = true;
+        window.setTimeout(() => {
+          tvGate.classList.add('is-leaving');
+          document.body.classList.remove('intro-active');
+          window.setTimeout(() => {
+            tvGate.hidden = true;
+            document.body.classList.remove('experience-entering');
+            experienceRegions.forEach((region) => { region.inert = false; });
+            experienceEntering = false;
+            document.getElementById('top').focus({ preventScroll: true });
+            requestScrollUpdate();
+          }, reduceMotion ? 20 : 740);
+        }, reduceMotion ? 50 : 620);
+      };
+      const returnToGate = () => {
+        if (experienceEntering || !tvGate.hidden || window.scrollY > 8) return;
+        experienceEntering = true;
+        playEffect('return');
+        window.scrollTo(0, 0);
+        experienceRegions.forEach((region) => { region.inert = true; });
+        tvGate.hidden = false;
+        tvGate.inert = false;
+        tvGate.classList.remove('is-leaving', 'is-powering');
+        tvGate.classList.add('is-returning');
+        document.body.classList.add('intro-active', 'experience-returning');
+        requestAnimationFrame(() => tvGate.classList.remove('is-returning'));
+        window.setTimeout(() => {
+          document.body.classList.remove('experience-returning');
+          experienceEntering = false;
+          tvDial.focus({ preventScroll: true });
+          scheduleChannelAuto();
+          requestScrollUpdate();
+        }, reduceMotion ? 20 : 760);
+      };
+      tvScreen.addEventListener('click', enterExperience);
+      powerButton.addEventListener('click', enterExperience);
+      tvGate.addEventListener('wheel', (event) => {
+        if (event.deltaY > 24 || Math.abs(event.deltaX) > 34) {
+          event.preventDefault();
+          enterExperience();
+        }
+      }, { passive: false });
+      tvGate.addEventListener('pointerdown', (event) => {
+        if (event.target.closest('#tvDial,#soundToggle')) {
+          gatePointerStart = null;
+          return;
+        }
+        gatePointerStart = { x: event.clientX, y: event.clientY };
+      }, { passive: true });
+      tvGate.addEventListener('pointermove', (event) => {
+        if (gatePointerStart && gatePointerStart.y - event.clientY > 72) {
+          gatePointerStart = null;
+          enterExperience();
+        }
+      }, { passive: true });
+      tvGate.addEventListener('pointerup', (event) => {
+        if (gatePointerStart && gatePointerStart.y - event.clientY > 72) enterExperience();
+        gatePointerStart = null;
+      }, { passive: true });
+      tvGate.addEventListener('pointercancel', () => { gatePointerStart = null; }, { passive: true });
+      window.addEventListener('wheel', (event) => {
+        if (document.body.classList.contains('intro-active')) return;
+        if (window.scrollY <= 8 && event.deltaY < -24) {
+          event.preventDefault();
+          returnToGate();
+        }
+      }, { passive: false });
+      let returnSwipeStart = null;
+      window.addEventListener('pointerdown', (event) => {
+        if (!document.body.classList.contains('intro-active') && window.scrollY <= 8 && (event.pointerType === 'touch' || event.pointerType === 'pen')) {
+          returnSwipeStart = { y: event.clientY };
+        }
+      }, { passive: true });
+      window.addEventListener('pointerup', (event) => {
+        if (returnSwipeStart && event.clientY - returnSwipeStart.y > 76) returnToGate();
+        returnSwipeStart = null;
+      }, { passive: true });
+      window.addEventListener('pointercancel', () => { returnSwipeStart = null; }, { passive: true });
+      document.addEventListener('keydown', (event) => {
+        if (document.body.classList.contains('intro-active') && event.target !== tvDial && event.target !== soundToggle && (event.key === 'ArrowUp' || event.key === 'Enter')) {
+          event.preventDefault();
+          enterExperience();
+        }
+      });
+
+      const filterNames = { all: 'ALL STORIES', series: 'SERIES', film: 'FILM', variety: 'SHOW', anime: 'ANIME', documentary: 'DOC', kids: 'KIDS' };
+      const chooseCatalogCard = (card) => {
+        catalogCards.forEach((item) => {
+          const selected = item === card;
+          item.classList.toggle('is-selected', selected);
+          item.setAttribute('aria-pressed', String(selected));
+        });
+        catalogSelectionTitle.textContent = card.dataset.title;
+        catalogSelectionCopy.textContent = card.dataset.copy;
+      };
+      catalogFilters.forEach((filter) => {
+        filter.addEventListener('click', () => {
+          if (filter.getAttribute('aria-pressed') !== 'true') playEffect('select');
+          const type = filter.dataset.filter;
+          catalogFilters.forEach((item) => item.setAttribute('aria-pressed', String(item === filter)));
+          catalogCards.forEach((card) => { card.hidden = type !== 'all' && card.dataset.type !== type; });
+          const visibleCards = catalogCards.filter(card => !card.hidden);
+          catalogGrid.classList.toggle('is-filtered', type !== 'all');
+          catalogGrid.classList.toggle('is-single', visibleCards.length === 1);
+          catalogCount.textContent = `${String(visibleCards.length).padStart(2, '0')} CHANNELS · ${filterNames[type]}`;
+          if (!visibleCards.some(card => card.classList.contains('is-selected'))) chooseCatalogCard(visibleCards[0]);
+        });
+      });
+      catalogCards.forEach(card => card.addEventListener('click', () => {
+        if (!card.classList.contains('is-selected')) playEffect('select');
+        chooseCatalogCard(card);
+      }));
+
+      onScroll();
+      window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+
+      if (!reduceMotion) {
+        hero.addEventListener('pointermove', (event) => {
+          const heroRect = hero.getBoundingClientRect();
+          const stageRect = phoneStage.getBoundingClientRect();
+          pointerX = Math.max(-1, Math.min(1, (event.clientX - heroRect.left) / heroRect.width * 2 - 1));
+          pointerY = Math.max(-1, Math.min(1, (event.clientY - heroRect.top) / heroRect.height * 2 - 1));
+          phone.style.setProperty('--ry', `${pointerX * 18 - 8}deg`);
+          phone.style.setProperty('--rx', `${pointerY * -13 - 6}deg`);
+          magneticGlow.style.left = `${event.clientX - stageRect.left}px`;
+          magneticGlow.style.top = `${event.clientY - stageRect.top}px`;
+          updatePhoneRig();
+        });
+        hero.addEventListener('pointerleave', () => {
+          pointerX = 0;
+          pointerY = 0;
+          phone.style.setProperty('--ry', '-10deg');
+          phone.style.setProperty('--rx', '-7deg');
+          magneticGlow.style.left = '50%';
+          magneticGlow.style.top = '50%';
+          updatePhoneRig();
+        });
+
+        document.querySelectorAll('.poster, .plan, .catalog-card').forEach((card) => {
+          card.addEventListener('pointermove', (event) => {
+            const rect = card.getBoundingClientRect();
+            const x = (event.clientX - rect.left) / rect.width;
+            const y = (event.clientY - rect.top) / rect.height;
+            card.style.setProperty('--spot-x', `${x * 100}%`);
+            card.style.setProperty('--spot-y', `${y * 100}%`);
+            if (card.classList.contains('poster')) {
+              card.style.setProperty('--pointer-rx', `${(0.5 - y) * 7}deg`);
+              card.style.setProperty('--pointer-ry', `${(x - 0.5) * 9}deg`);
+            } else if (card.classList.contains('plan')) {
+              card.style.setProperty('--plan-rx', `${(0.5 - y) * 5}deg`);
+              card.style.setProperty('--plan-ry', `${(x - 0.5) * 7}deg`);
+            }
+          });
+          card.addEventListener('pointerleave', () => {
+            card.style.setProperty('--pointer-rx', '0deg');
+            card.style.setProperty('--pointer-ry', '0deg');
+            card.style.setProperty('--plan-rx', '0deg');
+            card.style.setProperty('--plan-ry', '0deg');
+            card.style.setProperty('--spot-x', '50%');
+            card.style.setProperty('--spot-y', '50%');
+          });
+        });
+      }
+
+      const featuredShows = [
+        { badge: '独播剧场', kicker: '迷雾剧场 · 正在热播', title: '边界回声', sub: '迷雾之中，每个人都有两张面孔' },
+        { badge: '综艺热榜', kicker: '限定企划 · 全网首播', title: '此刻出发', sub: '和喜欢的人，一起把快乐放大' },
+        { badge: '电影频道', kicker: '高分新片 · 帧绮映画', title: '银河以北', sub: '一场为大银幕感而生的冒险' }
+      ];
+      let featuredIndex = 0;
+
+      if (!reduceMotion) {
+        window.setInterval(() => {
+          showMeta.classList.add('switching');
+          window.setTimeout(() => {
+            featuredIndex = (featuredIndex + 1) % featuredShows.length;
+            const featured = featuredShows[featuredIndex];
+            phoneBadge.textContent = featured.badge;
+            showKicker.textContent = featured.kicker;
+            showTitle.textContent = featured.title;
+            showSub.textContent = featured.sub;
+          }, 245);
+          window.setTimeout(() => showMeta.classList.remove('switching'), 540);
+        }, 3400);
+      }
+
+      const revealItems = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !reduceMotion) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: .13, rootMargin: '0px 0px -7% 0px' });
+        revealItems.forEach((item, index) => {
+          item.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
+          observer.observe(item);
+        });
+      } else {
+        revealItems.forEach(item => item.classList.add('is-visible'));
+      }
+
+      const showToast = (message) => {
+        clearTimeout(toastTimer);
+        toastText.textContent = message;
+        toast.classList.add('show');
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+      };
+
+      const planCards = [...document.querySelectorAll('.plan')];
+      const selectPlan = (chosenPlan) => {
+        planCards.forEach((plan) => {
+          const selected = plan === chosenPlan;
+          const button = plan.querySelector('button');
+          plan.classList.toggle('is-selected', selected);
+          button.setAttribute('aria-pressed', String(selected));
+          button.textContent = `${selected ? '已选' : '选择'}${plan.dataset.tier}`;
+        });
+        playEffect('select');
+        showToast(chosenPlan.querySelector('button').dataset.message);
+      };
+      planCards.forEach((plan) => plan.addEventListener('click', () => selectPlan(plan)));
+
+      document.querySelectorAll('.action').forEach((element) => {
+        element.addEventListener('click', () => {
+          playEffect('select');
+          showToast(element.dataset.message || '操作已完成');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
