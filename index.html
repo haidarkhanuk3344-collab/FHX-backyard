@@ -109,9 +109,12 @@
     .tv-gate.is-returning { opacity:0; visibility:visible; }
     .gate-content { position:relative; z-index:1; width:min(1120px,100%); display:grid; justify-items:center; text-align:center; }
     .gate-heading { margin:0 0 24px; }
-    .gate-kicker { display:block; margin-bottom:13px; color:#83d492; font-size:.68rem; font-weight:800; letter-spacing:.32em; }
+    .gate-kicker { display:flex; align-items:center; justify-content:center; gap:13px; margin-bottom:13px; color:#83d492; font-size:.68rem; font-weight:800; letter-spacing:.27em; }
+    .gate-kicker b { color:#f0fff0; font-size:1rem; font-weight:900; letter-spacing:-.045em; }
+    .gate-kicker i { width:24px; height:1px; background:rgba(166,247,177,.5); }
     .gate-heading h1 { margin:0; font-family:var(--display-face); font-size:clamp(2.2rem,4.3vw,4.3rem); line-height:1; letter-spacing:-.07em; font-weight:600; }
     .gate-heading h1 em { color:#a8efad; font-weight:500; }
+    .gate-subtitle { margin:15px 0 0; color:#c7ddca; font-size:.77rem; font-weight:700; letter-spacing:.13em; }
     .tv-cabinet { position:relative; width:min(980px,calc(100vw - 120px)); display:grid; grid-template-columns:minmax(0,1fr) 130px; align-items:center; gap:24px; padding:28px; border:1px solid rgba(228,245,218,.28); border-radius:38px; background:linear-gradient(145deg,#26372a,#18251b 48%,#101912); box-shadow:0 48px 130px rgba(0,0,0,.56),0 0 0 8px rgba(211,235,198,.025),inset 0 2px rgba(255,255,255,.16),inset 0 -12px 35px rgba(0,0,0,.35); transform:perspective(1500px) rotateX(1.5deg); transition:transform .8s var(--ease),box-shadow .8s var(--ease); }
     .tv-cabinet::before,.tv-cabinet::after { content:""; position:absolute; z-index:-1; bottom:-30px; width:24px; height:40px; border-radius:0 0 8px 8px; background:linear-gradient(90deg,#101711,#374536 48%,#131b14); box-shadow:0 10px 14px rgba(0,0,0,.25); }
     .tv-cabinet::before { left:11%; transform:rotate(8deg); }
@@ -123,14 +126,15 @@
     .tv-screen-frame { position:relative; padding:13px; border-radius:28px; background:linear-gradient(145deg,#080d09,#1a241c); box-shadow:inset 0 2px 10px rgba(0,0,0,.9),0 1px rgba(255,255,255,.1); }
     .tv-screen { position:relative; display:block; width:100%; aspect-ratio:16/9; overflow:hidden; padding:0; border:1px solid rgba(164,255,175,.34); border-radius:19px; color:#fff; background:#06110a; cursor:pointer; text-align:left; box-shadow:inset 0 0 45px rgba(0,0,0,.76),0 0 28px rgba(33,220,70,.14); isolation:isolate; }
     .tv-screen::before { content:""; position:absolute; inset:0; z-index:2; pointer-events:none; background:linear-gradient(0deg,rgba(0,10,3,.7),transparent 65%),repeating-linear-gradient(0deg,transparent 0 4px,rgba(3,12,5,.12) 5px); }
-    .tv-screen-image { position:absolute; inset:-4%; width:108%; height:108%; object-fit:cover; opacity:.74; filter:saturate(.82) brightness(.7); transform:scale(1.035); transition:transform 1.4s var(--ease),opacity .7s,filter .7s; }
-    .tv-light-cone { position:absolute; z-index:1; left:-3%; top:10%; width:90%; height:80%; pointer-events:none; background:linear-gradient(90deg,rgba(207,255,218,.02),rgba(224,255,229,.13) 58%,rgba(240,255,240,.3)); clip-path:polygon(100% 43%,0 0,0 100%,100% 57%); transform-origin:100% 50%; mix-blend-mode:screen; filter:blur(12px); opacity:.76; animation:tdl-sweep 6.4s ease-in-out infinite alternate; }
-    .tv-light-cone::before,.tv-light-cone::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(222,255,229,.22),rgba(241,255,239,.05)); clip-path:polygon(100% 46%,0 12%,0 18%,100% 48%); filter:blur(5px); }
-    .tv-light-cone::after { opacity:.6; clip-path:polygon(100% 53%,0 83%,0 90%,100% 55%); }
+    .tv-screen-image { position:absolute; inset:-4%; width:108%; height:108%; object-fit:cover; opacity:.82; filter:saturate(.92) brightness(.78); transform:scale(1.035); transition:transform 1.4s var(--ease),opacity .7s,filter .7s; }
+    .tv-light-cone { position:absolute; z-index:1; left:-8%; top:7%; width:78%; height:86%; pointer-events:none; background:radial-gradient(ellipse 82% 58% at 0% 50%,rgba(213,255,223,.16) 0%,rgba(172,246,190,.08) 37%,rgba(130,220,156,.025) 67%,transparent 86%); mix-blend-mode:screen; filter:blur(25px); opacity:.42; animation:tdl-sweep 8s ease-in-out infinite alternate; }
     .beam-particles { position:absolute; z-index:2; inset:0; overflow:hidden; pointer-events:none; }
     .beam-particles i { position:absolute; left:var(--x); top:var(--y); width:var(--size); height:var(--size); border-radius:50%; background:rgba(235,255,226,.9); box-shadow:0 0 8px 2px rgba(192,255,199,.52); opacity:0; animation:beam-dust var(--duration) var(--delay) ease-in-out infinite; }
     .tv-screen.is-tuning .tv-screen-image { opacity:.18; filter:blur(2px) saturate(.7) brightness(.55); transform:scale(1.09); }
     .tv-screen-copy { position:absolute; z-index:3; left:8%; bottom:10%; display:grid; gap:8px; text-shadow:0 4px 20px rgba(0,0,0,.72); }
+    .tv-screen-brand { position:absolute; z-index:3; top:7%; left:8%; display:inline-flex; align-items:center; gap:8px; color:#f0fff0; font-size:.75rem; font-weight:900; letter-spacing:-.02em; text-shadow:0 2px 12px rgba(0,0,0,.75); }
+    .tv-screen-brand b { padding:5px 7px; border-radius:6px; color:#062308; background:#42f04b; font-size:.65rem; letter-spacing:-.07em; text-shadow:none; }
+    .tv-screen-brand small { margin-left:4px; color:#d4f4d7; font-size:.51rem; font-weight:800; letter-spacing:.15em; }
     .tv-screen-copy small { color:#baf7c4; font-size:.64rem; font-weight:800; letter-spacing:.28em; }
     .tv-screen-copy strong { font-family:var(--display-face); font-size:clamp(2.1rem,4vw,4.6rem); line-height:.98; letter-spacing:-.06em; font-weight:550; }
     .tv-screen-copy strong em { color:#bdffc3; font-style:normal; }
@@ -168,7 +172,7 @@
     .tv-gate.is-powering .tv-screen { animation:screen-flash .75s ease both; }
     .tv-gate.is-powering .tv-screen-copy { animation:image-reveal .7s .25s both; }
     @keyframes on-air { 50% { opacity:.25; } }
-    @keyframes tdl-sweep { from { transform:rotate(-1.5deg) scaleX(.97); opacity:.52; } to { transform:rotate(2deg) scaleX(1.035); opacity:.88; } }
+    @keyframes tdl-sweep { from { transform:translateY(-8px) scaleX(.96); opacity:.26; } to { transform:translateY(8px) scaleX(1.04); opacity:.5; } }
     @keyframes beam-dust { 0%,100% { opacity:0; transform:translate3d(0,10px,0) scale(.45); } 28% { opacity:.75; } 58% { opacity:.5; transform:translate3d(-20px,-11px,0) scale(1.1); } 78% { opacity:.12; transform:translate3d(-37px,-18px,0) scale(.7); } }
     @keyframes crt-wake { 0% { opacity:0; transform:scaleY(.008); } 12% { opacity:.85; transform:scaleY(.015); } 21% { opacity:.2; transform:scaleY(1); } 34% { opacity:1; } 43% { opacity:.45; } 56%,100% { opacity:.82; transform:scale(1.08); } }
     @keyframes screen-flash { 0%,17% { box-shadow:inset 0 0 90px #d9ffe0,0 0 0 2px #e9fff0; } 40% { box-shadow:inset 0 0 25px rgba(217,255,224,.75),0 0 38px 8px rgba(43,241,54,.5); } 100% { box-shadow:inset 0 0 45px rgba(0,0,0,.76),0 0 55px rgba(33,220,70,.36); } }
@@ -287,6 +291,11 @@
       gap: 40px;
     }
     .hero-copy { position: relative; z-index: 3; }
+    .hero-brand { display:flex; align-items:center; flex-wrap:wrap; gap:9px; width:max-content; max-width:100%; margin-bottom:24px; color:#ecffec; }
+    .hero-brand-mark { display:grid; place-items:center; width:73px; height:42px; border-radius:11px; color:#052508; background:var(--brand-bright); font-size:1.08rem; font-weight:950; letter-spacing:-.08em; box-shadow:0 10px 32px rgba(0,190,6,.28); }
+    .hero-brand-name { font-size:1.86rem; font-weight:900; letter-spacing:-.075em; line-height:1; }
+    .hero-brand-rule { width:1px; height:21px; margin-inline:5px; background:rgba(224,255,228,.38); }
+    .hero-brand-type { color:#bfe3c7; font-size:.64rem; font-weight:800; letter-spacing:.16em; }
     .hero h1 {
       margin: 22px 0 24px;
       max-width: 730px;
@@ -337,6 +346,30 @@
       animation: fade-up .8s .35s var(--ease) forwards;
     }
     .hero-actions { display: flex; align-items: center; gap: 14px; opacity: 0; animation: fade-up .8s .48s var(--ease) forwards; }
+    .loop-preview { display:grid; grid-template-columns:156px minmax(0,1fr); width:min(490px,100%); min-height:120px; margin-top:31px; overflow:hidden; border:1px solid rgba(196,255,206,.25); border-radius:18px; background:rgba(6,27,13,.78); box-shadow:0 19px 46px rgba(0,10,4,.28),inset 0 1px rgba(255,255,255,.06); opacity:0; animation:fade-up .8s .6s var(--ease) forwards; }
+    .loop-visual { position:relative; min-height:120px; overflow:hidden; background:#193527; isolation:isolate; }
+    .loop-frame { position:absolute; inset:-4%; display:block; opacity:0; background-position:center; background-size:cover; filter:saturate(.88) contrast(1.06); animation-duration:6s; animation-timing-function:linear; animation-iteration-count:infinite; }
+    .loop-frame:nth-child(1) { opacity:1; background-image:url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=78'); animation-name:loop-frame-one; }
+    .loop-frame:nth-child(2) { background-image:url('https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=78'); animation-name:loop-frame-two; }
+    .loop-frame:nth-child(3) { background-image:url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=700&q=78'); animation-name:loop-frame-three; }
+    .loop-visual::after { content:""; position:absolute; z-index:2; inset:0; pointer-events:none; background:linear-gradient(90deg,rgba(3,25,8,.05),rgba(3,25,8,.6)),repeating-linear-gradient(0deg,transparent 0 3px,rgba(218,255,223,.045) 4px); }
+    .loop-visual-label { position:absolute; z-index:3; left:13px; bottom:12px; display:flex; align-items:center; gap:7px; color:#efffee; font-size:.57rem; font-weight:900; letter-spacing:.15em; text-shadow:0 2px 9px #041208; }
+    .loop-visual-label i { width:6px; height:6px; border-radius:50%; background:#2bf136; box-shadow:0 0 10px #2bf136; animation:loop-beat 2s ease-in-out infinite; }
+    .loop-copy { min-width:0; display:flex; flex-direction:column; justify-content:center; gap:5px; padding:16px 15px 12px 17px; }
+    .loop-overline { color:#9bedab; font-size:.55rem; font-weight:900; letter-spacing:.2em; }
+    .loop-copy strong { font-family:var(--display-face); font-size:1.18rem; font-weight:650; letter-spacing:-.045em; }
+    .loop-copy small { color:#b5ccba; font-size:.65rem; }
+    .loop-controls { display:flex; align-items:center; gap:10px; margin-top:5px; }
+    .loop-progress { flex:1; height:3px; overflow:hidden; border-radius:4px; background:rgba(188,255,195,.2); }
+    .loop-progress i { display:block; width:100%; height:100%; background:linear-gradient(90deg,#22f436,#a9ffad); transform:scaleX(0); transform-origin:left; animation:loop-progress 6s linear infinite; }
+    .loop-toggle { flex:0 0 auto; display:grid; place-items:center; width:28px; height:28px; padding:0; border:1px solid rgba(178,255,188,.38); border-radius:50%; color:#e0ffe5; background:rgba(23,92,41,.46); cursor:pointer; transition:background .2s,transform .2s; }
+    .loop-toggle:hover,.loop-toggle:focus-visible { transform:scale(1.1); background:rgba(0,190,6,.38); }
+    .loop-preview.is-paused .loop-frame,.loop-preview.is-paused .loop-progress i,.loop-preview.is-paused .loop-visual-label i { animation-play-state:paused; }
+    @keyframes loop-frame-one { 0%,29% { opacity:1; transform:scale(1.03) translateX(0); } 33%,95% { opacity:0; transform:scale(1.13) translateX(-3%); } 100% { opacity:1; transform:scale(1.03) translateX(0); } }
+    @keyframes loop-frame-two { 0%,29% { opacity:0; transform:scale(1.1) translateX(3%); } 33%,62% { opacity:1; transform:scale(1.03) translateX(0); } 66%,100% { opacity:0; transform:scale(1.12) translateX(-3%); } }
+    @keyframes loop-frame-three { 0%,62% { opacity:0; transform:scale(1.1) translateX(3%); } 66%,95% { opacity:1; transform:scale(1.03) translateX(0); } 100% { opacity:0; transform:scale(1.1) translateX(-2%); } }
+    @keyframes loop-progress { to { transform:scaleX(1); } }
+    @keyframes loop-beat { 50% { opacity:.38; transform:scale(.72); } }
     @keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
 
     .btn {
@@ -378,6 +411,7 @@
       transform-style: preserve-3d;
       will-change: transform;
       transition: transform .22s cubic-bezier(.2,.8,.2,1);
+      pointer-events: none;
     }
     .magnetic-glow {
       position: absolute;
@@ -399,6 +433,7 @@
       border-radius: 50%;
       border: 1px dashed rgba(143,255,163,.17);
       animation: ring-spin 18s linear infinite;
+      pointer-events: none;
     }
     .signal-ring::before, .signal-ring::after {
       content: "";
@@ -422,6 +457,7 @@
       box-shadow: 0 0 90px rgba(20, 216, 61, .09), inset 0 0 70px rgba(80,255,113,.035);
       border-radius: 50%;
       transform: rotateX(66deg) rotateZ(-16deg);
+      pointer-events: none;
     }
     .orbit::after {
       content: "";
@@ -448,6 +484,7 @@
       transform: rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(3deg);
       transition: transform .12s ease-out, filter .35s;
       will-change: transform;
+      pointer-events: auto;
     }
     .phone-stage:hover .phone { filter: saturate(1.15) brightness(1.06); }
     .phone-stage:hover .magnetic-glow { opacity: 1; }
@@ -474,21 +511,20 @@
       background: #3b413d;
     }
     .screen { position: absolute; inset: 4px; overflow: hidden; border-radius: 36px; background: #090c0a; }
-    .phone-art {
-      height: 57%;
-      position: relative;
-      background:
-        linear-gradient(to top, #090c0a 2%, transparent 54%),
-        radial-gradient(circle at 52% 38%, rgba(205,255,216,.9) 0 2%, transparent 3%),
-        radial-gradient(ellipse at 49% 38%, rgba(20,160,73,.3) 0 16%, transparent 17%),
-        linear-gradient(145deg, transparent 0 47%, rgba(41,245,78,.68) 48% 50%, transparent 51%),
-        radial-gradient(ellipse at 74% 22%, #567160 0 13%, transparent 14%),
-        radial-gradient(ellipse at 37% 48%, #1d6635 0 16%, transparent 17%),
-        linear-gradient(152deg, #345640, #0a2112 43%, #327044 44%, #0b2113 76%);
-    }
-    .phone-brand { position: absolute; left: 18px; top: 45px; font-size: .73rem; font-weight: 900; color: var(--brand-bright); }
-    .phone-badge { position: absolute; right: 16px; top: 47px; padding: 5px 8px; border-radius: 8px; background: rgba(0,0,0,.35); font-size: .56rem; color: #dfe7e1; backdrop-filter: blur(8px); }
-    .show-meta { position: absolute; left: 19px; right: 19px; bottom: 9px; }
+    .phone-art { --phone-image:url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=82'); height:57%; position:relative; overflow:hidden; background:linear-gradient(145deg,#315740,#081c11 68%); }
+    .phone-art::before { content:""; position:absolute; inset:-5%; background-image:var(--phone-image); background-size:cover; background-position:center; opacity:.75; filter:saturate(.9); transform:scale(1.03); transition:opacity .35s,filter .35s; }
+    .phone-art::after { content:""; position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(to top,#090c0a 1%,rgba(3,18,8,.55) 31%,transparent 68%),linear-gradient(to bottom,rgba(2,17,5,.4),transparent 37%); }
+    .phone-art.is-previewing::before { opacity:.94; filter:saturate(1.15) brightness(1.06); animation:phone-scene-move 6s ease-in-out infinite; }
+    @keyframes phone-scene-move { 0%,100% { transform:scale(1.04) translate(1%,0); } 50% { transform:scale(1.16) translate(-2%,-1%); } }
+    .phone-brand { position:absolute; z-index:2; left:18px; top:45px; display:inline-flex; align-items:center; gap:5px; color:#efffef; font-size:.73rem; font-weight:900; text-shadow:0 2px 10px #071409; }
+    .phone-brand b { padding:3px 5px; border-radius:5px; color:#062209; background:var(--brand-bright); font-size:.58rem; letter-spacing:-.075em; text-shadow:none; }
+    .phone-badge { position:absolute; z-index:2; right:16px; top:47px; padding:5px 8px; border-radius:8px; background:rgba(0,0,0,.4); font-size:.56rem; color:#e8f8e8; backdrop-filter:blur(8px); }
+    .phone-preview-button { position:absolute; z-index:3; right:16px; top:94px; display:inline-flex; align-items:center; gap:5px; padding:6px 8px; border:1px solid rgba(215,255,218,.5); border-radius:999px; color:#efffef; background:rgba(5,28,12,.58); font-size:.55rem; font-weight:800; cursor:pointer; backdrop-filter:blur(7px); transition:background .2s,transform .2s; }
+    .phone-preview-button:hover,.phone-preview-button:focus-visible { transform:scale(1.06); background:rgba(0,190,6,.5); }
+    .phone-preview-button[aria-pressed="true"] { border-color:#9fffab; background:rgba(0,145,17,.6); }
+    .phone-preview-status { position:absolute; z-index:2; top:132px; right:16px; color:#dfffe2; font-size:.5rem; font-weight:800; letter-spacing:.08em; opacity:0; transition:opacity .2s; }
+    .phone-art.is-previewing .phone-preview-status { opacity:1; }
+    .show-meta { position:absolute; z-index:2; left:19px; right:19px; bottom:9px; }
     .show-kicker { color: var(--brand-bright); font-size: .55rem; font-weight: 850; letter-spacing: .16em; }
     .show-title { margin: 5px 0 8px; font-family: "STSong", "Songti SC", serif; font-size: 2.15rem; letter-spacing: .14em; line-height: 1; }
     .show-sub { color: #b3b9b4; font-size: .6rem; }
@@ -502,16 +538,23 @@
     .screen-body { padding: 13px 17px; }
     .screen-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 11px; }
     .screen-row strong { font-size: .75rem; }
-    .screen-row span { color: var(--brand-bright); font-size: .52rem; }
+    .screen-row button { padding:3px 5px; border:0; border-radius:5px; color:var(--brand-bright); background:transparent; font-size:.52rem; cursor:pointer; }
+    .screen-row button:hover,.screen-row button:focus-visible { color:#d5ffd9; background:rgba(0,190,6,.2); }
     .mini-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
-    .mini-card { height: 95px; border-radius: 9px; background: linear-gradient(155deg, var(--c1), var(--c2)); position: relative; overflow: hidden; }
-    .mini-card::after { content: ""; position: absolute; inset: auto 0 0; height: 55%; background: linear-gradient(transparent, rgba(0,0,0,.75)); }
-    .mini-card:nth-child(1) { --c1: #504a30; --c2: #0f1d12; }
-    .mini-card:nth-child(2) { --c1: #51333a; --c2: #101925; }
-    .mini-card:nth-child(3) { --c1: #2e5161; --c2: #18201b; }
-    .phone-nav { position: absolute; bottom: 0; left: 0; right: 0; height: 55px; display: flex; align-items: center; justify-content: space-around; border-top: 1px solid rgba(255,255,255,.08); background: rgba(8,10,9,.95); }
-    .phone-nav i { width: 15px; height: 15px; border: 1.5px solid #697069; border-radius: 4px; }
-    .phone-nav i:first-child { background: var(--brand); border-color: var(--brand); box-shadow: 0 0 13px rgba(0,190,6,.55); }
+    .mini-card { position:relative; height:82px; overflow:hidden; padding:0; border:1px solid rgba(213,255,220,.12); border-radius:9px; color:#fff; background:#233727; cursor:pointer; text-align:left; transition:transform .2s,border-color .2s,box-shadow .2s; }
+    .mini-card::before { content:""; position:absolute; inset:0; background-image:var(--card-image); background-size:cover; background-position:center; opacity:.78; }
+    .mini-card::after { content:""; position:absolute; inset:30% 0 0; background:linear-gradient(transparent,rgba(0,0,0,.82)); }
+    .mini-card span { position:absolute; z-index:1; left:5px; right:3px; bottom:7px; font-size:.51rem; font-weight:800; line-height:1.15; }
+    .mini-card:hover,.mini-card:focus-visible { transform:translateY(-3px); border-color:rgba(112,255,129,.75); }
+    .mini-card[aria-pressed="true"] { border-color:#2bf136; box-shadow:0 0 0 1px rgba(43,241,54,.45),0 0 16px rgba(43,241,54,.18); }
+    .phone-feedback { display:flex; align-items:center; gap:5px; min-height:19px; margin:9px 0 0; color:#b7d4bc; font-size:.51rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .phone-feedback::before { content:"●"; color:var(--brand-bright); font-size:.47rem; }
+    .phone-nav { position:absolute; bottom:0; left:0; right:0; height:55px; display:flex; align-items:center; justify-content:space-around; border-top:1px solid rgba(255,255,255,.08); background:rgba(8,10,9,.95); }
+    .phone-nav button { display:grid; justify-items:center; align-content:center; gap:3px; width:25%; height:100%; padding:0; border:0; color:#849488; background:transparent; font-size:.48rem; cursor:pointer; transition:color .2s,background .2s; }
+    .phone-nav button::before { content:""; width:13px; height:13px; border:1.5px solid currentColor; border-radius:4px; }
+    .phone-nav button:hover,.phone-nav button:focus-visible { color:#ddffe1; background:rgba(51,140,67,.12); }
+    .phone-nav button[aria-pressed="true"] { color:#36f14b; }
+    .phone-nav button[aria-pressed="true"]::before { background:currentColor; box-shadow:0 0 13px rgba(0,190,6,.55); }
 
     .float-chip {
       position: absolute;
@@ -528,6 +571,7 @@
       color: #d8e8db;
       font-size: .72rem;
       animation: float 4.2s ease-in-out infinite;
+      pointer-events: none;
     }
     .float-chip b { color: #fff; display: block; font-size: .83rem; }
     .float-chip .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 12px var(--brand); }
@@ -568,6 +612,7 @@
       align-items: center;
       animation: marquee-left 27s linear infinite;
     }
+    .marquee:hover .marquee-track,.marquee:focus-within .marquee-track { animation-play-state:paused; }
     .marquee.secondary .marquee-track { animation-name: marquee-right; animation-duration: 31s; }
     .marquee-group { display: flex; align-items: center; }
     .marquee-item {
@@ -694,6 +739,28 @@
       pointer-events: none;
     }
     .poster-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .loop-ribbon { position:relative; isolation:isolate; }
+    .loop-ribbon.is-looping { display:block; overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent); mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent); }
+    .loop-ribbon.is-looping::before { content:""; position:absolute; z-index:0; left:-12%; right:-12%; top:21%; height:52%; border:1px solid rgba(142,255,166,.16); border-radius:50%; transform:perspective(700px) rotateX(69deg) rotate(-3deg); box-shadow:0 0 30px rgba(64,225,98,.09),inset 0 0 28px rgba(146,255,164,.08); pointer-events:none; }
+    .loop-ribbon.is-looping::after { content:""; position:absolute; z-index:0; left:10%; right:10%; bottom:10%; height:1px; background:linear-gradient(90deg,transparent,rgba(196,255,206,.18),rgba(228,201,138,.35),transparent); filter:blur(.5px); pointer-events:none; }
+    .loop-track { position:relative; z-index:1; display:flex; align-items:flex-start; gap:var(--loop-gap); width:max-content; will-change:transform; }
+    .loop-ribbon.is-keyboard-mode { height:auto; overflow:visible; -webkit-mask-image:none; mask-image:none; }
+    .loop-ribbon.is-keyboard-mode::before,.loop-ribbon.is-keyboard-mode::after { display:none; }
+    .loop-ribbon.is-keyboard-mode .loop-track { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--loop-gap); width:100%; transform:none!important; will-change:auto; }
+    .orbit-caption { display:flex; align-items:center; gap:10px; margin:-23px 0 18px; color:rgba(207,239,211,.64); font-size:.59rem; font-weight:800; letter-spacing:.18em; }
+    .orbit-caption::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,rgba(180,255,193,.28),transparent 60%); }
+    .orbit-caption span { color:#e4cf9c; font-family:var(--display-face); font-size:1.35rem; line-height:.7; letter-spacing:0; }
+    .orbit-caption em { color:rgba(213,240,217,.55); font-size:.65rem; font-style:normal; font-weight:500; letter-spacing:.04em; }
+    .catalog-section .orbit-caption { margin:-12px 0 16px; }
+    .poster-grid.is-looping { --loop-gap:18px; height:458px; }
+    .poster-grid.is-looping .poster { flex:0 0 390px; width:390px; margin-top:0; }
+    .poster-grid.is-keyboard-mode .poster { width:100%; top:0; }
+    .poster-grid.is-looping .poster[data-catalog-filter="series"] { top:8px; }
+    .poster-grid.is-looping .poster[data-catalog-filter="variety"] { top:42px; }
+    .poster-grid.is-looping .poster[data-catalog-filter="film"] { top:23px; }
+    .poster-grid.is-looping .poster[data-catalog-filter="anime"] { top:49px; }
+    .poster-grid.is-looping.is-keyboard-mode { height:auto; }
+    .poster-grid.is-looping.is-keyboard-mode .poster { top:0; }
     .poster {
       --tilt: 0deg;
       position: relative;
@@ -712,7 +779,7 @@
       transition: transform .55s var(--ease), box-shadow .5s var(--ease), border-color .5s;
       will-change: transform;
     }
-    .poster.reveal.is-visible { transform: perspective(1050px) rotateX(var(--pointer-rx, 0deg)) rotateY(var(--pointer-ry, 0deg)) translateY(var(--scroll-lift, 0)); }
+    .poster.reveal.is-visible { transform: perspective(1050px) rotateX(var(--pointer-rx, 0deg)) rotateY(var(--pointer-ry, 0deg)) translateY(var(--scroll-lift, 0)) rotate(var(--orbit-rotate, 0deg)); }
     .poster:nth-child(even) { margin-top: 38px; }
     .poster::before { content: ""; position: absolute; inset: -22px 0; z-index: -3; background: var(--art); transform: translateY(var(--art-shift, 0)) scale(1.06); transition: transform .7s var(--ease), filter .7s; will-change: transform; }
     .poster-image { position:absolute; inset:-22px 0; z-index:-2; width:100%; height:calc(100% + 44px); object-fit:cover; opacity:.8; filter:saturate(.9) brightness(.72); transform:translateY(var(--art-shift, 0)) scale(1.06); transition:transform .7s var(--ease),filter .7s,opacity .7s; will-change:transform; }
@@ -720,10 +787,10 @@
     .poster.reveal.is-visible:hover, .poster.reveal.is-visible:focus-visible { transform: perspective(1050px) rotateX(var(--pointer-rx, 0deg)) rotateY(var(--pointer-ry, 0deg)) translateY(-10px) scale(1.025) rotate(var(--tilt)); border-color: rgba(189,255,200,.35); box-shadow: 0 30px 75px rgba(0,18,6,.45), 0 0 45px rgba(0,190,6,.2); }
     .poster:hover::before, .poster:focus-visible::before { transform: translateY(var(--art-shift, 0)) scale(1.13); filter: saturate(1.3) brightness(1.08); }
     .poster:hover .poster-image,.poster:focus-visible .poster-image { transform:translateY(var(--art-shift, 0)) scale(1.13); filter:saturate(1.24) brightness(.96); opacity:.98; }
-    .poster:nth-child(1) { --tilt: -1.1deg; --art: radial-gradient(circle at 67% 24%, #ffe3b3 0 5%, transparent 5.5%), radial-gradient(ellipse at 65% 42%, #9a7056 0 18%, transparent 19%), linear-gradient(148deg, #d6532d 0 22%, #2c5135 48%, #102318 80%); }
-    .poster:nth-child(2) { --tilt: .8deg; --art: radial-gradient(circle at 38% 32%, #ffe6bc 0 4%, transparent 4.5%), radial-gradient(ellipse at 40% 49%, #d53972 0 19%, transparent 20%), linear-gradient(35deg, #2a1d3b, #845cbd 52%, #253343); }
-    .poster:nth-child(3) { --tilt: -.8deg; --art: linear-gradient(24deg, transparent 46%, rgba(205,244,244,.7) 47% 49%, transparent 50%), radial-gradient(circle at 70% 26%, #bde8ec 0 8%, transparent 8.5%), linear-gradient(150deg, #17657a, #25473e 57%, #a28d59); }
-    .poster:nth-child(4) { --tilt: 1deg; --art: radial-gradient(circle at 54% 28%, #e3ffe6 0 4%, transparent 4.5%), radial-gradient(circle at 53% 39%, #25a553 0 17%, transparent 18%), linear-gradient(145deg, #286c43, #11291b 52%, #54a975); }
+    .poster[data-catalog-filter="series"] { --tilt: -1.1deg; --orbit-rotate:-1.1deg; --art: radial-gradient(circle at 67% 24%, #ffe3b3 0 5%, transparent 5.5%), radial-gradient(ellipse at 65% 42%, #9a7056 0 18%, transparent 19%), linear-gradient(148deg, #d6532d 0 22%, #2c5135 48%, #102318 80%); }
+    .poster[data-catalog-filter="variety"] { --tilt: .8deg; --orbit-rotate:.8deg; --art: radial-gradient(circle at 38% 32%, #ffe6bc 0 4%, transparent 4.5%), radial-gradient(ellipse at 40% 49%, #d53972 0 19%, transparent 20%), linear-gradient(35deg, #2a1d3b, #845cbd 52%, #253343); }
+    .poster[data-catalog-filter="film"] { --tilt: -.8deg; --orbit-rotate:-.8deg; --art: linear-gradient(24deg, transparent 46%, rgba(205,244,244,.7) 47% 49%, transparent 50%), radial-gradient(circle at 70% 26%, #bde8ec 0 8%, transparent 8.5%), linear-gradient(150deg, #17657a, #25473e 57%, #a28d59); }
+    .poster[data-catalog-filter="anime"] { --tilt: 1deg; --orbit-rotate:1deg; --art: radial-gradient(circle at 54% 28%, #e3ffe6 0 4%, transparent 4.5%), radial-gradient(circle at 53% 39%, #25a553 0 17%, transparent 18%), linear-gradient(145deg, #286c43, #11291b 52%, #54a975); }
     .poster-index { position: absolute; top: 17px; right: 18px; color: rgba(255,255,255,.42); font-size: .66rem; letter-spacing: .17em; }
     .poster-copy { position: absolute; left: 20px; right: 20px; bottom: 22px; }
     .poster-kind { color: var(--brand-bright); font-size: .65rem; font-weight: 850; letter-spacing: .18em; }
@@ -742,6 +809,21 @@
     .catalog-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:15px; }
     .catalog-grid.is-filtered { width:min(100%,calc(2 * 283px + 15px)); grid-template-columns:repeat(2,minmax(0,1fr)); margin-inline:auto; }
     .catalog-grid.is-single { width:min(100%,283px); grid-template-columns:1fr; }
+    .catalog-grid.is-looping { --loop-gap:15px; height:358px; }
+    .catalog-grid.is-looping .catalog-card { flex:0 0 300px; width:300px; }
+    .catalog-grid.is-looping .catalog-card[data-orbit-index="0"] { top:10px; }
+    .catalog-grid.is-looping .catalog-card[data-orbit-index="1"] { top:0; }
+    .catalog-grid.is-looping .catalog-card[data-orbit-index="2"] { top:16px; }
+    .catalog-grid.is-looping .catalog-card[data-orbit-index="3"] { top:28px; }
+    .catalog-grid.is-keyboard-mode .catalog-card { width:100%; }
+    .catalog-grid.is-looping.is-keyboard-mode { height:auto; }
+    .catalog-grid.is-looping.is-keyboard-mode .catalog-card { top:0; }
+    .catalog-grid.is-looping.is-filtered { width:100%; height:auto; margin-inline:0; overflow:visible; -webkit-mask-image:none; mask-image:none; }
+    .catalog-grid.is-looping.is-filtered::before,.catalog-grid.is-looping.is-filtered::after { display:none; }
+    .catalog-grid.is-looping.is-filtered .loop-track { display:grid; grid-template-columns:repeat(2,283px); gap:15px; width:max-content; margin-inline:auto; transform:none!important; will-change:auto; }
+    .catalog-grid.is-looping.is-single .loop-track { grid-template-columns:283px; }
+    .catalog-grid.is-looping.is-filtered .catalog-card { width:283px; }
+    .catalog-grid.is-looping.is-filtered .catalog-card { top:0; }
     .catalog-card { position:relative; display:block; min-width:0; height:330px; overflow:hidden; padding:0; border:1px solid rgba(219,255,226,.13); border-radius:21px; color:#fff; background:#15251a; text-align:left; cursor:pointer; isolation:isolate; box-shadow:0 18px 40px rgba(0,20,7,.2),inset 0 1px rgba(255,255,255,.1); transition:transform .5s var(--ease),border-color .4s,box-shadow .4s; }
     .catalog-card[hidden] { display:none!important; }
     .catalog-card img { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; opacity:.77; filter:saturate(.86) brightness(.78); transform:scale(1.015); transition:transform .8s var(--ease),filter .55s,opacity .55s; }
@@ -762,45 +844,74 @@
     .catalog-selection-label { display:block; margin-bottom:5px; color:rgba(204,245,210,.56); font-size:.58rem; font-weight:800; letter-spacing:.2em; }
     .catalog-selection-title { display:block; font-family:var(--display-face); font-size:1.05rem; }
     .catalog-selection-copy { margin:0; color:var(--muted); font-size:.76rem; line-height:1.6; }
-    .catalog-selection-mark { flex:0 0 auto; color:var(--brand-bright); font-size:1.2rem; }
+    .catalog-next { flex:0 0 auto; display:inline-flex; align-items:center; gap:18px; padding:11px 15px; border:1px solid rgba(148,255,166,.3); border-radius:999px; color:#caffd0; background:rgba(0,190,6,.1); font-size:.72rem; font-weight:800; transition:transform .25s var(--ease),background .25s,border-color .25s; }
+    .catalog-next:hover,.catalog-next:focus-visible { transform:translateY(-3px); border-color:rgba(148,255,166,.65); background:rgba(0,190,6,.2); }
+    .catalog-next span { color:var(--brand-bright); font-size:1.1rem; }
 
     .ai-section {
       padding-block: 112px;
       background: radial-gradient(ellipse at 78% 45%, rgba(29, 207, 91, .1), transparent 36%);
     }
-    .ai-frame { position: relative; padding: 58px; overflow: hidden; border: 1px solid rgba(197,255,207,.2); border-radius: var(--radius-lg); background: linear-gradient(135deg, rgba(35, 88, 52, .54), rgba(12, 35, 20, .78)); box-shadow: 0 30px 90px rgba(0, 28, 10, .25), inset 0 1px rgba(255,255,255,.11); }
-    .ai-frame::before { content: ""; position: absolute; width: 450px; height: 450px; right: -170px; top: -180px; border-radius: 50%; background: rgba(45,242,100,.25); filter: blur(70px); }
-    .ai-layout { display: grid; grid-template-columns: .78fr 1.22fr; gap: 60px; align-items: start; }
-    .ai-title h2 { margin: 14px 0 0; font-family: var(--display-face); font-size: clamp(2.65rem, 4.3vw, 4.1rem); line-height: .98; font-weight: 650; letter-spacing: -.065em; text-wrap: balance; }
-    .ai-title p { color: var(--muted); line-height: 1.8; max-width: 340px; font-size: .88rem; }
-    .ai-visual { position:relative; height:184px; margin-top:25px; overflow:hidden; border:1px solid rgba(199,255,209,.2); border-radius:19px; background:#13291b; box-shadow:0 18px 45px rgba(0,15,5,.32),inset 0 1px rgba(255,255,255,.16); isolation:isolate; }
-    .ai-visual img { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; opacity:.68; filter:saturate(.88) brightness(.76); transform:scale(1.02); transition:transform .8s var(--ease),filter .6s,opacity .6s; }
+    .ai-frame { position: relative; padding: 54px 58px 25px; overflow: hidden; border: 1px solid rgba(197,255,207,.2); border-radius: var(--radius-lg); background: radial-gradient(ellipse at 50% 65%,rgba(35,153,68,.23),transparent 39rem),linear-gradient(135deg, rgba(35, 88, 52, .54), rgba(12, 35, 20, .78)); box-shadow: 0 30px 90px rgba(0, 28, 10, .25), inset 0 1px rgba(255,255,255,.11); }
+    .ai-frame::before { content: ""; position: absolute; width: 680px; height: 480px; left:50%; top:29%; border-radius: 50%; background: rgba(45,242,100,.11); filter: blur(90px); transform:translateX(-50%); pointer-events:none; }
+    .ai-layout { position:relative; display:block; }
+    .ai-title { position:relative; z-index:6; display:grid; grid-template-columns:minmax(0,1fr) 330px; grid-template-rows:auto auto auto; column-gap:42px; align-items:end; }
+    .ai-title .eyebrow,.ai-title h2,.ai-title .section-caption { grid-column:1; }
+    .ai-title h2 { margin: 12px 0 8px; font-family: var(--display-face); font-size: clamp(3rem, 4.2vw, 4.2rem); line-height: .96; font-weight: 650; letter-spacing: -.065em; text-wrap: balance; }
+    .ai-title p { grid-column:2; grid-row:1 / span 3; justify-self:end; align-self:end; color: var(--muted); line-height: 1.72; max-width: 300px; margin:0 0 4px; font-size: .84rem; }
+    .ai-orbit { position:relative; height:625px; margin-top:4px; perspective:1250px; isolation:isolate; }
+    .ai-orbit::before,.ai-orbit::after { content:""; position:absolute; z-index:0; left:50%; top:43%; border-radius:50%; pointer-events:none; }
+    .ai-orbit::before { width:92%; height:490px; border:1px solid rgba(185,255,194,.19); border-top-color:rgba(230,207,153,.55); box-shadow:0 0 46px rgba(89,248,129,.12),inset 0 0 48px rgba(128,255,159,.06); transform:translate(-50%,-50%) rotateX(67deg) rotate(-7deg); animation:ai-orbit-breathe 17s ease-in-out infinite alternate; }
+    .ai-orbit::after { width:69%; height:380px; border:1px dashed rgba(173,255,186,.16); transform:translate(-50%,-50%) rotateX(64deg) rotate(9deg); }
+    @keyframes ai-orbit-breathe { from { opacity:.45; transform:translate(-50%,-50%) rotateX(67deg) rotate(-11deg) scale(.98); } to { opacity:.9; transform:translate(-50%,-50%) rotateX(67deg) rotate(11deg) scale(1.03); } }
+    .ai-core { position:absolute; z-index:3; top:75px; left:50%; width:510px; padding:13px; border:1px solid rgba(175,255,191,.46); border-radius:27px; background:linear-gradient(145deg,rgba(15,64,32,.94),rgba(6,33,17,.96)); box-shadow:0 35px 100px rgba(0,18,8,.5),0 0 44px rgba(38,219,83,.13),0 0 0 10px rgba(162,255,177,.035),inset 0 1px rgba(255,255,255,.14); transform:translateX(-50%) rotateX(2deg); }
+    .ai-core::before { content:""; position:absolute; z-index:-1; inset:-21px; border:1px solid rgba(159,255,176,.12); border-radius:39px; pointer-events:none; }
+    .ai-core-top,.ai-core-bottom { display:flex; justify-content:space-between; align-items:center; gap:15px; padding-inline:8px; color:rgba(215,250,220,.64); font-size:.57rem; font-weight:800; letter-spacing:.16em; }
+    .ai-core-top { padding-block:3px 13px; }
+    .ai-core-top span:first-child::before { content:""; display:inline-block; width:6px; height:6px; margin-right:9px; border-radius:50%; background:var(--brand-bright); box-shadow:0 0 12px var(--brand-bright); vertical-align:middle; }
+    .ai-core-top strong { color:#e8d19b; font-size:.7rem; letter-spacing:.13em; }
+    .ai-core-bottom { padding-block:12px 2px; font-size:.53rem; }
+    .ai-core-bottom span:last-child { color:#e8d19b; }
+    .ai-visual { --preview-progress:65%; position:relative; height:274px; margin:0; overflow:hidden; border:1px solid rgba(199,255,209,.2); border-radius:18px; background:#13291b; box-shadow:0 18px 45px rgba(0,15,5,.32),inset 0 1px rgba(255,255,255,.16); isolation:isolate; }
+    .ai-visual img { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; opacity:.86; filter:saturate(1.04) brightness(.94); transform:scale(1.02); transition:transform .8s var(--ease),filter .6s,opacity .6s; }
+    .ai-visual.is-switching img { animation:ai-picture-in .55s var(--ease); }
+    @keyframes ai-picture-in { from { opacity:.18; filter:blur(7px) saturate(.7); transform:scale(1.09); } to { opacity:.86; filter:saturate(1.04) brightness(.94); transform:scale(1.02); } }
     .ai-visual::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(3,14,7,.04),rgba(3,14,7,.84)),linear-gradient(100deg,rgba(17,203,65,.2),transparent 62%); }
-    .ai-visual:hover img { transform:scale(1.09); filter:saturate(1.08) brightness(.92); opacity:.88; }
+    .ai-visual:hover img { transform:scale(1.09); filter:saturate(1.14) brightness(1.03); opacity:1; }
     .ai-visual-tag { position:absolute; top:14px; left:15px; padding:6px 9px; border:1px solid rgba(218,255,222,.27); border-radius:999px; color:#dfffe2; background:rgba(5,21,10,.44); backdrop-filter:blur(10px); font-size:.52rem; font-weight:800; letter-spacing:.16em; }
     .ai-visual-copy { position:absolute; left:16px; right:16px; bottom:13px; display:flex; align-items:end; justify-content:space-between; gap:10px; }
     .ai-visual-copy strong { font-family:var(--display-face); font-size:1.14rem; letter-spacing:.02em; text-shadow:0 2px 12px rgba(0,0,0,.6); }
     .ai-visual-copy span { color:#f0d59b; font-size:.57rem; font-weight:800; letter-spacing:.15em; }
     .ai-timeline { position:absolute; left:16px; right:16px; bottom:50px; height:2px; background:rgba(240,255,239,.3); }
-    .ai-timeline::before { content:""; position:absolute; inset:0 35% 0 0; background:#e6c47e; box-shadow:0 0 10px rgba(230,196,126,.55); }
-    .ai-timeline::after { content:""; position:absolute; left:65%; top:50%; width:7px; height:7px; border-radius:50%; background:#f4d89a; box-shadow:0 0 12px rgba(244,216,154,.75); transform:translate(-50%,-50%); }
-    .ai-list { border-top: 1px solid var(--line); }
-    .ai-item { position: relative; display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: 18px; padding: 22px 4px; border-bottom: 1px solid var(--line); transition: padding .35s var(--ease), background .35s, transform .4s var(--ease), border-color .4s; }
-    .ai-item::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 100%; height: 1px; transform: scaleX(0); transform-origin: left; background: var(--brand-bright); box-shadow: 0 0 14px rgba(43,241,54,.48); transition: transform .5s var(--ease); }
-    .ai-item:hover, .ai-item:focus-visible { padding-inline: 14px; background: rgba(194,255,204,.065); border-color: rgba(43,241,54,.22); }
-    .ai-item:hover::after, .ai-item:focus-visible::after { transform: scaleX(1); }
+    .ai-timeline::before { content:""; position:absolute; left:0; top:0; width:var(--preview-progress); height:100%; background:#e6c47e; box-shadow:0 0 10px rgba(230,196,126,.55); transition:width .6s var(--ease); }
+    .ai-timeline::after { content:""; position:absolute; left:var(--preview-progress); top:50%; width:7px; height:7px; border-radius:50%; background:#f4d89a; box-shadow:0 0 12px rgba(244,216,154,.75); transform:translate(-50%,-50%); transition:left .6s var(--ease); }
+    .ai-list { position:absolute; inset:0; pointer-events:none; }
+    .ai-item { --orbit-x:0px; --orbit-y:0px; --orbit-z:0px; --orbit-ry:0deg; --orbit-rx:0deg; --orbit-scale:1; --orbit-lift:0px; position:absolute; top:0; left:50%; width:340px; min-height:154px; margin-left:-170px; display:grid; grid-template-columns:46px 1fr auto; align-items:start; gap:15px; padding:21px 18px; border:1px solid rgba(177,255,192,.24); border-radius:20px; color:inherit; background:linear-gradient(140deg,rgba(33,81,48,.94),rgba(10,40,22,.93)); text-align:left; cursor:pointer; pointer-events:auto; backdrop-filter:blur(16px); box-shadow:0 22px 55px rgba(0,26,10,.28),inset 0 1px rgba(255,255,255,.11); transform:perspective(1250px) translate3d(var(--orbit-x),var(--orbit-y),var(--orbit-z)) rotateY(var(--orbit-ry)) rotateX(var(--orbit-rx)) scale(var(--orbit-scale)) translateY(var(--orbit-lift)); transform-origin:center; transition:transform .82s var(--ease),opacity .45s,filter .45s,border-color .4s,background .4s,box-shadow .45s; }
+    .ai-list.focus-group > .ai-item.focus-item { position:absolute; transition:transform .82s var(--ease),opacity .45s,filter .45s,border-color .4s,background .4s,box-shadow .45s; }
+    .ai-item[data-orbit-slot="front"] { --orbit-y:432px; --orbit-z:70px; --orbit-rx:-2deg; --orbit-scale:1.04; z-index:5; opacity:1; border-color:rgba(115,255,137,.73); background:linear-gradient(140deg,rgba(28,115,53,.95),rgba(9,57,28,.96)); box-shadow:0 30px 78px rgba(0,31,12,.44),0 0 36px rgba(30,228,69,.18),inset 0 1px rgba(255,255,255,.16); }
+    .ai-item[data-orbit-slot="left"] { --orbit-x:-420px; --orbit-y:193px; --orbit-z:-88px; --orbit-ry:9deg; --orbit-scale:.95; z-index:2; opacity:.9; }
+    .ai-item[data-orbit-slot="right"] { --orbit-x:420px; --orbit-y:193px; --orbit-z:-88px; --orbit-ry:-9deg; --orbit-scale:.95; z-index:2; opacity:.9; }
+    .ai-item:hover,.ai-item:focus-visible { --orbit-lift:-8px; z-index:7; border-color:rgba(154,255,171,.76); box-shadow:0 34px 80px rgba(0,20,8,.48),0 0 34px rgba(36,228,72,.2); }
+    .ai-list.focus-group:has(> .ai-item:hover) > .ai-item:not(:hover):not([aria-pressed="true"]),.ai-list.focus-group:has(> .ai-item:focus-visible) > .ai-item:not(:focus-visible):not([aria-pressed="true"]) { opacity:.72; filter:saturate(.86) brightness(.87); }
+    .ai-item::after { content: ""; position: absolute; left: 20px; right:20px; bottom: 0; height: 1px; transform: scaleX(0); transform-origin: left; background: var(--brand-bright); box-shadow: 0 0 14px rgba(43,241,54,.48); transition: transform .5s var(--ease); }
+    .ai-item:hover::after, .ai-item:focus-visible::after,.ai-item.is-active::after { transform: scaleX(1); }
+    .ai-item.is-active .ai-number { color:var(--brand-bright); }
     .ai-icon { width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid rgba(102,255,127,.4); border-radius: 14px; color: var(--brand-soft); background: rgba(0,190,6,.13); box-shadow: inset 0 1px rgba(255,255,255,.09); }
     .ai-icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; }
-    .ai-item h3 { margin: 0 0 3px; font-family: var(--display-face); font-size: 1.13rem; letter-spacing: .015em; }
+    .ai-item-copy { display:block; min-width:0; }
+    .ai-item-title { display:block; margin:0 0 3px; font-family:var(--display-face); font-size:1.18rem; font-weight:700; letter-spacing:.015em; }
     .ai-english { display: block; margin-bottom: 8px; color: rgba(201,255,207,.58); font-size: .52rem; font-weight: 750; letter-spacing: .16em; }
-    .ai-item p { margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.65; }
+    .ai-description { display:block; color:#d5e6d8; font-size:.72rem; line-height:1.55; }
     .ai-number { color: #7fa288; font-size: .67rem; letter-spacing: .15em; }
 
     .membership {
       padding-top: 110px;
       background: linear-gradient(180deg, transparent, rgba(24, 67, 38, .22) 45%, transparent);
     }
-    .plans { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; align-items:center; transition:grid-template-columns .58s var(--ease); }
+    .plans { position:relative; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; align-items:center; transition:grid-template-columns .58s var(--ease); }
+    .plans::before { content:""; position:absolute; left:6%; right:6%; top:42%; height:70px; border:1px solid rgba(148,255,163,.15); border-radius:50%; transform:perspective(700px) rotateX(65deg); box-shadow:0 0 32px rgba(80,232,110,.1); animation:vip-orbit-glow 18s ease-in-out infinite alternate; pointer-events:none; }
+    .plans:hover::before,.plans:focus-within::before { animation-play-state:paused; }
+    @keyframes vip-orbit-glow { from { opacity:.38; transform:perspective(700px) rotateX(65deg) translateX(-12px); } to { opacity:.85; transform:perspective(700px) rotateX(65deg) translateX(12px); } }
     .plans:has(> .plan:nth-child(1).is-selected) { grid-template-columns:1.12fr .94fr .94fr; }
     .plans:has(> .plan:nth-child(2).is-selected) { grid-template-columns:.94fr 1.12fr .94fr; }
     .plans:has(> .plan:nth-child(3).is-selected) { grid-template-columns:.94fr .94fr 1.12fr; }
@@ -857,6 +968,12 @@
     .plan .btn { margin-top: auto; width: 100%; min-height: 47px; }
     .plan.is-selected .btn { color:#071709; border-color:transparent; background:var(--tier-accent); box-shadow:0 15px 38px var(--tier-glow),inset 0 1px rgba(255,255,255,.35); }
     .plan.is-selected .btn:hover { transform:translateY(-3px); box-shadow:0 19px 48px var(--tier-glow),inset 0 1px rgba(255,255,255,.48); }
+    .plan-summary { display:flex; align-items:center; justify-content:space-between; gap:30px; margin-top:25px; padding:19px 25px; border:1px solid rgba(185,255,196,.2); border-radius:18px; background:linear-gradient(105deg,rgba(25,78,39,.62),rgba(11,36,20,.75)); box-shadow:inset 0 1px rgba(255,255,255,.06); }
+    .plan-summary-label { display:block; margin-bottom:6px; color:#b9fac1; font-size:.61rem; font-weight:800; letter-spacing:.19em; }
+    .plan-summary strong { display:block; font-family:var(--display-face); font-size:1.23rem; font-weight:650; }
+    .plan-summary p { margin:5px 0 0; color:var(--muted); font-size:.75rem; line-height:1.55; }
+    .plan-summary a { flex:0 0 auto; padding:10px 15px; border:1px solid rgba(192,255,204,.3); border-radius:999px; color:#d8ffdd; font-size:.72rem; font-weight:800; transition:transform .25s var(--ease),background .25s; }
+    .plan-summary a:hover,.plan-summary a:focus-visible { transform:translateY(-2px); background:rgba(0,190,6,.17); }
 
     .final-cta { padding: 122px 0 64px; text-align: center; overflow: hidden; background: radial-gradient(ellipse at 50% 100%, rgba(30, 239, 70, .2), transparent 52%); }
     .final-cta::before { content: ""; position: absolute; width: 650px; height: 360px; left: 50%; bottom: -190px; transform: translateX(-50%); border-radius: 50%; background: rgba(32,244,72,.34); filter: blur(75px); }
@@ -898,9 +1015,15 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+      .orbit-caption { display:none; }
       #particleCanvas { opacity: .28; }
       .hero h1 .word, .hero-lede, .hero-actions, .phone-stage, .reveal { opacity: 1; transform: none; }
       .phone { transform: rotateX(-5deg) rotateY(-8deg) rotateZ(2deg); }
+      .loop-frame:nth-child(n+2) { opacity:0; }
+      .loop-frame:first-child { opacity:1; transform:none; }
+      .loop-progress i { transform:scaleX(0); }
+      .phone-art.is-previewing::before { transform:none; }
+      .phone-preview-button { display:none; }
     }
   </style>
 </head>
@@ -908,8 +1031,9 @@
   <section class="tv-gate" id="tvGate" aria-label="开机页" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
     <div class="gate-content">
       <div class="gate-heading">
-        <span class="gate-kicker">IQIYI · ON AIR</span>
+        <span class="gate-kicker"><b>iQIYI 爱奇艺</b><i aria-hidden="true"></i> APP ON AIR</span>
         <h1 id="gateTitle">把好戏，<em>调到眼前。</em></h1>
+        <p class="gate-subtitle">爱奇艺 App · 剧集 / 电影 / 综艺 / 动漫，一屏畅看</p>
       </div>
       <div class="tv-cabinet" id="tvCabinet">
         <div class="tv-aerial" aria-hidden="true"></div>
@@ -918,6 +1042,7 @@
             <img class="tv-screen-image" src="https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=1600&q=88" alt="" fetchpriority="high">
             <span class="tv-light-cone" aria-hidden="true"></span>
             <span class="beam-particles" id="beamParticles" aria-hidden="true"></span>
+            <span class="tv-screen-brand"><b>iQIYI</b> 爱奇艺 <small>随时进入好戏</small></span>
             <span class="tv-screen-corner"><i></i> <span id="tvSignalName">LIVE SIGNAL · IQIYI</span></span>
             <span class="tv-screen-copy"><small id="tvScreenKicker">THE NEXT STORY IS CALLING</small><strong><span id="tvTitleLead">好戏，</span><em id="tvTitleAccent">马上开场。</em></strong></span>
           </button>
@@ -954,7 +1079,7 @@
         <a class="focus-item" href="#catalog">影视分类</a>
         <a class="focus-item" href="#ai">AI 体验</a>
         <a class="focus-item" href="#vip">会员权益</a>
-        <a class="nav-cta action focus-item" href="#vip" data-message="已为你定位到会员方案">开通会员</a>
+        <a class="nav-cta focus-item" href="#vip">查看会员方案</a>
       </div>
     </nav>
   </header>
@@ -963,18 +1088,23 @@
     <section class="hero focus-item">
       <div class="hero-grid shell focus-group">
         <div class="hero-copy focus-item">
-          <span class="eyebrow">iQIYI · ENTER THE STORY</span>
+          <div class="hero-brand" aria-label="爱奇艺 App 长视频内容平台"><span class="hero-brand-mark">iQIYI</span><span class="hero-brand-name">爱奇艺</span><span class="hero-brand-rule" aria-hidden="true"></span><span class="hero-brand-type">APP · 长视频内容平台</span></div>
+          <span class="eyebrow">剧集 · 电影 · 综艺 · 动漫</span>
           <h1>
             <span class="line"><span class="word">下一秒</span></span>
             <span class="line hook-line"><span class="hook-window"><span class="hook-track"><span>悬念</span><span>心动</span><span>欢笑</span><span>热爱</span><span>悬念</span></span></span><span class="word">就来了</span></span>
           </h1>
-          <p class="hero-lede">别花时间找下一部。爱奇艺让值得追的内容，主动来到你面前。</p>
+          <p class="hero-lede">打开爱奇艺 App，追剧、看电影、刷综艺与动漫。AI 帮你更快找到想看的，也能接着上次的进度继续看。</p>
           <div class="hero-actions">
-            <button class="btn btn-primary action" type="button" data-message="入场通道已开启，下一场好戏马上开始">
+            <a class="btn btn-primary" href="#catalog">
               立即入戏
               <svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            </button>
+            </a>
             <a class="btn btn-ghost" href="#content">看看有什么 <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="loop-preview" id="loopPreview" role="group" aria-label="爱奇艺概念内容动态预览">
+            <div class="loop-visual" aria-hidden="true"><span class="loop-frame"></span><span class="loop-frame"></span><span class="loop-frame"></span><span class="loop-visual-label"><i></i> ON AIR</span></div>
+            <div class="loop-copy"><span class="loop-overline">IQIYI · 06S LOOP</span><strong>好戏，六秒入场</strong><small>剧集 / 电影 / 综艺 · 概念预览</small><div class="loop-controls"><span class="loop-progress" aria-hidden="true"><i></i></span><button class="loop-toggle" id="loopToggle" type="button" aria-label="暂停动态预览" aria-pressed="false">Ⅱ</button></div></div>
           </div>
         </div>
 
@@ -988,20 +1118,27 @@
             <div class="float-chip two" aria-hidden="true"><span class="dot"></span><span><b>AI 跳看</b>直达高能时刻</span></div>
             <div class="phone" id="phone">
               <div class="screen">
-                <div class="phone-art">
-                  <span class="phone-brand">iQIYI 爱奇艺</span>
-                  <span class="phone-badge" id="phoneBadge">独播剧场</span>
+                <div class="phone-art" id="phoneArt">
+                  <span class="phone-brand"><b>iQIYI</b> 爱奇艺</span>
+                  <span class="phone-badge" id="phoneBadge">为你精选</span>
+                  <button class="phone-preview-button" id="phonePreviewButton" type="button" aria-label="播放手机中的概念预览" aria-pressed="false">▶ 预览 6 秒</button>
+                  <span class="phone-preview-status" aria-hidden="true">● 正在预览 · 演示动画</span>
                   <div class="show-meta" id="showMeta">
-                    <span class="show-kicker" id="showKicker">迷雾剧场 · 正在热播</span>
+                    <span class="show-kicker" id="showKicker">迷雾剧场 · 剧集</span>
                     <div class="show-title" id="showTitle">边界回声</div>
-                    <div class="show-sub" id="showSub">迷雾之中，每个人都有两张面孔</div>
+                    <div class="show-sub" id="showSub">悬念正在发生，下一集接着追</div>
                   </div>
                 </div>
                 <div class="screen-body">
-                  <div class="screen-row"><strong>为你精选</strong><span>换一换</span></div>
-                  <div class="mini-cards"><i class="mini-card"></i><i class="mini-card"></i><i class="mini-card"></i></div>
+                  <div class="screen-row"><strong>为你精选</strong><button id="phoneShuffle" type="button" aria-label="换一组精选内容">换一换</button></div>
+                  <div class="mini-cards" role="group" aria-label="手机内推荐片单">
+                    <button class="mini-card" type="button" data-phone-story="1" aria-label="查看剧集 长夜信号" aria-pressed="false" style="--card-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=300&q=75')"><span>长夜信号</span></button>
+                    <button class="mini-card" type="button" data-phone-story="2" aria-label="查看综艺 此刻出发" aria-pressed="false" style="--card-image:url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=300&q=75')"><span>此刻出发</span></button>
+                    <button class="mini-card" type="button" data-phone-story="3" aria-label="查看电影 银河以北" aria-pressed="false" style="--card-image:url('https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=300&q=75')"><span>银河以北</span></button>
+                  </div>
+                  <p class="phone-feedback" id="phoneFeedback" aria-live="polite">点选频道，看看下一部好戏</p>
                 </div>
-                <div class="phone-nav" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                <div class="phone-nav" role="group" aria-label="手机内频道"><button type="button" data-phone-story="0" aria-pressed="true">精选</button><button type="button" data-phone-story="1" aria-pressed="false">剧集</button><button type="button" data-phone-story="2" aria-pressed="false">综艺</button><button type="button" data-phone-story="3" aria-pressed="false">电影</button></div>
               </div>
             </div>
           </div>
@@ -1024,29 +1161,30 @@
     <section class="content-section focus-item" id="content">
       <div class="shell">
         <div class="section-head reveal focus-group">
-          <div class="focus-item"><span class="eyebrow">CONTENT UNIVERSE</span><h2>每一次点开，<br><span class="headline-accent">都有新的世界。</span></h2><span class="section-caption">A NEW WORLD IN EVERY PLAY</span></div>
+          <div class="focus-item"><span class="eyebrow">IQIYI · CONTENT UNIVERSE</span><h2>每一次点开，<br><span class="headline-accent">都有新的世界。</span></h2><span class="section-caption">A NEW WORLD IN EVERY PLAY</span></div>
           <p class="section-note focus-item">四种观看情绪，一处自在切换。选择你此刻想进入的故事。</p>
         </div>
-        <div class="poster-grid focus-group">
-          <button class="poster reveal action focus-item" type="button" data-message="已进入剧集频道｜好故事，慢慢追">
+        <div class="orbit-caption" aria-hidden="true"><span>∞</span> SLOW ORBIT <em>悬停暂停 · 移开继续</em></div>
+        <div class="poster-grid focus-group" aria-label="影视内容循环展示，悬停卡片可暂停">
+          <button class="poster reveal focus-item" type="button" data-catalog-filter="series" aria-label="查看剧集分类">
             <img class="poster-image" src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=85" alt="夜空下的城市剪影" loading="lazy" decoding="async">
             <span class="poster-index">01 / 04</span>
             <div class="poster-copy"><span class="poster-kind">剧集 SERIES</span><h3>好故事，慢慢追</h3><p>迷雾剧场、恋恋剧场与年度大剧，陪你追到下一集。</p></div>
             <span class="poster-arrow" aria-hidden="true">↗</span>
           </button>
-          <button class="poster reveal action focus-item" type="button" data-message="已进入综艺频道｜把快乐拉满">
+          <button class="poster reveal focus-item" type="button" data-catalog-filter="variety" aria-label="查看综艺分类">
             <img class="poster-image" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=900&q=85" alt="舞台灯光与现场演出" loading="lazy" decoding="async">
             <span class="poster-index">02 / 04</span>
             <div class="poster-copy"><span class="poster-kind">综艺 SHOW</span><h3>把快乐拉满</h3><p>热梗、新声与现场感，随时加入这一场快乐。</p></div>
             <span class="poster-arrow" aria-hidden="true">↗</span>
           </button>
-          <button class="poster reveal action focus-item" type="button" data-message="已进入电影频道｜一部就入戏">
+          <button class="poster reveal focus-item" type="button" data-catalog-filter="film" aria-label="查看电影分类">
             <img class="poster-image" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=85" alt="电影放映机与银幕" loading="lazy" decoding="async">
             <span class="poster-index">03 / 04</span>
             <div class="poster-copy"><span class="poster-kind">电影 FILM</span><h3>一部就入戏</h3><p>从院线新作到经典佳片，留一段完整时间给电影。</p></div>
             <span class="poster-arrow" aria-hidden="true">↗</span>
           </button>
-          <button class="poster reveal action focus-item" type="button" data-message="已进入动漫频道｜热爱不设限">
+          <button class="poster reveal focus-item" type="button" data-catalog-filter="anime" aria-label="查看动漫分类">
             <img class="poster-image" src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=900&q=85" alt="星空与绚丽色彩" loading="lazy" decoding="async">
             <span class="poster-index">04 / 04</span>
             <div class="poster-copy"><span class="poster-kind">动漫 ANIME</span><h3>热爱不设限</h3><p>国创、日漫与少儿内容，让想象力继续生长。</p></div>
@@ -1074,7 +1212,8 @@
           </div>
           <span class="catalog-count focus-item" id="catalogCount">08 CHANNELS · ALL STORIES</span>
         </div>
-        <div class="catalog-grid focus-group" id="catalogGrid">
+        <div class="orbit-caption" aria-hidden="true"><span>∞</span> CHANNEL ORBIT <em>悬停暂停 · 移开继续</em></div>
+        <div class="catalog-grid focus-group" id="catalogGrid" aria-label="影视分类循环展示，悬停卡片可暂停">
           <button class="catalog-card focus-item is-selected" type="button" data-type="series" data-title="迷雾剧场" data-copy="悬念、反转与层层递进的真相。今晚，跟着线索走进下一集。" aria-pressed="true">
             <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
             <span class="catalog-card-index">01 / SERIES</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
@@ -1118,7 +1257,7 @@
         </div>
         <div class="catalog-selection" aria-live="polite">
           <div><span class="catalog-selection-label">NOW BROWSING</span><strong class="catalog-selection-title" id="catalogSelectionTitle">迷雾剧场</strong><p class="catalog-selection-copy" id="catalogSelectionCopy">悬念、反转与层层递进的真相。今晚，跟着线索走进下一集。</p></div>
-          <span class="catalog-selection-mark" aria-hidden="true">↗</span>
+          <a class="catalog-next" href="#ai">看看 AI 如何帮你找片 <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
@@ -1126,32 +1265,38 @@
     <section class="ai-section focus-item" id="ai">
       <div class="shell">
         <div class="ai-frame reveal">
-          <div class="ai-layout focus-group">
-            <div class="ai-title focus-item">
-              <span class="eyebrow">AI VIEWING</span>
+          <div class="ai-layout">
+            <div class="ai-title">
+              <span class="eyebrow">IQIYI · AI VIEWING</span>
               <h2>让好内容，<br><span class="headline-accent">更懂你。</span></h2>
               <span class="section-caption">SMARTER WATCHING, LESS SEARCHING</span>
               <p>技术退到幕后，把选择变简单，把观看变顺畅。你只管享受故事。</p>
-              <div class="ai-visual focus-item" aria-label="AI 跳看影片时间轴示意">
-                <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=900&q=85" alt="影院银幕正播放电影画面" loading="lazy" decoding="async">
-                <span class="ai-visual-tag">AI · SCENE MAP 00:42</span>
-                <span class="ai-timeline" aria-hidden="true"></span>
-                <span class="ai-visual-copy"><strong>高能时刻，直达现场</strong><span>01:24 / 42:18</span></span>
-              </div>
             </div>
-            <div class="ai-list focus-group focus-item">
-              <article class="ai-item focus-item">
+            <div class="ai-orbit" id="aiOrbit" aria-label="爱奇艺 AI 观看功能环绕展示">
+              <div class="ai-core">
+                <div class="ai-core-top"><span>IQIYI · AI VIEWING ENGINE</span><strong id="aiOrbitIndex">01 / 03</strong></div>
+                <div class="ai-visual focus-item" id="aiPreview" aria-label="AI 跳看影片时间轴示意">
+                  <img id="aiPreviewImage" src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=900&q=85" alt="影院银幕正播放电影画面" loading="lazy" decoding="async">
+                  <span class="ai-visual-tag" id="aiPreviewTag">AI · SCENE MAP 00:42</span>
+                  <span class="ai-timeline" aria-hidden="true"></span>
+                  <span class="ai-visual-copy"><strong id="aiPreviewTitle">高能时刻，直达现场</strong><span id="aiPreviewMeta">01:24 / 42:18</span></span>
+                </div>
+                <div class="ai-core-bottom"><span>THE STORY STAYS AT THE CENTER</span><span>选择环绕功能 ↗</span></div>
+              </div>
+              <div class="ai-list focus-group" role="group" aria-label="选择 AI 观看功能">
+              <button class="ai-item focus-item is-active" type="button" data-feature="skip" data-orbit-slot="front" aria-pressed="true" aria-controls="aiPreview">
                 <span class="ai-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4v16M9 7l8 5-8 5z"/></svg></span>
-                <div><h3>AI 跳看</h3><span class="ai-english">SKIP TO THE MOMENT</span><p>快速理解剧情脉络，一键直达关键情节与高能片段。</p></div><span class="ai-number">01</span>
-              </article>
-              <article class="ai-item focus-item">
+                <span class="ai-item-copy"><span class="ai-item-title">AI 跳看</span><span class="ai-english">SKIP TO THE MOMENT</span><span class="ai-description">快速理解剧情脉络，一键直达关键情节与高能片段。</span></span><span class="ai-number">01</span>
+              </button>
+              <button class="ai-item focus-item" type="button" data-feature="resume" data-orbit-slot="right" aria-pressed="false" aria-controls="aiPreview">
                 <span class="ai-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7M4 4v5h5"/></svg></span>
-                <div><h3>智能续播</h3><span class="ai-english">PICK UP WHERE YOU LEFT</span><p>自动记住进度与观看习惯，换个设备也能无缝接上。</p></div><span class="ai-number">02</span>
-              </article>
-              <article class="ai-item focus-item">
+                <span class="ai-item-copy"><span class="ai-item-title">智能续播</span><span class="ai-english">PICK UP WHERE YOU LEFT</span><span class="ai-description">自动记住进度与观看习惯，换个设备也能无缝接上。</span></span><span class="ai-number">02</span>
+              </button>
+              <button class="ai-item focus-item" type="button" data-feature="recommend" data-orbit-slot="left" aria-pressed="false" aria-controls="aiPreview">
                 <span class="ai-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.3-7-10a4 4 0 0 1 7-2.7A4 4 0 0 1 19 10c0 5.7-7 10-7 10z"/></svg></span>
-                <div><h3>个性荐片</h3><span class="ai-english">MADE AROUND YOUR TASTE</span><p>从你的真实兴趣出发，减少翻找，把下一部好片放到眼前。</p></div><span class="ai-number">03</span>
-              </article>
+                <span class="ai-item-copy"><span class="ai-item-title">个性荐片</span><span class="ai-english">MADE AROUND YOUR TASTE</span><span class="ai-description">从你的真实兴趣出发，减少翻找，把下一部好片放到眼前。</span></span><span class="ai-number">03</span>
+              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1161,7 +1306,7 @@
     <section class="membership focus-item" id="vip">
       <div class="shell">
         <div class="section-head reveal focus-group">
-          <div class="focus-item"><span class="eyebrow">VIP PRIVILEGES</span><h2>选对你的<br><span class="headline-accent">观影方式。</span></h2><span class="section-caption">MORE WAYS TO WATCH</span></div>
+          <div class="focus-item"><span class="eyebrow">IQIYI · VIP PRIVILEGES</span><h2>选对你的<br><span class="headline-accent">观影方式。</span></h2><span class="section-caption">MORE WAYS TO WATCH</span></div>
           <p class="section-note focus-item">从个人观看，到跨屏共享体验。三档权益，按你的生活场景选择。</p>
         </div>
         <div class="plans focus-group" role="group" aria-label="选择 VIP 方案">
@@ -1184,6 +1329,10 @@
             <button class="btn btn-ghost" type="button" data-message="已选择星钻 VIP｜解锁旗舰会员体验" aria-pressed="false">选择星钻</button>
           </article>
         </div>
+        <div class="plan-summary" aria-live="polite">
+          <div><span class="plan-summary-label">YOUR CURRENT PICK · 当前体验方案</span><strong id="planSummaryTitle">白金 VIP</strong><p id="planSummaryCopy">大屏观影与多设备续播。此页面仅作概念演示，不会产生支付或真实开通。</p></div>
+          <a href="#catalog">继续浏览影视分类 ↗</a>
+        </div>
       </div>
     </section>
 
@@ -1199,7 +1348,7 @@
         <span class="eyebrow">YOUR STORY STARTS HERE</span>
         <h2>下一场好戏，<br><span>现在开场。</span></h2>
         <p>打开爱奇艺，把喜欢的内容留在身边。</p>
-        <button class="btn btn-primary action" type="button" data-message="会员开通页已准备好，欢迎入场">开通会员 <span aria-hidden="true">→</span></button>
+        <a class="btn btn-primary" href="#vip">查看会员方案 <span aria-hidden="true">→</span></a>
       </div>
     </section>
   </main>
@@ -1222,6 +1371,10 @@
       const phoneStage = document.getElementById('phoneStage');
       const phoneRig = document.getElementById('phoneRig');
       const phone = document.getElementById('phone');
+      const phoneArt = document.getElementById('phoneArt');
+      const phonePreviewButton = document.getElementById('phonePreviewButton');
+      const phoneFeedback = document.getElementById('phoneFeedback');
+      const phoneStoryButtons = [...document.querySelectorAll('[data-phone-story]')];
       const magneticGlow = document.getElementById('magneticGlow');
       const phoneBadge = document.getElementById('phoneBadge');
       const showMeta = document.getElementById('showMeta');
@@ -1248,14 +1401,43 @@
       const powerButton = document.getElementById('powerButton');
       const soundToggle = document.getElementById('soundToggle');
       const soundLabel = document.getElementById('soundLabel');
+      const loopPreview = document.getElementById('loopPreview');
+      const loopToggle = document.getElementById('loopToggle');
+      let loopUserPaused = false;
+      const syncLoopPreview = () => loopPreview.classList.toggle('is-paused', loopUserPaused || document.hidden || document.body.classList.contains('intro-active'));
+      syncLoopPreview();
+      if (reduceMotion) {
+        loopToggle.disabled = true;
+        loopToggle.setAttribute('aria-label', '静态概念预览');
+      } else {
+        loopToggle.addEventListener('click', () => {
+          loopUserPaused = !loopUserPaused;
+          loopToggle.setAttribute('aria-pressed', String(loopUserPaused));
+          loopToggle.setAttribute('aria-label', loopUserPaused ? '继续动态预览' : '暂停动态预览');
+          loopToggle.textContent = loopUserPaused ? '▶' : 'Ⅱ';
+          syncLoopPreview();
+          playEffect('select');
+        });
+      }
       const experienceRegions = [topbar, document.querySelector('main'), document.querySelector('footer')];
       experienceRegions.forEach((region) => { region.inert = true; });
       const catalogGrid = document.getElementById('catalogGrid');
+      let catalogOrbit;
       const catalogCards = [...document.querySelectorAll('.catalog-card')];
       const catalogFilters = [...document.querySelectorAll('.catalog-filter')];
       const catalogCount = document.getElementById('catalogCount');
       const catalogSelectionTitle = document.getElementById('catalogSelectionTitle');
       const catalogSelectionCopy = document.getElementById('catalogSelectionCopy');
+      const catalogSection = document.getElementById('catalog');
+      const aiPreview = document.getElementById('aiPreview');
+      const aiPreviewImage = document.getElementById('aiPreviewImage');
+      const aiPreviewTag = document.getElementById('aiPreviewTag');
+      const aiPreviewTitle = document.getElementById('aiPreviewTitle');
+      const aiPreviewMeta = document.getElementById('aiPreviewMeta');
+      const aiButtons = [...document.querySelectorAll('.ai-item')];
+      const aiOrbitIndex = document.getElementById('aiOrbitIndex');
+      const planSummaryTitle = document.getElementById('planSummaryTitle');
+      const planSummaryCopy = document.getElementById('planSummaryCopy');
       const particleCanvas = document.getElementById('particleCanvas');
       const particleContext = particleCanvas.getContext('2d');
       let toastTimer;
@@ -1523,6 +1705,7 @@
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) stopChannelAuto();
         else scheduleChannelAuto();
+        syncLoopPreview();
       });
       scheduleChannelAuto();
 
@@ -1585,9 +1768,10 @@
           tvGate.classList.add('is-leaving');
           document.body.classList.remove('intro-active');
           window.setTimeout(() => {
-            tvGate.hidden = true;
-            document.body.classList.remove('experience-entering');
-            experienceRegions.forEach((region) => { region.inert = false; });
+          tvGate.hidden = true;
+          document.body.classList.remove('experience-entering');
+          syncLoopPreview();
+          experienceRegions.forEach((region) => { region.inert = false; });
             experienceEntering = false;
             document.getElementById('top').focus({ preventScroll: true });
             requestScrollUpdate();
@@ -1605,6 +1789,7 @@
         tvGate.classList.remove('is-leaving', 'is-powering');
         tvGate.classList.add('is-returning');
         document.body.classList.add('intro-active', 'experience-returning');
+        syncLoopPreview();
         requestAnimationFrame(() => tvGate.classList.remove('is-returning'));
         window.setTimeout(() => {
           document.body.classList.remove('experience-returning');
@@ -1675,22 +1860,65 @@
         catalogSelectionTitle.textContent = card.dataset.title;
         catalogSelectionCopy.textContent = card.dataset.copy;
       };
-      catalogFilters.forEach((filter) => {
-        filter.addEventListener('click', () => {
-          if (filter.getAttribute('aria-pressed') !== 'true') playEffect('select');
-          const type = filter.dataset.filter;
-          catalogFilters.forEach((item) => item.setAttribute('aria-pressed', String(item === filter)));
-          catalogCards.forEach((card) => { card.hidden = type !== 'all' && card.dataset.type !== type; });
-          const visibleCards = catalogCards.filter(card => !card.hidden);
-          catalogGrid.classList.toggle('is-filtered', type !== 'all');
-          catalogGrid.classList.toggle('is-single', visibleCards.length === 1);
-          catalogCount.textContent = `${String(visibleCards.length).padStart(2, '0')} CHANNELS · ${filterNames[type]}`;
-          if (!visibleCards.some(card => card.classList.contains('is-selected'))) chooseCatalogCard(visibleCards[0]);
-        });
-      });
+      const applyCatalogFilter = (type) => {
+        const filter = catalogFilters.find(item => item.dataset.filter === type);
+        if (!filter) return null;
+        if (filter.getAttribute('aria-pressed') !== 'true') playEffect('select');
+        catalogFilters.forEach((item) => item.setAttribute('aria-pressed', String(item === filter)));
+        catalogCards.forEach((card) => { card.hidden = type !== 'all' && card.dataset.type !== type; });
+        const visibleCards = catalogCards.filter(card => !card.hidden);
+        catalogGrid.classList.toggle('is-filtered', type !== 'all');
+        catalogGrid.classList.toggle('is-single', visibleCards.length === 1);
+        catalogOrbit?.reset();
+        catalogCount.textContent = `${String(visibleCards.length).padStart(2, '0')} CHANNELS · ${filterNames[type]}`;
+        if (!visibleCards.some(card => card.classList.contains('is-selected'))) chooseCatalogCard(visibleCards[0]);
+        return visibleCards[0];
+      };
+      catalogFilters.forEach(filter => filter.addEventListener('click', () => applyCatalogFilter(filter.dataset.filter)));
       catalogCards.forEach(card => card.addEventListener('click', () => {
         if (!card.classList.contains('is-selected')) playEffect('select');
         chooseCatalogCard(card);
+      }));
+      document.querySelectorAll('[data-catalog-filter]').forEach((poster) => {
+        poster.addEventListener('click', () => {
+          const firstCard = applyCatalogFilter(poster.dataset.catalogFilter);
+          if (firstCard) chooseCatalogCard(firstCard);
+          catalogSection.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+          if (firstCard) window.setTimeout(() => firstCard.focus({ preventScroll: true }), reduceMotion ? 0 : 650);
+        });
+      });
+
+      const aiFeatures = {
+        skip: { tag: 'AI · SCENE MAP 00:42', title: '高能时刻，直达现场', meta: '01:24 / 42:18', progress: '65%', image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=900&q=85', alt: '影院银幕正播放电影画面', label: 'AI 跳看影片时间轴示意' },
+        resume: { tag: 'SMART RESUME · CONTINUE', title: '上次看到这里，继续入戏', meta: '17:38 / 42:18', progress: '42%', image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=85', alt: '电影放映机正在播放画面', label: '智能续播进度示意' },
+        recommend: { tag: 'FOR YOU · TASTE MATCH', title: '下一部好片，已经挑好', meta: '06 PICKS · FOR YOU', progress: '86%', image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=900&q=85', alt: '星空中的多彩光线', label: '个性荐片匹配示意' }
+      };
+      let aiPreviewTimer;
+      aiButtons.forEach((button) => button.addEventListener('click', () => {
+        if (button.getAttribute('aria-pressed') === 'true') return;
+        const feature = aiFeatures[button.dataset.feature];
+        const activeIndex = aiButtons.indexOf(button);
+        aiButtons.forEach((item, index) => {
+          const selected = item === button;
+          item.classList.toggle('is-active', selected);
+          item.setAttribute('aria-pressed', String(selected));
+          const distance = (index - activeIndex + aiButtons.length) % aiButtons.length;
+          item.dataset.orbitSlot = distance === 0 ? 'front' : distance === 1 ? 'right' : 'left';
+        });
+        aiOrbitIndex.textContent = `${String(activeIndex + 1).padStart(2, '0')} / 03`;
+        aiPreviewImage.src = feature.image;
+        aiPreviewImage.alt = feature.alt;
+        aiPreviewTag.textContent = feature.tag;
+        aiPreviewTitle.textContent = feature.title;
+        aiPreviewMeta.textContent = feature.meta;
+        aiPreview.setAttribute('aria-label', feature.label);
+        aiPreview.style.setProperty('--preview-progress', feature.progress);
+        aiPreview.classList.remove('is-switching');
+        void aiPreview.offsetWidth;
+        aiPreview.classList.add('is-switching');
+        window.clearTimeout(aiPreviewTimer);
+        aiPreviewTimer = window.setTimeout(() => aiPreview.classList.remove('is-switching'), 600);
+        playEffect('select');
       }));
 
       onScroll();
@@ -1745,26 +1973,58 @@
       }
 
       const featuredShows = [
-        { badge: '独播剧场', kicker: '迷雾剧场 · 正在热播', title: '边界回声', sub: '迷雾之中，每个人都有两张面孔' },
-        { badge: '综艺热榜', kicker: '限定企划 · 全网首播', title: '此刻出发', sub: '和喜欢的人，一起把快乐放大' },
-        { badge: '电影频道', kicker: '高分新片 · 帧绮映画', title: '银河以北', sub: '一场为大银幕感而生的冒险' }
+        { badge: '为你精选', kicker: '迷雾剧场 · 剧集', title: '边界回声', sub: '悬念正在发生，下一集接着追', channel: '精选', image: 'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=82' },
+        { badge: '剧集频道', kicker: '悬疑剧场 · 正在热播', title: '长夜信号', sub: '跟着线索，走进故事深处', channel: '剧集', image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=700&q=82' },
+        { badge: '综艺频道', kicker: '限定企划 · 综艺现场', title: '此刻出发', sub: '和喜欢的人，把快乐放大', channel: '综艺', image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=700&q=82' },
+        { badge: '电影频道', kicker: '高分新片 · 电影', title: '银河以北', sub: '留一段完整时间，交给想象力', channel: '电影', image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=82' }
       ];
       let featuredIndex = 0;
-
-      if (!reduceMotion) {
-        window.setInterval(() => {
-          showMeta.classList.add('switching');
-          window.setTimeout(() => {
-            featuredIndex = (featuredIndex + 1) % featuredShows.length;
-            const featured = featuredShows[featuredIndex];
-            phoneBadge.textContent = featured.badge;
-            showKicker.textContent = featured.kicker;
-            showTitle.textContent = featured.title;
-            showSub.textContent = featured.sub;
-          }, 245);
-          window.setTimeout(() => showMeta.classList.remove('switching'), 540);
-        }, 3400);
-      }
+      let featuredRevision = 0;
+      let phonePreviewing = false;
+      let phoneManualUntil = 0;
+      const switchFeatured = (index, source = 'manual') => {
+        const revision = ++featuredRevision;
+        if (!reduceMotion) showMeta.classList.add('switching');
+        window.setTimeout(() => {
+          if (revision !== featuredRevision) return;
+          featuredIndex = index;
+          const featured = featuredShows[featuredIndex];
+          phoneBadge.textContent = featured.badge;
+          showKicker.textContent = featured.kicker;
+          showTitle.textContent = featured.title;
+          showSub.textContent = featured.sub;
+          phoneArt.style.setProperty('--phone-image', `url("${featured.image}")`);
+          phoneStoryButtons.forEach((button) => button.setAttribute('aria-pressed', String(Number(button.dataset.phoneStory) === featuredIndex)));
+          if (source !== 'auto') phoneFeedback.textContent = `已切换到${featured.channel}：${featured.title}`;
+        }, reduceMotion ? 0 : 245);
+        window.setTimeout(() => {
+          if (revision === featuredRevision) showMeta.classList.remove('switching');
+        }, reduceMotion ? 0 : 540);
+        if (source !== 'auto') {
+          phoneManualUntil = performance.now() + 10000;
+          playEffect('select');
+        }
+      };
+      document.getElementById('phoneShuffle').addEventListener('click', () => {
+        switchFeatured((featuredIndex + 1) % featuredShows.length);
+      });
+      phoneStoryButtons.forEach((button) => button.addEventListener('click', () => {
+        switchFeatured(Number(button.dataset.phoneStory));
+      }));
+      phonePreviewButton.addEventListener('click', () => {
+        phonePreviewing = !phonePreviewing;
+        phoneArt.classList.toggle('is-previewing', phonePreviewing && !reduceMotion);
+        phonePreviewButton.setAttribute('aria-pressed', String(phonePreviewing));
+        phonePreviewButton.setAttribute('aria-label', phonePreviewing ? '暂停手机中的概念预览' : '播放手机中的概念预览');
+        phonePreviewButton.textContent = phonePreviewing ? 'Ⅱ 暂停预览' : '▶ 预览 6 秒';
+        phoneFeedback.textContent = phonePreviewing ? '正在播放 6 秒概念动画' : '概念预览已暂停';
+        phoneManualUntil = performance.now() + 10000;
+        playEffect('select');
+      });
+      if (!reduceMotion) window.setInterval(() => {
+        if (document.hidden || document.body.classList.contains('intro-active') || phonePreviewing || performance.now() < phoneManualUntil || phoneStage.matches(':hover') || phoneStage.matches(':focus-within')) return;
+        switchFeatured((featuredIndex + 1) % featuredShows.length, 'auto');
+      }, 3400);
 
       const revealItems = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window && !reduceMotion) {
@@ -1792,6 +2052,11 @@
       };
 
       const planCards = [...document.querySelectorAll('.plan')];
+      const planDescriptions = {
+        '黄金': '适合个人在手机、平板和电脑上追剧。',
+        '白金': '大屏观影与多设备续播，适合想把客厅也变成影院的人。',
+        '星钻': '覆盖电视与 XR 等更多场景，适合追求完整视听体验的人。'
+      };
       const selectPlan = (chosenPlan) => {
         planCards.forEach((plan) => {
           const selected = plan === chosenPlan;
@@ -1800,17 +2065,86 @@
           button.setAttribute('aria-pressed', String(selected));
           button.textContent = `${selected ? '已选' : '选择'}${plan.dataset.tier}`;
         });
+        planSummaryTitle.textContent = `${chosenPlan.dataset.tier} VIP`;
+        planSummaryCopy.textContent = `${planDescriptions[chosenPlan.dataset.tier]} 此页面仅作概念演示，不会产生支付或真实开通。`;
         playEffect('select');
         showToast(chosenPlan.querySelector('button').dataset.message);
       };
       planCards.forEach((plan) => plan.addEventListener('click', () => selectPlan(plan)));
-
-      document.querySelectorAll('.action').forEach((element) => {
-        element.addEventListener('click', () => {
-          playEffect('select');
-          showToast(element.dataset.message || '操作已完成');
+      const createOrbit = (root, cardSelector, speed) => {
+        if (reduceMotion || !root) return null;
+        const cards = [...root.children];
+        const track = document.createElement('div');
+        track.className = 'loop-track focus-group';
+        cards.forEach((card, index) => {
+          card.dataset.orbitIndex = String(index % 4);
+          track.appendChild(card);
         });
-      });
+        root.appendChild(track);
+        root.classList.add('loop-ribbon', 'is-looping');
+        const step = cards[0].offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || 0);
+
+        let offset = 0;
+        let lastTime = 0;
+        let inView = false;
+        let frameId = 0;
+        const render = () => { track.style.transform = `translate3d(${offset}px,0,0)`; };
+        const reset = () => {
+          cards.forEach((card) => track.appendChild(card));
+          offset = 0;
+          lastTime = 0;
+          render();
+        };
+        const isPaused = () => document.hidden
+          || document.body.classList.contains('intro-active')
+          || document.body.classList.contains('experience-returning')
+          || root.classList.contains('is-filtered')
+          || root.classList.contains('is-keyboard-mode')
+          || Boolean(root.querySelector(`${cardSelector}:hover, ${cardSelector}:focus-visible`));
+        const tick = (now) => {
+          frameId = 0;
+          if (!inView) return;
+          if (!isPaused() && lastTime) {
+            offset -= Math.min(now - lastTime, 50) * speed / 1000;
+            while (-offset >= step) {
+              offset += step;
+              track.appendChild(track.firstElementChild);
+            }
+            render();
+          }
+          lastTime = now;
+          frameId = requestAnimationFrame(tick);
+        };
+        const setInView = (visible) => {
+          inView = visible;
+          lastTime = 0;
+          if (visible && !frameId) frameId = requestAnimationFrame(tick);
+          if (!visible && frameId) { cancelAnimationFrame(frameId); frameId = 0; }
+        };
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => setInView(entry.isIntersecting));
+          }, { threshold:.04 });
+          observer.observe(root);
+        } else setInView(true);
+
+        root.addEventListener('focusin', (event) => {
+          if (root.classList.contains('is-filtered') || !event.target.matches(`${cardSelector}:focus-visible`)) return;
+          offset = 0;
+          lastTime = 0;
+          root.classList.add('is-keyboard-mode');
+          render();
+        });
+        root.addEventListener('focusout', (event) => {
+          if (root.contains(event.relatedTarget)) return;
+          root.classList.remove('is-keyboard-mode');
+          reset();
+        });
+        return { reset };
+      };
+      createOrbit(document.querySelector('.poster-grid'), '.poster', 24);
+      catalogOrbit = createOrbit(catalogGrid, '.catalog-card', 22);
+      document.querySelectorAll('a[href^="#"]').forEach((link) => link.addEventListener('click', () => playEffect('select')));
     })();
   </script>
 </body>
