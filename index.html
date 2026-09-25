@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0b2414">
-  <meta name="description" content="打开电视，进入爱奇艺的好戏现场；探索剧集、电影、综艺、动漫与纪录片。">
-  <title>爱奇艺｜打开好戏，进入此刻</title>
+  <meta name="description" content="一份非官方爱奇艺概念作品集。开机选片，探索四部真实作品及对应海报，再前往爱奇艺观看。">
+  <title>爱奇艺概念作品集｜把好戏调到眼前</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23050706'/%3E%3Crect x='12' y='16' width='40' height='32' rx='7' fill='none' stroke='%2300BE06' stroke-width='5'/%3E%3Cpath d='M27 25l14 7-14 7z' fill='%2300BE06'/%3E%3C/svg%3E">
   <style>
     :root {
@@ -349,9 +349,9 @@
     .loop-preview { display:grid; grid-template-columns:156px minmax(0,1fr); width:min(490px,100%); min-height:120px; margin-top:31px; overflow:hidden; border:1px solid rgba(196,255,206,.25); border-radius:18px; background:rgba(6,27,13,.78); box-shadow:0 19px 46px rgba(0,10,4,.28),inset 0 1px rgba(255,255,255,.06); opacity:0; animation:fade-up .8s .6s var(--ease) forwards; }
     .loop-visual { position:relative; min-height:120px; overflow:hidden; background:#193527; isolation:isolate; }
     .loop-frame { position:absolute; inset:-4%; display:block; opacity:0; background-position:center; background-size:cover; filter:saturate(.88) contrast(1.06); animation-duration:6s; animation-timing-function:linear; animation-iteration-count:infinite; }
-    .loop-frame:nth-child(1) { opacity:1; background-image:url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=78'); animation-name:loop-frame-one; }
-    .loop-frame:nth-child(2) { background-image:url('https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=78'); animation-name:loop-frame-two; }
-    .loop-frame:nth-child(3) { background-image:url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=700&q=78'); animation-name:loop-frame-three; }
+    .loop-frame:nth-child(1) { opacity:1; background-image:url('assets/kuangbiao-poster.jpg'); animation-name:loop-frame-one; }
+    .loop-frame:nth-child(2) { background-image:url('assets/lianhualou-poster.jpg'); animation-name:loop-frame-two; }
+    .loop-frame:nth-child(3) { background-image:url('assets/zhongdiba-poster.jpg'); animation-name:loop-frame-three; }
     .loop-visual::after { content:""; position:absolute; z-index:2; inset:0; pointer-events:none; background:linear-gradient(90deg,rgba(3,25,8,.05),rgba(3,25,8,.6)),repeating-linear-gradient(0deg,transparent 0 3px,rgba(218,255,223,.045) 4px); }
     .loop-visual-label { position:absolute; z-index:3; left:13px; bottom:12px; display:flex; align-items:center; gap:7px; color:#efffee; font-size:.57rem; font-weight:900; letter-spacing:.15em; text-shadow:0 2px 9px #041208; }
     .loop-visual-label i { width:6px; height:6px; border-radius:50%; background:#2bf136; box-shadow:0 0 10px #2bf136; animation:loop-beat 2s ease-in-out infinite; }
@@ -511,7 +511,7 @@
       background: #3b413d;
     }
     .screen { position: absolute; inset: 4px; overflow: hidden; border-radius: 36px; background: #090c0a; }
-    .phone-art { --phone-image:url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=82'); height:57%; position:relative; overflow:hidden; background:linear-gradient(145deg,#315740,#081c11 68%); }
+    .phone-art { --phone-image:url('assets/kuangbiao-poster.jpg'); height:57%; position:relative; overflow:hidden; background:linear-gradient(145deg,#315740,#081c11 68%); }
     .phone-art::before { content:""; position:absolute; inset:-5%; background-image:var(--phone-image); background-size:cover; background-position:center; opacity:.75; filter:saturate(.9); transform:scale(1.03); transition:opacity .35s,filter .35s; }
     .phone-art::after { content:""; position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(to top,#090c0a 1%,rgba(3,18,8,.55) 31%,transparent 68%),linear-gradient(to bottom,rgba(2,17,5,.4),transparent 37%); }
     .phone-art.is-previewing::before { opacity:.94; filter:saturate(1.15) brightness(1.06); animation:phone-scene-move 6s ease-in-out infinite; }
@@ -1012,6 +1012,140 @@
     .toast.show { opacity: 1; transform: translate(-50%, 0); }
     .toast-dot { width: 9px; height: 9px; flex: 0 0 auto; border-radius: 50%; background: var(--brand-bright); box-shadow: 0 0 16px var(--brand); }
 
+    /* Curated stories: fewer continuous motions, deeper interaction states. */
+    body { --work-accent:#efc48b; background:radial-gradient(circle at 78% 5%,rgba(76,241,131,.31),transparent 35rem),radial-gradient(circle at 8% 38%,rgba(108,217,144,.18),transparent 33rem),linear-gradient(155deg,#17432a 0%,#12321f 43%,#17402a 100%); }
+    #particleCanvas { opacity:.28; }
+    .tv-screen-image { object-position:center 45%; filter:saturate(1.06) brightness(.91); }
+    .tv-light-cone { opacity:.5; }
+    .loop-frame:nth-child(1) { background-image:url('assets/kuangbiao-poster.jpg'); }
+    .loop-frame:nth-child(2) { background-image:url('assets/lianhualou-poster.jpg'); }
+    .loop-frame:nth-child(3) { background-image:url('assets/zhongdiba-poster.jpg'); }
+    .phone-art { --phone-image:url('assets/kuangbiao-poster.jpg'); }
+    .phone-art::before { opacity:.88; filter:saturate(1.08) brightness(.95); }
+    .signal-ring.secondary,.float-chip { animation:none; }
+    .hero.is-offscreen .hook-track,.hero.is-offscreen .signal-ring { animation-play-state:paused; }
+    .marquee { background:linear-gradient(100deg,rgba(20,59,32,.94),rgba(13,37,24,.94)); }
+    .marquee-track { animation-duration:42s; }
+    .marquee.is-offscreen .marquee-track { animation-play-state:paused; }
+    .marquee-item { font-size:clamp(1.3rem,2.1vw,2.2rem); padding-block:17px; }
+    .content-section { background:radial-gradient(circle at 15% 45%,rgba(95,243,147,.19),transparent 29rem),linear-gradient(180deg,rgba(41,101,62,.54),rgba(19,53,34,.55)); }
+    .poster-grid.is-looping { height:522px; }
+    .poster-grid.is-looping .poster { width:355px; flex-basis:355px; }
+    .poster-grid.is-looping .poster[data-work="0"] { top:5px; }
+    .poster-grid.is-looping .poster[data-work="1"] { top:40px; }
+    .poster-grid.is-looping .poster[data-work="2"] { top:17px; }
+    .poster-grid.is-looping .poster[data-work="3"] { top:42px; }
+    .poster { height:445px; border-color:rgba(230,255,234,.24); box-shadow:0 20px 45px rgba(0,23,10,.28),inset 0 1px rgba(255,255,255,.13); }
+    .poster::before { background:linear-gradient(145deg,#18472b,#af8654); }
+    .poster-image { opacity:1; filter:saturate(1.03) brightness(.95); }
+    .poster::after { background:radial-gradient(circle at var(--spot-x,50%) var(--spot-y,40%),rgba(241,255,230,.2),transparent 37%),linear-gradient(to top,rgba(4,18,10,.92),rgba(4,18,10,.07) 60%,rgba(4,18,10,.05)),linear-gradient(115deg,rgba(255,255,255,.13),transparent 28%); }
+    .poster.reveal.is-visible.is-current { border-color:rgba(239,196,139,.8); box-shadow:0 28px 65px rgba(0,20,7,.37),0 0 0 1px rgba(239,196,139,.25),0 0 34px rgba(239,196,139,.13); }
+    .poster:hover .poster-image,.poster:focus-visible .poster-image { filter:saturate(1.17) brightness(1.08); }
+    .poster-index { color:#f5fbef; font-size:.61rem; font-weight:850; text-shadow:0 2px 10px #132018; }
+    .poster-kind { color:#f2d6a8; }
+    .poster h3 { font-size:2rem; letter-spacing:-.04em; line-height:1.05; }
+    .poster p { max-width:275px; color:#edf5e8; font-size:.76rem; }
+    .catalog-section { background:radial-gradient(ellipse at 68% 42%,rgba(142,240,164,.18),transparent 35rem),linear-gradient(180deg,#1a4b30,#123624); }
+    .catalog-section::before { content:"THE STORY DESK"; color:rgba(224,255,227,.055); }
+    .work-stage { position:relative; display:grid; grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr); gap:0; min-height:565px; overflow:hidden; border:1px solid rgba(216,255,221,.28); border-radius:34px; background:linear-gradient(125deg,rgba(37,97,61,.92),rgba(14,53,32,.95)); box-shadow:0 42px 100px rgba(0,21,9,.34),inset 0 1px rgba(255,255,255,.13); perspective:1200px; }
+    .work-stage::after { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 78% 60%,color-mix(in srgb,var(--work-accent) 16%,transparent),transparent 41%); }
+    .work-stage-art { position:relative; min-height:565px; overflow:hidden; background:#21452f; transform-origin:left center; transform:rotateY(3deg) scale(1.018); box-shadow:24px 0 50px rgba(0,15,6,.18); transition:transform .7s var(--ease); }
+    .work-stage:hover .work-stage-art { transform:rotateY(0deg) scale(1.035); }
+    .work-stage-art::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg,transparent 52%,rgba(10,38,22,.47)),linear-gradient(0deg,rgba(5,22,12,.45),transparent 44%); }
+    .work-stage-art img { display:block; width:100%; height:100%; object-fit:cover; object-position:center 42%; filter:saturate(1.04) brightness(.96); transition:opacity .42s,transform 1.1s var(--ease); }
+    .work-stage.is-switching .work-stage-art img { opacity:.45; transform:scale(1.06); }
+    .work-stage-scan { position:absolute; z-index:2; inset:0; pointer-events:none; opacity:.2; background:repeating-linear-gradient(0deg,transparent 0 7px,rgba(230,255,230,.12) 8px); }
+    .work-stage-badge { position:absolute; z-index:3; left:23px; bottom:23px; padding:8px 12px; border:1px solid rgba(255,255,255,.5); border-radius:999px; color:#fff; background:rgba(5,26,15,.42); backdrop-filter:blur(10px); font-size:.6rem; font-weight:800; letter-spacing:.08em; }
+    .work-stage-copy { position:relative; z-index:2; display:flex; flex-direction:column; align-items:flex-start; padding:43px 48px 40px; }
+    .work-stage-topline { display:flex; align-items:center; justify-content:space-between; gap:24px; width:100%; color:#bed6c1; font-size:.64rem; font-weight:900; letter-spacing:.19em; }
+    .work-stage-topline b { color:var(--work-accent); font-variant-numeric:tabular-nums; }
+    .work-stage-genre { display:inline-flex; align-items:center; gap:10px; margin-top:44px; color:var(--work-accent); font-size:.68rem; font-weight:850; letter-spacing:.22em; }
+    .work-stage-genre::before { content:""; width:27px; height:2px; background:currentColor; }
+    .work-stage-copy h3 { margin:12px 0 16px; font-family:var(--display-face); font-size:clamp(3.9rem,6vw,6.6rem); font-weight:600; line-height:.94; letter-spacing:-.09em; text-shadow:0 14px 35px rgba(0,17,5,.18); }
+    .work-stage-note { max-width:440px; margin:0; color:#eff9ed; font-size:1rem; line-height:1.75; }
+    .work-stage-disclaimer { max-width:440px; margin:13px 0 27px; color:#aacbb0; font-size:.7rem; line-height:1.6; }
+    .work-stage-picks { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; width:100%; margin-top:auto; }
+    .work-pick { display:flex; align-items:center; gap:11px; min-height:51px; padding:9px 13px; border:1px solid rgba(220,255,224,.17); border-radius:12px; color:#d7ead9; background:rgba(2,22,10,.19); cursor:pointer; text-align:left; transition:transform .28s var(--ease),background .28s,border-color .28s,opacity .28s; }
+    .work-stage-picks:has(.work-pick:hover) .work-pick:not(:hover),.work-stage-picks:has(.work-pick:focus-visible) .work-pick:not(:focus-visible) { opacity:.6; }
+    .work-pick:hover,.work-pick:focus-visible { transform:translateY(-4px); border-color:rgba(248,255,238,.52); background:rgba(167,255,189,.14); }
+    .work-pick[aria-pressed="true"] { color:#fcfff3; border-color:var(--work-accent); background:color-mix(in srgb,var(--work-accent) 19%,rgba(15,57,31,.8)); box-shadow:0 12px 30px rgba(0,19,7,.19),inset 0 1px rgba(255,255,255,.17); }
+    .work-pick span { color:var(--work-accent); font-size:.65rem; font-weight:850; letter-spacing:.12em; }
+    .work-pick strong { font-family:var(--display-face); font-size:1rem; font-weight:600; }
+    .work-stage-next { display:inline-flex; align-items:center; gap:16px; margin-top:24px; padding-bottom:5px; border-bottom:1px solid rgba(201,255,208,.45); color:#d8ffe0; font-size:.77rem; font-weight:800; transition:gap .25s,color .25s; }
+    .work-stage-next:hover,.work-stage-next:focus-visible { gap:25px; color:#fff; }
+    .ai-orbit::before,.plans::before { animation:none; }
+    .ai-visual img { filter:saturate(1.06) brightness(.84); }
+    .plan-art img { opacity:.61; filter:saturate(1.06) brightness(.9); }
+    .plan.is-selected .plan-art img { opacity:.76; }
+    .plan-art::after { background:linear-gradient(110deg,rgba(4,17,8,.16),rgba(4,18,8,.12)),linear-gradient(0deg,rgba(12,46,22,.76),transparent 92%); }
+    .plan-summary-actions { display:flex; align-items:center; justify-content:flex-end; gap:10px; flex:0 0 auto; }
+    .vip-demo-open { min-height:43px; padding:10px 17px; border:1px solid rgba(232,255,225,.38); border-radius:999px; color:#0b2a12; background:linear-gradient(110deg,#b5ffae,#55e86b); box-shadow:0 12px 25px rgba(12,120,40,.24),inset 0 1px rgba(255,255,255,.56); font-size:.72rem; font-weight:900; cursor:pointer; transition:transform .28s var(--ease),box-shadow .28s var(--ease); }
+    .vip-demo-open:hover,.vip-demo-open:focus-visible { transform:translateY(-3px); box-shadow:0 17px 33px rgba(12,120,40,.35),inset 0 1px rgba(255,255,255,.7); }
+    .vip-demo-dialog { width:min(900px,calc(100vw - 64px)); max-width:none; max-height:calc(100vh - 64px); margin:auto; padding:0; overflow:auto; border:1px solid rgba(221,255,220,.46); border-radius:30px; color:#f5fff0; background:radial-gradient(circle at 13% 9%,rgba(90,223,126,.26),transparent 38%),linear-gradient(130deg,#1d5030,#0b2819 73%); box-shadow:0 44px 140px rgba(0,14,6,.72),inset 0 1px rgba(255,255,255,.16); isolation:isolate; }
+    .vip-demo-dialog[open] { display:grid; grid-template-columns:1.1fr .9fr; animation:vip-demo-enter .46s var(--ease) both; }
+    .vip-demo-dialog::backdrop { background:rgba(1,18,8,.76); backdrop-filter:blur(13px); }
+    .vip-demo-dialog::before { content:"1,000,000"; position:absolute; z-index:-1; top:-54px; left:7px; color:rgba(224,255,222,.045); font-size:10rem; font-weight:950; letter-spacing:-.1em; white-space:nowrap; pointer-events:none; }
+    @keyframes vip-demo-enter { from { opacity:0; transform:translateY(28px) scale(.97); } to { opacity:1; transform:none; } }
+    .vip-demo-close { position:absolute; z-index:5; top:18px; right:19px; display:grid; place-items:center; width:38px; height:38px; padding:0; border:1px solid rgba(240,255,238,.28); border-radius:50%; color:#f2fff0; background:rgba(3,31,15,.5); cursor:pointer; font-size:1.35rem; line-height:1; transition:transform .25s var(--ease),background .25s; }
+    .vip-demo-close:hover,.vip-demo-close:focus-visible { transform:rotate(90deg); background:rgba(84,193,104,.32); }
+    .vip-demo-copy { position:relative; z-index:1; display:flex; flex-direction:column; align-items:flex-start; min-height:524px; padding:61px 46px 45px; }
+    .vip-demo-kicker { display:inline-flex; align-items:center; gap:11px; color:#c5f8bc; font-size:.65rem; font-weight:900; letter-spacing:.2em; }
+    .vip-demo-kicker::before { content:""; width:26px; height:2px; background:#77f87b; }
+    .vip-demo-copy h2 { max-width:440px; margin:21px 0 17px; font-family:var(--display-face); font-size:clamp(2.8rem,3.4vw,3.35rem); font-weight:600; line-height:1.04; letter-spacing:-.08em; }
+    .vip-demo-copy h2 em { color:#f2d6a6; font-weight:500; }
+    .vip-demo-intro { max-width:370px; margin:0; color:#d0e5d0; font-size:.86rem; line-height:1.75; }
+    .vip-demo-tier { display:flex; align-items:center; gap:12px; margin-top:30px; padding:11px 14px; border:1px solid rgba(223,255,222,.26); border-radius:12px; color:#acd8ad; background:rgba(4,29,13,.23); font-size:.68rem; }
+    .vip-demo-tier strong { color:#fff5d8; font-family:var(--display-face); font-size:1rem; font-weight:650; }
+    .vip-demo-controls { margin-top:auto; }
+    .vip-demo-reveal { display:inline-flex; align-items:center; gap:17px; padding:11px 0 7px; border:0; border-bottom:1px solid rgba(239,219,176,.55); color:#fce2af; background:none; cursor:pointer; font-size:.8rem; font-weight:850; transition:gap .25s var(--ease),color .25s; }
+    .vip-demo-reveal:hover,.vip-demo-reveal:focus-visible { gap:25px; color:#fff8e8; }
+    .vip-demo-safety { max-width:340px; margin:16px 0 0; color:#a9c8b0; font-size:.7rem; line-height:1.6; }
+    .vip-demo-result { max-width:380px; margin-top:21px; padding:16px 18px; border:1px solid rgba(255,219,167,.58); border-radius:15px; background:linear-gradient(115deg,rgba(234,188,116,.2),rgba(40,93,51,.38)); box-shadow:0 15px 32px rgba(0,14,6,.17); }
+    .vip-demo-result[hidden] { display:none; }
+    .vip-demo-result strong { display:block; color:#fff4d7; font-family:var(--display-face); font-size:1.55rem; font-weight:650; }
+    .vip-demo-result span { display:block; margin-top:7px; color:#e2ead7; font-size:.7rem; line-height:1.5; }
+    .vip-demo-qr-side { position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:0; padding:63px 38px 44px; border-left:1px solid rgba(226,255,224,.14); background:radial-gradient(circle at 55% 44%,rgba(133,245,136,.19),transparent 55%),repeating-linear-gradient(0deg,transparent 0 8px,rgba(224,255,223,.025) 9px); }
+    .vip-demo-qr-label { align-self:flex-start; margin-bottom:22px; color:#d9e9d1; font-size:.64rem; font-weight:900; letter-spacing:.2em; }
+    .vip-demo-qr-frame { width:min(292px,100%); padding:14px; border-radius:18px; background:#fff; box-shadow:0 30px 64px rgba(0,17,7,.43),13px 15px 0 rgba(203,255,193,.1); transform:perspective(700px) rotateY(-6deg) rotateZ(2deg); transition:transform .55s var(--ease),box-shadow .55s; }
+    .vip-demo-qr-frame:hover { transform:perspective(700px) rotateY(0) rotateZ(0) translateY(-6px); box-shadow:0 38px 74px rgba(0,17,7,.47),0 0 35px rgba(154,255,157,.2); }
+    .vip-demo-qr-frame img { display:block; width:100%; height:auto; }
+    .vip-demo-qr-caption { max-width:292px; margin:24px 0 0; color:#c5dcc7; font-size:.72rem; line-height:1.6; text-align:center; }
+    .final-cta { padding-block:105px 85px; background:radial-gradient(ellipse at 53% 95%,rgba(77,223,105,.28),transparent 48%),linear-gradient(140deg,#123725,#1c5030); }
+    .final-cta .shell { position:relative; display:grid; grid-template-columns:315px minmax(0,1fr); align-items:center; gap:78px; text-align:left; }
+    .final-work-visual { position:relative; height:418px; overflow:hidden; border:1px solid rgba(239,255,231,.38); border-radius:23px; box-shadow:0 35px 80px rgba(0,18,7,.42),16px 18px 0 rgba(165,249,173,.11); transform:perspective(900px) rotateY(7deg) rotateZ(-3deg); transition:transform .65s var(--ease),box-shadow .65s; }
+    .final-work-visual:hover { transform:perspective(900px) rotateY(0deg) rotateZ(0deg) translateY(-8px); box-shadow:0 46px 90px rgba(0,18,7,.47),0 0 35px rgba(155,255,174,.17); }
+    .final-work-visual::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,rgba(4,19,10,.65),transparent 34%); pointer-events:none; }
+    .final-work-visual img { width:100%; height:100%; object-fit:cover; object-position:center 40%; }
+    .final-work-visual span { position:absolute; z-index:1; left:18px; bottom:18px; color:#eaffdf; font-size:.61rem; font-weight:900; letter-spacing:.18em; }
+    .final-work-copy { position:relative; z-index:1; }
+    .final-cta h2 { margin:16px 0 25px; max-width:760px; }
+    .final-cta h2 span { color:var(--work-accent); }
+    .final-cta p { margin:0 0 29px; max-width:520px; }
+    .final-official-note { display:block; margin-top:15px; color:#c1d7c5; font-size:.68rem; }
+
+    /* Keep user-provided portrait posters legible inside cinematic widescreen surfaces. */
+    body { --selected-poster:url('assets/kuangbiao-poster.jpg'); }
+    .tv-screen { --tv-poster:url('assets/kuangbiao-poster.jpg'); }
+    .tv-screen::after { content:""; position:absolute; z-index:0; inset:-9%; pointer-events:none; background-image:linear-gradient(90deg,rgba(1,17,7,.7),rgba(3,24,12,.2)),var(--tv-poster); background-size:cover; background-position:center; filter:blur(19px) saturate(.84); transform:scale(1.08); }
+    .tv-screen-image { z-index:1; inset:5% 6% 5% auto; width:39%; height:90%; object-fit:contain; object-position:center; opacity:1; filter:drop-shadow(0 15px 21px rgba(0,0,0,.52)) saturate(1.05); transform:none; }
+    .tv-screen.is-tuning .tv-screen-image { opacity:.2; filter:blur(3px) saturate(.72); transform:translateX(8px) scale(.98); }
+    .tv-screen-copy { max-width:53%; }
+    .tv-screen-copy strong { font-size:clamp(2rem,3.2vw,3.8rem); }
+    .loop-frame { background-color:#163a24; background-size:auto 100%; background-repeat:no-repeat; }
+    .poster-grid.is-looping { height:565px; }
+    .poster { height:490px; }
+    .poster-image { inset:0; width:100%; height:100%; object-fit:cover; transform:none; }
+    .poster:hover .poster-image,.poster:focus-visible .poster-image { transform:scale(1.035); }
+    .work-stage-art { background-image:linear-gradient(rgba(5,25,13,.5),rgba(6,31,17,.5)),var(--selected-poster); background-position:center; background-size:cover; }
+    .work-stage-art img { object-fit:contain; object-position:center; filter:drop-shadow(0 18px 28px rgba(0,0,0,.4)) saturate(1.04); }
+    .ai-visual { background-image:linear-gradient(90deg,rgba(6,33,15,.92),rgba(8,37,19,.42)),var(--selected-poster); background-position:center; background-size:cover; }
+    .ai-visual img { z-index:0; inset:0 2% 0 auto; width:40%; height:100%; object-fit:contain; opacity:1; filter:drop-shadow(0 12px 20px rgba(0,0,0,.4)) saturate(1.04); transform:none; }
+    .ai-visual::before { z-index:1; background:linear-gradient(90deg,rgba(3,22,9,.67),rgba(3,22,9,.1) 65%),linear-gradient(0deg,rgba(3,18,7,.67),transparent 46%); }
+    .ai-visual-tag,.ai-timeline,.ai-visual-copy { z-index:2; }
+    .ai-visual:hover img { transform:scale(1.035); }
+    .final-work-visual { background-image:linear-gradient(rgba(5,30,14,.5),rgba(5,30,14,.5)),var(--selected-poster); background-position:center; background-size:cover; }
+    .final-work-visual img { object-fit:contain; }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
@@ -1024,6 +1158,9 @@
       .loop-progress i { transform:scaleX(0); }
       .phone-art.is-previewing::before { transform:none; }
       .phone-preview-button { display:none; }
+      .work-stage-art,.final-work-visual { transform:none!important; }
+      .marquee-track { animation:none!important; }
+      .vip-demo-dialog[open] { animation:none; }
     }
   </style>
 </head>
@@ -1039,19 +1176,19 @@
         <div class="tv-aerial" aria-hidden="true"></div>
         <div class="tv-screen-frame">
           <button class="tv-screen" id="tvScreen" type="button" aria-label="点亮电视，进入爱奇艺">
-            <img class="tv-screen-image" src="https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=1600&q=88" alt="" fetchpriority="high">
+            <img class="tv-screen-image" src="assets/kuangbiao-poster.jpg" alt="" fetchpriority="high">
             <span class="tv-light-cone" aria-hidden="true"></span>
             <span class="beam-particles" id="beamParticles" aria-hidden="true"></span>
             <span class="tv-screen-brand"><b>iQIYI</b> 爱奇艺 <small>随时进入好戏</small></span>
             <span class="tv-screen-corner"><i></i> <span id="tvSignalName">LIVE SIGNAL · IQIYI</span></span>
-            <span class="tv-screen-copy"><small id="tvScreenKicker">THE NEXT STORY IS CALLING</small><strong><span id="tvTitleLead">好戏，</span><em id="tvTitleAccent">马上开场。</em></strong></span>
+            <span class="tv-screen-copy"><small id="tvScreenKicker">CRIME · 01 / 04</small><strong><span id="tvTitleLead">狂飙，</span><em id="tvTitleAccent">从这里入戏。</em></strong></span>
           </button>
         </div>
         <div class="tv-controls">
           <span class="tv-brand">爱奇艺 · CHANNEL SELECTOR</span>
-          <span class="tv-channel-readout" aria-live="polite"><b id="tvChannelNumber">01</b><span id="tvChannelName">精选</span></span>
+          <span class="tv-channel-readout" aria-live="polite"><b id="tvChannelNumber">01</b><span id="tvChannelName">狂飙</span></span>
           <span class="tv-auto-line" id="tvAutoLine" aria-hidden="true"><i></i></span>
-          <button class="tv-dial" id="tvDial" type="button" aria-label="旋转频道旋钮，当前频道 01 精选" title="点击、滚动或拖动旋钮切换频道"></button>
+          <button class="tv-dial" id="tvDial" type="button" aria-label="旋转频道旋钮，当前频道 01 狂飙" title="点击、滚动或拖动旋钮切换频道"></button>
           <span class="tv-speaker" aria-hidden="true"></span>
           <button class="power-button" id="powerButton" type="button" aria-label="打开电视并进入首页">
             <span class="power-button-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v10M6.1 5.9a8 8 0 1 0 11.8 0"/></svg></span>
@@ -1075,9 +1212,9 @@
         <span class="logo-mark">iQIYI</span><span>爱奇艺</span>
       </a>
       <div class="nav-links focus-group focus-item">
-        <a class="focus-item" href="#content">正在热播</a>
-        <a class="focus-item" href="#catalog">影视分类</a>
-        <a class="focus-item" href="#ai">AI 体验</a>
+        <a class="focus-item" href="#content">精选作品</a>
+        <a class="focus-item" href="#catalog">放映台</a>
+        <a class="focus-item" href="#ai">观看体验</a>
         <a class="focus-item" href="#vip">会员权益</a>
         <a class="nav-cta focus-item" href="#vip">查看会员方案</a>
       </div>
@@ -1094,17 +1231,17 @@
             <span class="line"><span class="word">下一秒</span></span>
             <span class="line hook-line"><span class="hook-window"><span class="hook-track"><span>悬念</span><span>心动</span><span>欢笑</span><span>热爱</span><span>悬念</span></span></span><span class="word">就来了</span></span>
           </h1>
-          <p class="hero-lede">打开爱奇艺 App，追剧、看电影、刷综艺与动漫。AI 帮你更快找到想看的，也能接着上次的进度继续看。</p>
+          <p class="hero-lede">四部真实作品，四种进入故事的方式。转动频道，选中想看的那一部；在这份概念作品集中试着入戏，再去爱奇艺继续观看。</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#catalog">
-              立即入戏
+            <a class="btn btn-primary" href="#content">
+              探索精选作品
               <svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
             </a>
-            <a class="btn btn-ghost" href="#content">看看有什么 <span aria-hidden="true">↓</span></a>
+            <a class="btn btn-ghost" href="#catalog">进入放映台 <span aria-hidden="true">↓</span></a>
           </div>
           <div class="loop-preview" id="loopPreview" role="group" aria-label="爱奇艺概念内容动态预览">
             <div class="loop-visual" aria-hidden="true"><span class="loop-frame"></span><span class="loop-frame"></span><span class="loop-frame"></span><span class="loop-visual-label"><i></i> ON AIR</span></div>
-            <div class="loop-copy"><span class="loop-overline">IQIYI · 06S LOOP</span><strong>好戏，六秒入场</strong><small>剧集 / 电影 / 综艺 · 概念预览</small><div class="loop-controls"><span class="loop-progress" aria-hidden="true"><i></i></span><button class="loop-toggle" id="loopToggle" type="button" aria-label="暂停动态预览" aria-pressed="false">Ⅱ</button></div></div>
+            <div class="loop-copy"><span class="loop-overline">IQIYI · POSTER LOOP</span><strong>故事，在画面间流动</strong><small>作品海报 · 6 秒循环</small><div class="loop-controls"><span class="loop-progress" aria-hidden="true"><i></i></span><button class="loop-toggle" id="loopToggle" type="button" aria-label="暂停动态预览" aria-pressed="false">Ⅱ</button></div></div>
           </div>
         </div>
 
@@ -1114,8 +1251,8 @@
             <div class="signal-ring" aria-hidden="true"></div>
             <div class="signal-ring secondary" aria-hidden="true"></div>
             <div class="orbit" aria-hidden="true"></div>
-            <div class="float-chip one" aria-hidden="true"><span class="dot"></span><span><b>智能续播</b>刚刚好，接着看</span></div>
-            <div class="float-chip two" aria-hidden="true"><span class="dot"></span><span><b>AI 跳看</b>直达高能时刻</span></div>
+            <div class="float-chip one" aria-hidden="true"><span class="dot"></span><span><b>续播概念</b>刚刚好，接着看</span></div>
+            <div class="float-chip two" aria-hidden="true"><span class="dot"></span><span><b>跳看概念</b>直达高能时刻</span></div>
             <div class="phone" id="phone">
               <div class="screen">
                 <div class="phone-art" id="phoneArt">
@@ -1124,21 +1261,21 @@
                   <button class="phone-preview-button" id="phonePreviewButton" type="button" aria-label="播放手机中的概念预览" aria-pressed="false">▶ 预览 6 秒</button>
                   <span class="phone-preview-status" aria-hidden="true">● 正在预览 · 演示动画</span>
                   <div class="show-meta" id="showMeta">
-                    <span class="show-kicker" id="showKicker">迷雾剧场 · 剧集</span>
-                    <div class="show-title" id="showTitle">边界回声</div>
-                    <div class="show-sub" id="showSub">悬念正在发生，下一集接着追</div>
+                    <span class="show-kicker" id="showKicker">悬疑罪案 · 剧集</span>
+                    <div class="show-title" id="showTitle">狂飙</div>
+                    <div class="show-sub" id="showSub">一次选择，走进更深的故事</div>
                   </div>
                 </div>
                 <div class="screen-body">
                   <div class="screen-row"><strong>为你精选</strong><button id="phoneShuffle" type="button" aria-label="换一组精选内容">换一换</button></div>
                   <div class="mini-cards" role="group" aria-label="手机内推荐片单">
-                    <button class="mini-card" type="button" data-phone-story="1" aria-label="查看剧集 长夜信号" aria-pressed="false" style="--card-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=300&q=75')"><span>长夜信号</span></button>
-                    <button class="mini-card" type="button" data-phone-story="2" aria-label="查看综艺 此刻出发" aria-pressed="false" style="--card-image:url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=300&q=75')"><span>此刻出发</span></button>
-                    <button class="mini-card" type="button" data-phone-story="3" aria-label="查看电影 银河以北" aria-pressed="false" style="--card-image:url('https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=300&q=75')"><span>银河以北</span></button>
+                    <button class="mini-card" type="button" data-phone-story="1" aria-label="查看莲花楼" aria-pressed="false" style="--card-image:url('assets/lianhualou-poster.jpg')"><span>莲花楼</span></button>
+                    <button class="mini-card" type="button" data-phone-story="2" aria-label="查看种地吧第4季" aria-pressed="false" style="--card-image:url('assets/zhongdiba-poster.jpg')"><span>种地吧第4季</span></button>
+                    <button class="mini-card" type="button" data-phone-story="3" aria-label="查看成何体统" aria-pressed="false" style="--card-image:url('assets/chenghetitong-poster.jpg')"><span>成何体统</span></button>
                   </div>
-                  <p class="phone-feedback" id="phoneFeedback" aria-live="polite">点选频道，看看下一部好戏</p>
+                  <p class="phone-feedback" id="phoneFeedback" aria-live="polite">点选频道，切换精选作品</p>
                 </div>
-                <div class="phone-nav" role="group" aria-label="手机内频道"><button type="button" data-phone-story="0" aria-pressed="true">精选</button><button type="button" data-phone-story="1" aria-pressed="false">剧集</button><button type="button" data-phone-story="2" aria-pressed="false">综艺</button><button type="button" data-phone-story="3" aria-pressed="false">电影</button></div>
+                <div class="phone-nav" role="group" aria-label="手机内频道"><button type="button" data-phone-story="0" aria-pressed="true">悬疑</button><button type="button" data-phone-story="1" aria-pressed="false">江湖</button><button type="button" data-phone-story="2" aria-pressed="false">综艺</button><button type="button" data-phone-story="3" aria-pressed="false">古装</button></div>
               </div>
             </div>
           </div>
@@ -1151,43 +1288,43 @@
       <div class="scroll-hint" aria-hidden="true">向下探索</div>
     </section>
 
-    <div class="marquee focus-item" aria-label="爱奇艺功能亮点">
+    <div class="marquee focus-item" aria-label="精选作品字幕带">
       <div class="marquee-track">
-        <div class="marquee-group focus-group"><span class="marquee-item focus-item"><em>正在热播</em> 好戏不断</span><span class="marquee-item focus-item">AI 跳看 高能直达</span><span class="marquee-item focus-item"><em>智能续播</em> 无缝接上</span><span class="marquee-item focus-item">帧绮映画 沉浸视听</span><span class="marquee-item focus-item"><em>多端共享</em> 随时入戏</span></div>
-        <div class="marquee-group focus-group" aria-hidden="true"><span class="marquee-item focus-item"><em>正在热播</em> 好戏不断</span><span class="marquee-item focus-item">AI 跳看 高能直达</span><span class="marquee-item focus-item"><em>智能续播</em> 无缝接上</span><span class="marquee-item focus-item">帧绮映画 沉浸视听</span><span class="marquee-item focus-item"><em>多端共享</em> 随时入戏</span></div>
+        <div class="marquee-group focus-group"><span class="marquee-item focus-item"><em>《狂飙》</em> 雨夜入局</span><span class="marquee-item focus-item">《莲花楼》 江湖重逢</span><span class="marquee-item focus-item"><em>《种地吧第4季》</em> 田野有光</span><span class="marquee-item focus-item">《成何体统》 奇想开场</span></div>
+        <div class="marquee-group focus-group" aria-hidden="true"><span class="marquee-item focus-item"><em>《狂飙》</em> 雨夜入局</span><span class="marquee-item focus-item">《莲花楼》 江湖重逢</span><span class="marquee-item focus-item"><em>《种地吧第4季》</em> 田野有光</span><span class="marquee-item focus-item">《成何体统》 奇想开场</span></div>
       </div>
     </div>
 
     <section class="content-section focus-item" id="content">
       <div class="shell">
         <div class="section-head reveal focus-group">
-          <div class="focus-item"><span class="eyebrow">IQIYI · CONTENT UNIVERSE</span><h2>每一次点开，<br><span class="headline-accent">都有新的世界。</span></h2><span class="section-caption">A NEW WORLD IN EVERY PLAY</span></div>
-          <p class="section-note focus-item">四种观看情绪，一处自在切换。选择你此刻想进入的故事。</p>
+          <div class="focus-item"><span class="eyebrow">IQIYI · SELECTED STORIES</span><h2>一部好戏，<br><span class="headline-accent">一个新世界。</span></h2><span class="section-caption">FOUR STORIES · FOUR WAYS IN</span></div>
+          <p class="section-note focus-item">四部作品，四张对应海报。把鼠标停在海报上，挑一部进入放映台。</p>
         </div>
         <div class="orbit-caption" aria-hidden="true"><span>∞</span> SLOW ORBIT <em>悬停暂停 · 移开继续</em></div>
-        <div class="poster-grid focus-group" aria-label="影视内容循环展示，悬停卡片可暂停">
-          <button class="poster reveal focus-item" type="button" data-catalog-filter="series" aria-label="查看剧集分类">
-            <img class="poster-image" src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=85" alt="夜空下的城市剪影" loading="lazy" decoding="async">
+        <div class="poster-grid focus-group" aria-label="四部作品的对应海报，悬停卡片可暂停">
+          <button class="poster reveal focus-item is-current" type="button" data-work="0" aria-label="选择狂飙，进入放映台" aria-pressed="true">
+            <img class="poster-image" src="assets/kuangbiao-poster.jpg" alt="《狂飙》群像海报" loading="lazy" decoding="async">
             <span class="poster-index">01 / 04</span>
-            <div class="poster-copy"><span class="poster-kind">剧集 SERIES</span><h3>好故事，慢慢追</h3><p>迷雾剧场、恋恋剧场与年度大剧，陪你追到下一集。</p></div>
+            <div class="poster-copy"><span class="poster-kind">悬疑 · CRIME</span><h3>狂飙</h3><p>雨夜入局，走进善恶交锋的都市故事。</p></div>
             <span class="poster-arrow" aria-hidden="true">↗</span>
           </button>
-          <button class="poster reveal focus-item" type="button" data-catalog-filter="variety" aria-label="查看综艺分类">
-            <img class="poster-image" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=900&q=85" alt="舞台灯光与现场演出" loading="lazy" decoding="async">
+          <button class="poster reveal focus-item" type="button" data-work="1" aria-label="选择莲花楼，进入放映台" aria-pressed="false">
+            <img class="poster-image" src="assets/lianhualou-poster.jpg" alt="《莲花楼》三位主角海报" loading="lazy" decoding="async">
             <span class="poster-index">02 / 04</span>
-            <div class="poster-copy"><span class="poster-kind">综艺 SHOW</span><h3>把快乐拉满</h3><p>热梗、新声与现场感，随时加入这一场快乐。</p></div>
+            <div class="poster-copy"><span class="poster-kind">江湖 · MYSTERY</span><h3>莲花楼</h3><p>雾起江湖，让旧案与重逢慢慢浮现。</p></div>
             <span class="poster-arrow" aria-hidden="true">↗</span>
           </button>
-          <button class="poster reveal focus-item" type="button" data-catalog-filter="film" aria-label="查看电影分类">
-            <img class="poster-image" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=85" alt="电影放映机与银幕" loading="lazy" decoding="async">
+          <button class="poster reveal focus-item" type="button" data-work="2" aria-label="选择种地吧第4季，进入放映台" aria-pressed="false">
+            <img class="poster-image" src="assets/zhongdiba-poster.jpg" alt="《种地吧》少年篇4雪山合影海报" loading="lazy" decoding="async">
             <span class="poster-index">03 / 04</span>
-            <div class="poster-copy"><span class="poster-kind">电影 FILM</span><h3>一部就入戏</h3><p>从院线新作到经典佳片，留一段完整时间给电影。</p></div>
+            <div class="poster-copy"><span class="poster-kind">真人秀 · REALITY</span><h3>种地吧第4季</h3><p>日出照进田垄，成长也在这里发生。</p></div>
             <span class="poster-arrow" aria-hidden="true">↗</span>
           </button>
-          <button class="poster reveal focus-item" type="button" data-catalog-filter="anime" aria-label="查看动漫分类">
-            <img class="poster-image" src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=900&q=85" alt="星空与绚丽色彩" loading="lazy" decoding="async">
+          <button class="poster reveal focus-item" type="button" data-work="3" aria-label="选择成何体统，进入放映台" aria-pressed="false">
+            <img class="poster-image" src="assets/chenghetitong-poster.jpg" alt="《成何体统》双人古装海报" loading="lazy" decoding="async">
             <span class="poster-index">04 / 04</span>
-            <div class="poster-copy"><span class="poster-kind">动漫 ANIME</span><h3>热爱不设限</h3><p>国创、日漫与少儿内容，让想象力继续生长。</p></div>
+            <div class="poster-copy"><span class="poster-kind">古装 · FANTASY</span><h3>成何体统</h3><p>穿进故事，与命运重新过招。</p></div>
             <span class="poster-arrow" aria-hidden="true">↗</span>
           </button>
         </div>
@@ -1197,67 +1334,29 @@
     <section class="catalog-section focus-item" id="catalog">
       <div class="shell">
         <div class="section-head reveal focus-group">
-          <div class="focus-item"><span class="eyebrow">THE IQIYI COLLECTION</span><h2>挑一种心情，<br><span class="headline-accent">进入一类故事。</span></h2><span class="section-caption">PICK A GENRE · FIND YOUR NEXT STORY</span></div>
-          <p class="section-note focus-item">从悬疑剧到自然纪录片。选一个频道，好戏就从这里开始。</p>
+          <div class="focus-item"><span class="eyebrow">THE STORY DESK</span><h2>你选的这部，<br><span class="headline-accent">现在开场。</span></h2><span class="section-caption">SELECT · EXPLORE · CONTINUE</span></div>
+          <p class="section-note focus-item">在这里再挑一次。每次选择都会同步电视、首页和结尾的观看入口。</p>
         </div>
-        <div class="catalog-toolbar focus-group">
-          <div class="catalog-filters focus-group focus-item" role="group" aria-label="筛选影视分类">
-            <button class="catalog-filter focus-item" type="button" data-filter="all" aria-pressed="true">全部频道</button>
-            <button class="catalog-filter focus-item" type="button" data-filter="series" aria-pressed="false">剧集</button>
-            <button class="catalog-filter focus-item" type="button" data-filter="film" aria-pressed="false">电影</button>
-            <button class="catalog-filter focus-item" type="button" data-filter="variety" aria-pressed="false">综艺</button>
-            <button class="catalog-filter focus-item" type="button" data-filter="anime" aria-pressed="false">动漫</button>
-            <button class="catalog-filter focus-item" type="button" data-filter="documentary" aria-pressed="false">纪录片</button>
-            <button class="catalog-filter focus-item" type="button" data-filter="kids" aria-pressed="false">少儿</button>
+        <div class="work-stage" id="workStage">
+          <div class="work-stage-art">
+            <img id="workStageImage" src="assets/kuangbiao-poster.jpg" alt="《狂飙》作品海报" loading="lazy" decoding="async">
+            <span class="work-stage-scan" aria-hidden="true"></span>
+            <span class="work-stage-badge">SELECTED POSTER / 作品海报</span>
           </div>
-          <span class="catalog-count focus-item" id="catalogCount">08 CHANNELS · ALL STORIES</span>
-        </div>
-        <div class="orbit-caption" aria-hidden="true"><span>∞</span> CHANNEL ORBIT <em>悬停暂停 · 移开继续</em></div>
-        <div class="catalog-grid focus-group" id="catalogGrid" aria-label="影视分类循环展示，悬停卡片可暂停">
-          <button class="catalog-card focus-item is-selected" type="button" data-type="series" data-title="迷雾剧场" data-copy="悬念、反转与层层递进的真相。今晚，跟着线索走进下一集。" aria-pressed="true">
-            <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
-            <span class="catalog-card-index">01 / SERIES</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
-            <span class="catalog-card-copy"><span class="catalog-card-type">悬疑 · 高能 · 独播</span><h3>迷雾剧场</h3><p>每个答案，都藏着新的问题。</p></span>
-          </button>
-          <button class="catalog-card focus-item" type="button" data-type="series" data-title="都市热剧" data-copy="从心动相遇到人生转场，把熟悉的日常看出新的滋味。" aria-pressed="false">
-            <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
-            <span class="catalog-card-index">02 / SERIES</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
-            <span class="catalog-card-copy"><span class="catalog-card-type">都市 · 情感 · 连载</span><h3>都市热剧</h3><p>生活有回声，故事正发生。</p></span>
-          </button>
-          <button class="catalog-card focus-item" type="button" data-type="film" data-title="影院新片" data-copy="大银幕新作与口碑佳片，给自己留一段完整的观影时间。" aria-pressed="false">
-            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
-            <span class="catalog-card-index">03 / FILM</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
-            <span class="catalog-card-copy"><span class="catalog-card-type">院线 · 佳片 · 片单</span><h3>影院新片</h3><p>把世界放大，把此刻留给电影。</p></span>
-          </button>
-          <button class="catalog-card focus-item" type="button" data-type="film" data-title="科幻奇遇" data-copy="穿过星河、时间与想象边界。下一站，交给好奇心决定。" aria-pressed="false">
-            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
-            <span class="catalog-card-index">04 / FILM</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
-            <span class="catalog-card-copy"><span class="catalog-card-type">科幻 · 冒险 · 奇想</span><h3>科幻奇遇</h3><p>想象力，永远比宇宙更远。</p></span>
-          </button>
-          <button class="catalog-card focus-item" type="button" data-type="variety" data-title="综艺现场" data-copy="音乐、热梗与真实反应。打开这一场，快乐不用预热。" aria-pressed="false">
-            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
-            <span class="catalog-card-index">05 / SHOW</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
-            <span class="catalog-card-copy"><span class="catalog-card-type">音乐 · 喜剧 · 热梗</span><h3>综艺现场</h3><p>现场感拉满，快乐刚刚好。</p></span>
-          </button>
-          <button class="catalog-card focus-item" type="button" data-type="anime" data-title="动漫宇宙" data-copy="国创新作与人气番剧。每次出发，都有新的世界观。" aria-pressed="false">
-            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
-            <span class="catalog-card-index">06 / ANIME</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
-            <span class="catalog-card-copy"><span class="catalog-card-type">国创 · 番剧 · 新番</span><h3>动漫宇宙</h3><p>想象没有边界，热爱自有方向。</p></span>
-          </button>
-          <button class="catalog-card focus-item" type="button" data-type="documentary" data-title="自然纪录" data-copy="去山海之间，看见真实世界的辽阔与细节。" aria-pressed="false">
-            <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
-            <span class="catalog-card-index">07 / DOC</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
-            <span class="catalog-card-copy"><span class="catalog-card-type">自然 · 人文 · 真实</span><h3>自然纪录</h3><p>世界很大，值得慢慢看见。</p></span>
-          </button>
-          <button class="catalog-card focus-item" type="button" data-type="kids" data-title="少儿天地" data-copy="动画、启蒙与亲子时光。让好奇心从一个故事开始。" aria-pressed="false">
-            <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=900&q=82" alt="" loading="lazy" decoding="async">
-            <span class="catalog-card-index">08 / KIDS</span><span class="catalog-card-arrow" aria-hidden="true">↗</span>
-            <span class="catalog-card-copy"><span class="catalog-card-type">动画 · 启蒙 · 亲子</span><h3>少儿天地</h3><p>陪伴每一份小小的好奇。</p></span>
-          </button>
-        </div>
-        <div class="catalog-selection" aria-live="polite">
-          <div><span class="catalog-selection-label">NOW BROWSING</span><strong class="catalog-selection-title" id="catalogSelectionTitle">迷雾剧场</strong><p class="catalog-selection-copy" id="catalogSelectionCopy">悬念、反转与层层递进的真相。今晚，跟着线索走进下一集。</p></div>
-          <a class="catalog-next" href="#ai">看看 AI 如何帮你找片 <span aria-hidden="true">↗</span></a>
+          <div class="work-stage-copy">
+            <div class="work-stage-topline"><span>NOW SELECTED · 当前放映</span><b id="workStageCount">01 / 04</b></div>
+            <span class="work-stage-genre" id="workStageGenre">CRIME / SERIES</span>
+            <h3 id="workStageTitle">狂飙</h3>
+            <p class="work-stage-note" id="workStageNote">京海群像同框，善恶交锋由此展开。选中《狂飙》，沿着人物关系走进故事。</p>
+            <p class="work-stage-disclaimer">左侧海报由用户提供，仅用于个人作品集展示。片源与观看权益以爱奇艺官方页面为准。</p>
+            <div class="work-stage-picks" role="group" aria-label="选择当前展示作品">
+              <button class="work-pick is-active" type="button" data-work-pick="0" aria-pressed="true"><span>01</span><strong>狂飙</strong></button>
+              <button class="work-pick" type="button" data-work-pick="1" aria-pressed="false"><span>02</span><strong>莲花楼</strong></button>
+              <button class="work-pick" type="button" data-work-pick="2" aria-pressed="false"><span>03</span><strong>种地吧第4季</strong></button>
+              <button class="work-pick" type="button" data-work-pick="3" aria-pressed="false"><span>04</span><strong>成何体统</strong></button>
+            </div>
+            <a class="work-stage-next" href="#ai">继续探索观看体验 <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </div>
     </section>
@@ -1267,34 +1366,34 @@
         <div class="ai-frame reveal">
           <div class="ai-layout">
             <div class="ai-title">
-              <span class="eyebrow">IQIYI · AI VIEWING</span>
-              <h2>让好内容，<br><span class="headline-accent">更懂你。</span></h2>
-              <span class="section-caption">SMARTER WATCHING, LESS SEARCHING</span>
-              <p>技术退到幕后，把选择变简单，把观看变顺畅。你只管享受故事。</p>
+              <span class="eyebrow">IQIYI · VIEWING CONCEPT</span>
+              <h2>让技术，<br><span class="headline-accent">带你更近一步。</span></h2>
+              <span class="section-caption">THREE WAYS TO STAY IN THE STORY</span>
+              <p>围绕你选中的作品，试试跳看、续播与荐片。此处为作品集交互概念演示，实际功能以爱奇艺为准。</p>
             </div>
             <div class="ai-orbit" id="aiOrbit" aria-label="爱奇艺 AI 观看功能环绕展示">
               <div class="ai-core">
-                <div class="ai-core-top"><span>IQIYI · AI VIEWING ENGINE</span><strong id="aiOrbitIndex">01 / 03</strong></div>
+                <div class="ai-core-top"><span>IQIYI · CONCEPT VIEWING</span><strong id="aiOrbitIndex">01 / 03</strong></div>
                 <div class="ai-visual focus-item" id="aiPreview" aria-label="AI 跳看影片时间轴示意">
-                  <img id="aiPreviewImage" src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=900&q=85" alt="影院银幕正播放电影画面" loading="lazy" decoding="async">
-                  <span class="ai-visual-tag" id="aiPreviewTag">AI · SCENE MAP 00:42</span>
+                  <img id="aiPreviewImage" src="assets/kuangbiao-poster.jpg" alt="《狂飙》作品海报" loading="lazy" decoding="async">
+                  <span class="ai-visual-tag" id="aiPreviewTag">CONCEPT · SCENE MAP</span>
                   <span class="ai-timeline" aria-hidden="true"></span>
-                  <span class="ai-visual-copy"><strong id="aiPreviewTitle">高能时刻，直达现场</strong><span id="aiPreviewMeta">01:24 / 42:18</span></span>
+                  <span class="ai-visual-copy"><strong id="aiPreviewTitle">《狂飙》· 高能时刻</strong><span id="aiPreviewMeta">概念演示 / 01:24</span></span>
                 </div>
-                <div class="ai-core-bottom"><span>THE STORY STAYS AT THE CENTER</span><span>选择环绕功能 ↗</span></div>
+                <div class="ai-core-bottom"><span>POSTER ART · INTERACTION CONCEPT</span><span>选择环绕功能 ↗</span></div>
               </div>
               <div class="ai-list focus-group" role="group" aria-label="选择 AI 观看功能">
               <button class="ai-item focus-item is-active" type="button" data-feature="skip" data-orbit-slot="front" aria-pressed="true" aria-controls="aiPreview">
                 <span class="ai-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4v16M9 7l8 5-8 5z"/></svg></span>
-                <span class="ai-item-copy"><span class="ai-item-title">AI 跳看</span><span class="ai-english">SKIP TO THE MOMENT</span><span class="ai-description">快速理解剧情脉络，一键直达关键情节与高能片段。</span></span><span class="ai-number">01</span>
+                <span class="ai-item-copy"><span class="ai-item-title">跳看</span><span class="ai-english">SKIP TO THE MOMENT</span><span class="ai-description">把高能节点变成可以探索的观看路径。</span></span><span class="ai-number">01</span>
               </button>
               <button class="ai-item focus-item" type="button" data-feature="resume" data-orbit-slot="right" aria-pressed="false" aria-controls="aiPreview">
                 <span class="ai-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7M4 4v5h5"/></svg></span>
-                <span class="ai-item-copy"><span class="ai-item-title">智能续播</span><span class="ai-english">PICK UP WHERE YOU LEFT</span><span class="ai-description">自动记住进度与观看习惯，换个设备也能无缝接上。</span></span><span class="ai-number">02</span>
+                <span class="ai-item-copy"><span class="ai-item-title">续播</span><span class="ai-english">PICK UP WHERE YOU LEFT</span><span class="ai-description">把上次停留的位置，接回此刻的故事。</span></span><span class="ai-number">02</span>
               </button>
               <button class="ai-item focus-item" type="button" data-feature="recommend" data-orbit-slot="left" aria-pressed="false" aria-controls="aiPreview">
                 <span class="ai-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.3-7-10a4 4 0 0 1 7-2.7A4 4 0 0 1 19 10c0 5.7-7 10-7 10z"/></svg></span>
-                <span class="ai-item-copy"><span class="ai-item-title">个性荐片</span><span class="ai-english">MADE AROUND YOUR TASTE</span><span class="ai-description">从你的真实兴趣出发，减少翻找，把下一部好片放到眼前。</span></span><span class="ai-number">03</span>
+                <span class="ai-item-copy"><span class="ai-item-title">荐片</span><span class="ai-english">MADE AROUND YOUR TASTE</span><span class="ai-description">从一部喜欢的作品，发现下一次心动。</span></span><span class="ai-number">03</span>
               </button>
               </div>
             </div>
@@ -1307,23 +1406,23 @@
       <div class="shell">
         <div class="section-head reveal focus-group">
           <div class="focus-item"><span class="eyebrow">IQIYI · VIP PRIVILEGES</span><h2>选对你的<br><span class="headline-accent">观影方式。</span></h2><span class="section-caption">MORE WAYS TO WATCH</span></div>
-          <p class="section-note focus-item">从个人观看，到跨屏共享体验。三档权益，按你的生活场景选择。</p>
+          <p class="section-note focus-item">从个人观看，到跨屏共享体验。这里展示三档会员的设计概念；实际权益以爱奇艺官方说明为准。</p>
         </div>
         <div class="plans focus-group" role="group" aria-label="选择 VIP 方案">
           <article class="plan reveal focus-item" data-tier="黄金">
-            <div class="plan-art" aria-hidden="true"><img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=84" alt="" loading="lazy" decoding="async"></div>
+            <div class="plan-art" aria-hidden="true"><img src="assets/zhongdiba-poster.jpg" alt="" loading="lazy" decoding="async"></div>
             <span class="plan-tier">GOLD</span><h3>黄金 VIP</h3><p class="plan-sub">个人标准会员</p>
             <ul><li>手机 / 平板 / 电脑可用</li><li>会员内容免费看</li><li>热播内容抢先看</li><li>沉浸观影特权</li></ul>
             <button class="btn btn-ghost" type="button" data-message="已选择黄金 VIP｜适合个人多端观看" aria-pressed="false">选择黄金</button>
           </article>
           <article class="plan featured is-selected reveal focus-item" data-tier="白金">
-            <div class="plan-art" aria-hidden="true"><img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1000&q=86" alt="" loading="lazy" decoding="async"></div>
+            <div class="plan-art" aria-hidden="true"><img src="assets/lianhualou-poster.jpg" alt="" loading="lazy" decoding="async"></div>
             <span class="plan-tier">PLATINUM</span><h3>白金 VIP</h3><p class="plan-sub">大屏也能看</p>
             <ul><li>电视 / 手机 / 电脑 / 平板</li><li>黄金 VIP 全部权益</li><li>大屏观影体验</li><li>更多设备同时播放</li></ul>
             <button class="btn btn-ghost" type="button" data-message="已选择白金 VIP｜大屏观影更自在" aria-pressed="true">已选白金</button>
           </article>
           <article class="plan reveal focus-item" data-tier="星钻">
-            <div class="plan-art" aria-hidden="true"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=84" alt="" loading="lazy" decoding="async"></div>
+            <div class="plan-art" aria-hidden="true"><img src="assets/chenghetitong-poster.jpg" alt="" loading="lazy" decoding="async"></div>
             <span class="plan-tier">DIAMOND</span><h3>星钻 VIP</h3><p class="plan-sub">全场景旗舰会员</p>
             <ul><li>覆盖电视 / XR 等多端</li><li>白金 VIP 全部权益</li><li>加更礼内容免费看</li><li>多会员权益组合</li></ul>
             <button class="btn btn-ghost" type="button" data-message="已选择星钻 VIP｜解锁旗舰会员体验" aria-pressed="false">选择星钻</button>
@@ -1331,24 +1430,24 @@
         </div>
         <div class="plan-summary" aria-live="polite">
           <div><span class="plan-summary-label">YOUR CURRENT PICK · 当前体验方案</span><strong id="planSummaryTitle">白金 VIP</strong><p id="planSummaryCopy">大屏观影与多设备续播。此页面仅作概念演示，不会产生支付或真实开通。</p></div>
-          <a href="#catalog">继续浏览影视分类 ↗</a>
+          <div class="plan-summary-actions">
+            <a href="#catalog">继续浏览影视分类 ↗</a>
+            <button class="vip-demo-open" id="vipDemoOpen" type="button" aria-haspopup="dialog" aria-controls="vipDemoDialog">模拟充值 · 彩蛋 ↗</button>
+          </div>
         </div>
       </div>
     </section>
 
-    <div class="marquee secondary focus-item" aria-label="爱奇艺观影体验">
-      <div class="marquee-track">
-        <div class="marquee-group focus-group"><span class="marquee-item focus-item"><em>影院质感</em> 帧帧入戏</span><span class="marquee-item focus-item">独播剧场 抢先追更</span><span class="marquee-item focus-item"><em>兴趣推荐</em> 越看越懂</span><span class="marquee-item focus-item">大屏沉浸 声画俱佳</span><span class="marquee-item focus-item"><em>会员专享</em> 好戏先看</span></div>
-        <div class="marquee-group focus-group" aria-hidden="true"><span class="marquee-item focus-item"><em>影院质感</em> 帧帧入戏</span><span class="marquee-item focus-item">独播剧场 抢先追更</span><span class="marquee-item focus-item"><em>兴趣推荐</em> 越看越懂</span><span class="marquee-item focus-item">大屏沉浸 声画俱佳</span><span class="marquee-item focus-item"><em>会员专享</em> 好戏先看</span></div>
-      </div>
-    </div>
-
     <section class="final-cta focus-item">
       <div class="shell reveal">
-        <span class="eyebrow">YOUR STORY STARTS HERE</span>
-        <h2>下一场好戏，<br><span>现在开场。</span></h2>
-        <p>打开爱奇艺，把喜欢的内容留在身边。</p>
-        <a class="btn btn-primary" href="#vip">查看会员方案 <span aria-hidden="true">→</span></a>
+        <div class="final-work-visual"><img id="finalWorkImage" src="assets/kuangbiao-poster.jpg" alt="《狂飙》作品海报" loading="lazy" decoding="async"><span>YOUR NEXT STORY / 01</span></div>
+        <div class="final-work-copy">
+          <span class="eyebrow">YOUR STORY STARTS HERE</span>
+          <h2>选好了。<br><span id="finalWorkTitle">《狂飙》</span>继续。</h2>
+          <p>作品集的演示到这里。真正的故事，去爱奇艺接着看。</p>
+          <a class="btn btn-primary" id="officialWorkLink" href="https://www.iqiyi.com/a_1fkgtbddd2x.html" target="_blank" rel="noopener noreferrer"><span id="officialWorkLinkText">去爱奇艺看《狂飙》</span><span aria-hidden="true">↗</span></a>
+          <small class="final-official-note">将打开爱奇艺官方作品页 · 登录与观看权益以官网为准</small>
+        </div>
       </div>
     </section>
   </main>
@@ -1356,11 +1455,30 @@
   <footer>
     <div class="footer-row shell focus-group">
       <div class="logo focus-item"><span class="logo-mark">iQIYI</span><span>爱奇艺</span></div>
-      <span class="focus-item">个人概念演示 · 非爱奇艺官方项目 · 图片来自 Unsplash · 不提供真实充值</span>
+      <span class="focus-item">个人概念作品集 · 非爱奇艺官方项目 · 影视海报版权归原权利人 · 不提供真实播放或充值</span>
       <span class="focus-item">© 2026 FHX</span>
     </div>
   </footer>
 
+  <dialog class="vip-demo-dialog" id="vipDemoDialog" aria-labelledby="vipDemoTitle" aria-describedby="vipDemoIntro vipDemoSafety">
+    <button class="vip-demo-close" id="vipDemoClose" type="button" aria-label="关闭模拟充值彩蛋">×</button>
+    <div class="vip-demo-copy">
+      <span class="vip-demo-kicker">VIP · EASTER EGG / 趣味彩蛋</span>
+      <h2 id="vipDemoTitle">扫码，领取一个<br><em>离谱彩蛋。</em></h2>
+      <p class="vip-demo-intro" id="vipDemoIntro">这是一张仅包含文字的演示二维码。扫描后，你会看到一句夸张的提示。</p>
+      <div class="vip-demo-tier">你刚刚选择 <strong id="vipDemoTier">白金 VIP</strong></div>
+      <div class="vip-demo-controls">
+        <button class="vip-demo-reveal" id="vipDemoReveal" type="button">在网页预览扫码结果 <span aria-hidden="true">↗</span></button>
+        <p class="vip-demo-safety" id="vipDemoSafety">纯属互动彩蛋。二维码不含付款信息，不会扣款，也不会开通会员。</p>
+        <div class="vip-demo-result" id="vipDemoResult" role="status" aria-live="polite" hidden><strong>你已扣款一百万</strong><span>玩笑演示：没有发生真实扣款，也不会开通爱奇艺会员。</span></div>
+      </div>
+    </div>
+    <div class="vip-demo-qr-side">
+      <span class="vip-demo-qr-label">SCAN THE FICTION · 文字二维码</span>
+      <div class="vip-demo-qr-frame"><img src="assets/vip-demo-qr.png" alt="趣味演示二维码：扫描后显示你已扣款一百万，并说明没有真实扣款" width="854" height="854" loading="lazy" decoding="async"></div>
+      <p class="vip-demo-qr-caption">手机扫码时，文字会由你的扫码应用显示。它不会打开支付页面。</p>
+    </div>
+  </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"><span class="toast-dot"></span><span id="toastText">已完成</span></div>
 
   <script>
@@ -1404,8 +1522,15 @@
       const loopPreview = document.getElementById('loopPreview');
       const loopToggle = document.getElementById('loopToggle');
       let loopUserPaused = false;
-      const syncLoopPreview = () => loopPreview.classList.toggle('is-paused', loopUserPaused || document.hidden || document.body.classList.contains('intro-active'));
+      let loopInView = true;
+      const syncLoopPreview = () => loopPreview.classList.toggle('is-paused', loopUserPaused || !loopInView || document.hidden || document.body.classList.contains('intro-active'));
       syncLoopPreview();
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([entry]) => {
+          loopInView = entry.isIntersecting;
+          syncLoopPreview();
+        }, { threshold:.08 }).observe(loopPreview);
+      }
       if (reduceMotion) {
         loopToggle.disabled = true;
         loopToggle.setAttribute('aria-label', '静态概念预览');
@@ -1421,14 +1546,19 @@
       }
       const experienceRegions = [topbar, document.querySelector('main'), document.querySelector('footer')];
       experienceRegions.forEach((region) => { region.inert = true; });
-      const catalogGrid = document.getElementById('catalogGrid');
-      let catalogOrbit;
-      const catalogCards = [...document.querySelectorAll('.catalog-card')];
-      const catalogFilters = [...document.querySelectorAll('.catalog-filter')];
-      const catalogCount = document.getElementById('catalogCount');
-      const catalogSelectionTitle = document.getElementById('catalogSelectionTitle');
-      const catalogSelectionCopy = document.getElementById('catalogSelectionCopy');
+      const posterButtons = [...document.querySelectorAll('.poster[data-work]')];
+      const workPickButtons = [...document.querySelectorAll('[data-work-pick]')];
       const catalogSection = document.getElementById('catalog');
+      const workStage = document.getElementById('workStage');
+      const workStageImage = document.getElementById('workStageImage');
+      const workStageCount = document.getElementById('workStageCount');
+      const workStageGenre = document.getElementById('workStageGenre');
+      const workStageTitle = document.getElementById('workStageTitle');
+      const workStageNote = document.getElementById('workStageNote');
+      const finalWorkImage = document.getElementById('finalWorkImage');
+      const finalWorkTitle = document.getElementById('finalWorkTitle');
+      const officialWorkLink = document.getElementById('officialWorkLink');
+      const officialWorkLinkText = document.getElementById('officialWorkLinkText');
       const aiPreview = document.getElementById('aiPreview');
       const aiPreviewImage = document.getElementById('aiPreviewImage');
       const aiPreviewTag = document.getElementById('aiPreviewTag');
@@ -1448,17 +1578,26 @@
       let phoneScrollOffset = 0;
       let ticking = false;
 
+      const works = [
+        { title:'狂飙', genre:'CRIME / SERIES', category:'悬疑罪案 · 剧集', channel:'悬疑', kicker:'CRIME · 01 / 04', signal:'SERIES · CRIME STORY', lead:'狂飙，', accentCopy:'从这里入戏。', note:'京海群像同框，善恶交锋由此展开。选中《狂飙》，沿着人物关系走进故事。', sub:'一次选择，走进更深的故事', image:'assets/kuangbiao-poster.jpg', official:'https://www.iqiyi.com/a_1fkgtbddd2x.html', accent:'#efc48b' },
+        { title:'莲花楼', genre:'MYSTERY / SERIES', category:'古装探案 · 剧集', channel:'江湖', kicker:'MYSTERY · 02 / 04', signal:'SERIES · JIANGHU', lead:'莲花楼，', accentCopy:'雾起见江湖。', note:'三位主角并肩而立。沿着旧案线索，走进《莲花楼》的江湖。', sub:'沿着线索，走进下一段江湖', image:'assets/lianhualou-poster.jpg', official:'https://www.iqiyi.com/a_27r930p2tqp.html', accent:'#d4e6c3' },
+        { title:'种地吧第4季', genre:'REALITY / SHOW', category:'田野真人秀 · 综艺', channel:'综艺', kicker:'REALITY · 03 / 04', signal:'SHOW · GROW TOGETHER', lead:'种地吧，', accentCopy:'让日子发光。', note:'十个勤天并肩出发，在土地与旅途中继续记录真实的成长。', sub:'从田野出发，跟着他们一起成长', image:'assets/zhongdiba-poster.jpg', official:'https://www.iqiyi.com/a_vnn1du4wil.html', accent:'#f1cd82' },
+        { title:'成何体统', genre:'FANTASY / SERIES', category:'古装奇幻 · 剧集', channel:'古装', kicker:'FANTASY · 04 / 04', signal:'SERIES · NEW WORLD', lead:'成何体统，', accentCopy:'奇想开场。', note:'男女主角身着宫装，在穿书世界携手改写既定的结局。', sub:'推开宫门，下一幕充满想象', image:'assets/chenghetitong-poster.jpg', official:'https://www.iqiyi.com/a_16ucpowk17h.html', accent:'#f4af91' }
+      ];
+      let selectedWorkIndex = 0;
+      let workRevision = 0;
+
       const scrollSections = [
         { element: hero, label: '01 · OPENING' },
-        { element: document.getElementById('content'), label: '02 · CONTENT' },
-        { element: document.getElementById('catalog'), label: '03 · COLLECTION' },
-        { element: document.getElementById('ai'), label: '04 · AI VIEWING' },
+        { element: document.getElementById('content'), label: '02 · STORIES' },
+        { element: document.getElementById('catalog'), label: '03 · STORY DESK' },
+        { element: document.getElementById('ai'), label: '04 · VIEWING' },
         { element: document.getElementById('vip'), label: '05 · VIP' },
         { element: document.querySelector('.final-cta'), label: '06 · FINALE' }
       ];
 
       const makeParticles = () => {
-        const count = 42;
+        const count = 18;
         particles = Array.from({ length: count }, (_, index) => ({
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
@@ -1503,18 +1642,6 @@
           particleContext.arc(particle.x, particle.y, particle.radius * 5, 0, Math.PI * 2);
           particleContext.fill();
 
-          for (let nextIndex = index + 1; nextIndex < particles.length; nextIndex += 1) {
-            const next = particles[nextIndex];
-            const distance = Math.hypot(particle.x - next.x, particle.y - next.y);
-            if (distance < 112) {
-              particleContext.strokeStyle = `rgba(77,255,111,${(1 - distance / 112) * .075})`;
-              particleContext.lineWidth = .55;
-              particleContext.beginPath();
-              particleContext.moveTo(particle.x, particle.y);
-              particleContext.lineTo(next.x, next.y);
-              particleContext.stroke();
-            }
-          }
         });
 
         if (move) particleFrame = requestAnimationFrame(() => drawParticles(true));
@@ -1642,42 +1769,34 @@
         soundLabel.textContent = soundEnabled ? '音效开启' : '音效关闭';
         if (soundEnabled) playEffect('select');
       });
-      const channels = [
-        { name: '精选', label: 'ON AIR · FEATURED', kicker: 'THE NEXT STORY IS CALLING', lead: '好戏，', accent: '马上开场。', image: 'https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=1600&q=88' },
-        { name: '剧集', label: 'SERIES · NEW EPISODE', kicker: 'SERIES · NEXT EPISODE', lead: '故事，', accent: '正在热播。', image: 'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1600&q=88' },
-        { name: '电影', label: 'CINEMA · FEATURED FILM', kicker: 'CINEMA · A MOMENT TO STAY', lead: '此刻，', accent: '留给电影。', image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1600&q=88' },
-        { name: '综艺', label: 'SHOW · LIVE MOMENT', kicker: 'SHOW · GOOD TIMES LIVE', lead: '快乐，', accent: '正在发生。', image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1600&q=88' },
-        { name: '纪录', label: 'DOC · WIDE OPEN WORLD', kicker: 'DOCUMENTARY · OPEN YOUR WORLD', lead: '世界，', accent: '值得看见。', image: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1600&q=88' },
-        { name: '动漫', label: 'ANIME · ANIMATION', kicker: 'ANIMATION · IMAGINATION IN MOTION', lead: '想象，', accent: '自由生长。', image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1600&q=88' }
-      ];
       let activeChannel = 0;
       let channelRevision = 0;
       let dialDrag = null;
       let suppressDialClick = false;
       let lastDialWheelAt = 0;
       const tuneChannel = (direction, source = 'manual') => {
-        activeChannel = (activeChannel + direction + channels.length) % channels.length;
-        const channel = channels[activeChannel];
+        activeChannel = (activeChannel + direction + works.length) % works.length;
+        const channel = works[activeChannel];
         const revision = ++channelRevision;
         tvChannelNumber.textContent = String(activeChannel + 1).padStart(2, '0');
-        tvChannelName.textContent = channel.name;
-        tvDial.setAttribute('aria-label', `旋转频道旋钮，当前频道 ${String(activeChannel + 1).padStart(2, '0')} ${channel.name}`);
-        tvScreenKicker.textContent = channel.kicker;
-        tvTitleLead.textContent = channel.lead;
-        tvTitleAccent.textContent = channel.accent;
-        tvSignalName.textContent = channel.label;
+        tvChannelName.textContent = channel.title;
+        tvDial.setAttribute('aria-label', `旋转频道旋钮，当前频道 ${String(activeChannel + 1).padStart(2, '0')} ${channel.title}`);
         tvScreen.classList.add('is-tuning');
         window.setTimeout(() => {
           if (revision !== channelRevision) return;
           tvScreenImage.onload = () => {
-            if (revision === channelRevision) tvScreen.classList.remove('is-tuning');
+            if (revision !== channelRevision) return;
+            tvScreenKicker.textContent = channel.kicker;
+            tvTitleLead.textContent = channel.lead;
+            tvTitleAccent.textContent = channel.accentCopy;
+            tvSignalName.textContent = channel.signal;
+            tvScreen.style.setProperty('--tv-poster', `url("${channel.image}")`);
+            tvScreen.classList.remove('is-tuning');
           };
           tvScreenImage.src = channel.image;
-          window.setTimeout(() => {
-            if (revision === channelRevision) tvScreen.classList.remove('is-tuning');
-          }, 1100);
+          if (tvScreenImage.complete && tvScreenImage.naturalWidth) tvScreenImage.onload();
         }, 130);
-        tvDial.style.setProperty('--dial-angle', `${activeChannel * 60}deg`);
+        tvDial.style.setProperty('--dial-angle', `${activeChannel * 90}deg`);
         if (source === 'manual') {
           playEffect('dial');
           scheduleChannelAuto();
@@ -1760,6 +1879,9 @@
         if (experienceEntering || tvGate.hidden) return;
         experienceEntering = true;
         stopChannelAuto();
+        setActiveWork(activeChannel, 'tv');
+        if (window.location.hash) window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        window.scrollTo({ top: 0, behavior: 'instant' });
         playEffect('power');
         document.body.classList.add('experience-entering');
         tvGate.classList.add('is-powering');
@@ -1850,48 +1972,19 @@
         }
       });
 
-      const filterNames = { all: 'ALL STORIES', series: 'SERIES', film: 'FILM', variety: 'SHOW', anime: 'ANIME', documentary: 'DOC', kids: 'KIDS' };
-      const chooseCatalogCard = (card) => {
-        catalogCards.forEach((item) => {
-          const selected = item === card;
-          item.classList.toggle('is-selected', selected);
-          item.setAttribute('aria-pressed', String(selected));
-        });
-        catalogSelectionTitle.textContent = card.dataset.title;
-        catalogSelectionCopy.textContent = card.dataset.copy;
-      };
-      const applyCatalogFilter = (type) => {
-        const filter = catalogFilters.find(item => item.dataset.filter === type);
-        if (!filter) return null;
-        if (filter.getAttribute('aria-pressed') !== 'true') playEffect('select');
-        catalogFilters.forEach((item) => item.setAttribute('aria-pressed', String(item === filter)));
-        catalogCards.forEach((card) => { card.hidden = type !== 'all' && card.dataset.type !== type; });
-        const visibleCards = catalogCards.filter(card => !card.hidden);
-        catalogGrid.classList.toggle('is-filtered', type !== 'all');
-        catalogGrid.classList.toggle('is-single', visibleCards.length === 1);
-        catalogOrbit?.reset();
-        catalogCount.textContent = `${String(visibleCards.length).padStart(2, '0')} CHANNELS · ${filterNames[type]}`;
-        if (!visibleCards.some(card => card.classList.contains('is-selected'))) chooseCatalogCard(visibleCards[0]);
-        return visibleCards[0];
-      };
-      catalogFilters.forEach(filter => filter.addEventListener('click', () => applyCatalogFilter(filter.dataset.filter)));
-      catalogCards.forEach(card => card.addEventListener('click', () => {
-        if (!card.classList.contains('is-selected')) playEffect('select');
-        chooseCatalogCard(card);
-      }));
-      document.querySelectorAll('[data-catalog-filter]').forEach((poster) => {
+      posterButtons.forEach((poster) => {
         poster.addEventListener('click', () => {
-          const firstCard = applyCatalogFilter(poster.dataset.catalogFilter);
-          if (firstCard) chooseCatalogCard(firstCard);
+          setActiveWork(Number(poster.dataset.work), 'poster');
           catalogSection.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-          if (firstCard) window.setTimeout(() => firstCard.focus({ preventScroll: true }), reduceMotion ? 0 : 650);
+          window.setTimeout(() => workPickButtons[Number(poster.dataset.work)].focus({ preventScroll: true }), reduceMotion ? 0 : 650);
         });
       });
+      workPickButtons.forEach((button) => button.addEventListener('click', () => setActiveWork(Number(button.dataset.workPick), 'picker')));
 
       const aiFeatures = {
-        skip: { tag: 'AI · SCENE MAP 00:42', title: '高能时刻，直达现场', meta: '01:24 / 42:18', progress: '65%', image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=900&q=85', alt: '影院银幕正播放电影画面', label: 'AI 跳看影片时间轴示意' },
-        resume: { tag: 'SMART RESUME · CONTINUE', title: '上次看到这里，继续入戏', meta: '17:38 / 42:18', progress: '42%', image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=85', alt: '电影放映机正在播放画面', label: '智能续播进度示意' },
-        recommend: { tag: 'FOR YOU · TASTE MATCH', title: '下一部好片，已经挑好', meta: '06 PICKS · FOR YOU', progress: '86%', image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=900&q=85', alt: '星空中的多彩光线', label: '个性荐片匹配示意' }
+        skip: { tag: 'CONCEPT · SCENE MAP', title: '高能时刻，直达现场', meta: '概念演示 / 01:24', progress: '65%', label: '跳看时间轴概念示意' },
+        resume: { tag: 'CONCEPT · CONTINUE', title: '上次看到这里，继续入戏', meta: '概念演示 / 17:38', progress: '42%', label: '续播进度概念示意' },
+        recommend: { tag: 'CONCEPT · FOR YOU', title: '下一部好片，从这里发现', meta: '概念演示 / FOR YOU', progress: '86%', label: '个性荐片概念示意' }
       };
       let aiPreviewTimer;
       aiButtons.forEach((button) => button.addEventListener('click', () => {
@@ -1906,10 +1999,8 @@
           item.dataset.orbitSlot = distance === 0 ? 'front' : distance === 1 ? 'right' : 'left';
         });
         aiOrbitIndex.textContent = `${String(activeIndex + 1).padStart(2, '0')} / 03`;
-        aiPreviewImage.src = feature.image;
-        aiPreviewImage.alt = feature.alt;
         aiPreviewTag.textContent = feature.tag;
-        aiPreviewTitle.textContent = feature.title;
+        aiPreviewTitle.textContent = `《${works[selectedWorkIndex].title}》· ${feature.title}`;
         aiPreviewMeta.textContent = feature.meta;
         aiPreview.setAttribute('aria-label', feature.label);
         aiPreview.style.setProperty('--preview-progress', feature.progress);
@@ -1972,44 +2063,86 @@
         });
       }
 
-      const featuredShows = [
-        { badge: '为你精选', kicker: '迷雾剧场 · 剧集', title: '边界回声', sub: '悬念正在发生，下一集接着追', channel: '精选', image: 'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=82' },
-        { badge: '剧集频道', kicker: '悬疑剧场 · 正在热播', title: '长夜信号', sub: '跟着线索，走进故事深处', channel: '剧集', image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=700&q=82' },
-        { badge: '综艺频道', kicker: '限定企划 · 综艺现场', title: '此刻出发', sub: '和喜欢的人，把快乐放大', channel: '综艺', image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=700&q=82' },
-        { badge: '电影频道', kicker: '高分新片 · 电影', title: '银河以北', sub: '留一段完整时间，交给想象力', channel: '电影', image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=82' }
-      ];
-      let featuredIndex = 0;
-      let featuredRevision = 0;
       let phonePreviewing = false;
-      let phoneManualUntil = 0;
-      const switchFeatured = (index, source = 'manual') => {
-        const revision = ++featuredRevision;
-        if (!reduceMotion) showMeta.classList.add('switching');
-        window.setTimeout(() => {
-          if (revision !== featuredRevision) return;
-          featuredIndex = index;
-          const featured = featuredShows[featuredIndex];
-          phoneBadge.textContent = featured.badge;
-          showKicker.textContent = featured.kicker;
-          showTitle.textContent = featured.title;
-          showSub.textContent = featured.sub;
-          phoneArt.style.setProperty('--phone-image', `url("${featured.image}")`);
-          phoneStoryButtons.forEach((button) => button.setAttribute('aria-pressed', String(Number(button.dataset.phoneStory) === featuredIndex)));
-          if (source !== 'auto') phoneFeedback.textContent = `已切换到${featured.channel}：${featured.title}`;
-        }, reduceMotion ? 0 : 245);
-        window.setTimeout(() => {
-          if (revision === featuredRevision) showMeta.classList.remove('switching');
-        }, reduceMotion ? 0 : 540);
-        if (source !== 'auto') {
-          phoneManualUntil = performance.now() + 10000;
-          playEffect('select');
+      const setActiveWork = (index, source = 'manual') => {
+        const work = works[index];
+        if (!work) return;
+        const changed = selectedWorkIndex !== index;
+        const revision = ++workRevision;
+        selectedWorkIndex = index;
+        document.body.style.setProperty('--work-accent', work.accent);
+        document.body.style.setProperty('--selected-poster', `url("${work.image}")`);
+
+        if (source !== 'tv') {
+          activeChannel = index;
+          channelRevision += 1;
+          tvChannelNumber.textContent = String(index + 1).padStart(2, '0');
+          tvChannelName.textContent = work.title;
+          tvDial.setAttribute('aria-label', `旋转频道旋钮，当前频道 ${String(index + 1).padStart(2, '0')} ${work.title}`);
+          tvDial.style.setProperty('--dial-angle', `${index * 90}deg`);
+          tvScreenKicker.textContent = work.kicker;
+          tvTitleLead.textContent = work.lead;
+          tvTitleAccent.textContent = work.accentCopy;
+          tvSignalName.textContent = work.signal;
+          tvScreen.style.setProperty('--tv-poster', `url("${work.image}")`);
+          tvScreenImage.src = work.image;
+          tvScreen.classList.remove('is-tuning');
         }
+
+        if (changed && !reduceMotion) {
+          showMeta.classList.remove('switching');
+          void showMeta.offsetWidth;
+          showMeta.classList.add('switching');
+          workStage.classList.add('is-switching');
+        }
+        phoneBadge.textContent = '当前选择';
+        showKicker.textContent = work.category;
+        showTitle.textContent = work.title;
+        showSub.textContent = work.sub;
+        phoneArt.style.setProperty('--phone-image', `url("${work.image}")`);
+        phoneStoryButtons.forEach((button) => button.setAttribute('aria-pressed', String(Number(button.dataset.phoneStory) === index)));
+        if (source !== 'init' && source !== 'tv') phoneFeedback.textContent = `已切换到${work.channel}：${work.title}`;
+
+        posterButtons.forEach((button) => {
+          const selected = Number(button.dataset.work) === index;
+          button.classList.toggle('is-current', selected);
+          button.setAttribute('aria-pressed', String(selected));
+        });
+        workPickButtons.forEach((button) => {
+          const selected = Number(button.dataset.workPick) === index;
+          button.classList.toggle('is-active', selected);
+          button.setAttribute('aria-pressed', String(selected));
+        });
+        workStageImage.src = work.image;
+        workStageImage.alt = `《${work.title}》作品海报`;
+        workStageCount.textContent = `${String(index + 1).padStart(2, '0')} / 04`;
+        workStageGenre.textContent = work.genre;
+        workStageTitle.textContent = work.title;
+        workStageNote.textContent = work.note;
+        aiPreviewImage.src = work.image;
+        aiPreviewImage.alt = `《${work.title}》作品海报`;
+        const currentFeature = aiButtons.find((button) => button.getAttribute('aria-pressed') === 'true')?.dataset.feature || 'skip';
+        aiPreviewTitle.textContent = `《${work.title}》· ${aiFeatures[currentFeature].title}`;
+        finalWorkImage.src = work.image;
+        finalWorkImage.alt = `《${work.title}》作品海报`;
+        finalWorkTitle.textContent = `《${work.title}》`;
+        officialWorkLink.href = work.official;
+        officialWorkLinkText.textContent = `去爱奇艺看《${work.title}》`;
+        document.querySelector('.final-work-visual span').textContent = `YOUR NEXT STORY / ${String(index + 1).padStart(2, '0')}`;
+
+        window.setTimeout(() => {
+          if (revision !== workRevision) return;
+          showMeta.classList.remove('switching');
+          workStage.classList.remove('is-switching');
+        }, reduceMotion ? 0 : 560);
+        if (source === 'phone' || source === 'picker' || source === 'poster') playEffect('select');
       };
+      setActiveWork(0, 'init');
       document.getElementById('phoneShuffle').addEventListener('click', () => {
-        switchFeatured((featuredIndex + 1) % featuredShows.length);
+        setActiveWork((selectedWorkIndex + 1) % works.length, 'phone');
       });
       phoneStoryButtons.forEach((button) => button.addEventListener('click', () => {
-        switchFeatured(Number(button.dataset.phoneStory));
+        setActiveWork(Number(button.dataset.phoneStory), 'phone');
       }));
       phonePreviewButton.addEventListener('click', () => {
         phonePreviewing = !phonePreviewing;
@@ -2018,13 +2151,8 @@
         phonePreviewButton.setAttribute('aria-label', phonePreviewing ? '暂停手机中的概念预览' : '播放手机中的概念预览');
         phonePreviewButton.textContent = phonePreviewing ? 'Ⅱ 暂停预览' : '▶ 预览 6 秒';
         phoneFeedback.textContent = phonePreviewing ? '正在播放 6 秒概念动画' : '概念预览已暂停';
-        phoneManualUntil = performance.now() + 10000;
         playEffect('select');
       });
-      if (!reduceMotion) window.setInterval(() => {
-        if (document.hidden || document.body.classList.contains('intro-active') || phonePreviewing || performance.now() < phoneManualUntil || phoneStage.matches(':hover') || phoneStage.matches(':focus-within')) return;
-        switchFeatured((featuredIndex + 1) % featuredShows.length, 'auto');
-      }, 3400);
 
       const revealItems = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window && !reduceMotion) {
@@ -2071,6 +2199,30 @@
         showToast(chosenPlan.querySelector('button').dataset.message);
       };
       planCards.forEach((plan) => plan.addEventListener('click', () => selectPlan(plan)));
+      const vipDemoDialog = document.getElementById('vipDemoDialog');
+      const vipDemoOpen = document.getElementById('vipDemoOpen');
+      const vipDemoClose = document.getElementById('vipDemoClose');
+      const vipDemoTier = document.getElementById('vipDemoTier');
+      const vipDemoReveal = document.getElementById('vipDemoReveal');
+      const vipDemoResult = document.getElementById('vipDemoResult');
+      vipDemoOpen.addEventListener('click', () => {
+        vipDemoTier.textContent = planSummaryTitle.textContent;
+        vipDemoResult.hidden = true;
+        vipDemoDialog.showModal();
+        vipDemoClose.focus({ preventScroll: true });
+        playEffect('select');
+      });
+      vipDemoClose.addEventListener('click', () => vipDemoDialog.close());
+      vipDemoReveal.addEventListener('click', () => {
+        vipDemoResult.hidden = false;
+        playEffect('select');
+      });
+      vipDemoDialog.addEventListener('click', (event) => {
+        if (event.target !== vipDemoDialog) return;
+        const bounds = vipDemoDialog.getBoundingClientRect();
+        if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) vipDemoDialog.close();
+      });
+      vipDemoDialog.addEventListener('close', () => vipDemoOpen.focus({ preventScroll: true }));
       const createOrbit = (root, cardSelector, speed) => {
         if (reduceMotion || !root) return null;
         const cards = [...root.children];
@@ -2143,7 +2295,17 @@
         return { reset };
       };
       createOrbit(document.querySelector('.poster-grid'), '.poster', 24);
-      catalogOrbit = createOrbit(catalogGrid, '.catalog-card', 22);
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([entry]) => {
+          hero.classList.toggle('is-offscreen', !entry.isIntersecting);
+        }, { threshold:.02 }).observe(hero);
+      }
+      const marquee = document.querySelector('.marquee');
+      if ('IntersectionObserver' in window && marquee) {
+        new IntersectionObserver(([entry]) => {
+          marquee.classList.toggle('is-offscreen', !entry.isIntersecting);
+        }, { threshold:.02 }).observe(marquee);
+      }
       document.querySelectorAll('a[href^="#"]').forEach((link) => link.addEventListener('click', () => playEffect('select')));
     })();
   </script>
