@@ -14,8 +14,10 @@
 
 《狂飙》《莲花楼》《种地吧》《成何体统》的海报由项目作者提供，仅用于个人作品集展示。影视海报以及爱奇艺、iQIYI 的名称和标识归相应权利人所有，不包含在本仓库的 MIT 授权中。
 
-本仓库原创 HTML、CSS、JavaScript 代码采用 [MIT License](LICENSE)。
+本仓库原创 HTML、CSS、JavaScript 代码，以及页面精简 Skill 的原创规则、说明、模板与示例，采用 [MIT License](LICENSE)。
 
 ## 页面精简 Skill
 
 [page-simplify](skills/page-simplify/README.md)：精简冗余文案与模块，校准视觉层级、对齐和装饰强度，保留页面的设计巧思。
+
+[前后对照案例](skills/page-simplify/examples/landing-page-before-after.md) · [在线体验精简后页面](https://haidarkhanuk3344-collab.github.io/FHX-backyard/skills/page-simplify/examples/after.html)
